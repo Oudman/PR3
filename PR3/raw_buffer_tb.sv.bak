@@ -1,0 +1,76 @@
+`timescale 1ns/1ns
+`include "raw_buffer.v"
+
+module raw_buffer_tb();
+// testing parameters
+localparam DATA_WIDTH = 14;
+localparam BATCH_SIZE = 2048;
+localparam RUNS = 3;
+localparam time CLKIN_PERIOD = 50ns
+localparam time CLKOUT_PERIOD = 20ns
+
+
+
+// Declare inputs as regs and outputs as wires
+bit reset, sink_clk, source_clk, source_ready;
+bit [13:0] dataIn;
+wire ready, source_sop, source_eop, source_valid;
+wire [13:0] dataOut;
+
+// clock generator(s)
+always #(CLKIN_PERIOD/2) clkIn++;
+always #(CLKOUT_PERIOD/2) clkOut++;
+
+// actual test stuff
+initial
+begin
+	clkIn = 1;
+	clkOut = 1;
+	reset = 0;
+	start = 0;
+	dataIn = 0;
+end
+
+always begin
+	#6 dataIn = dataIn + 1;
+end
+
+reg [1:0] cnt = 0;
+always @(posedge ready)
+begin
+	#5000
+	if (cnt < 3) begin
+		#7 start = 1;
+		#7 start = 0;
+	end else begin
+		#7 reset = 1;
+		#7 reset = 0;
+	end
+	#1 cnt = cnt + 1;
+end
+
+initial begin
+	#100 reset = 1;	// Assert the reset
+	#7 reset = 0;	// De-assert the reset
+	#1000000 $finish;	// Terminate simulation
+end
+
+// Connect module(s) to test
+raw_buffer buff #(
+	DATA_WIDTH,
+	BATCH_SIZE,
+	RUNS
+)(
+	.reset			(),										// high:		reset all, then reload buffer
+	.ready			(),										// high:		ready to output
+	.sink_clk		(clk20),									// clock:	input data speed
+	.sink_data		(sink),									//				input data bus, connected to antenna A2D
+	.source_clk		(clk),									// clock:	output data speed
+	.source_ready	(),										// high:		ready for output data
+	.source_sop		(buff_fft_sop),						// high:		first output package
+	.source_eop		(buff_fft_eop),						// high:		last output package
+	.source_valid	(buff_fft_valid),						// high:		output is valid
+	.source_data	(buff_fft_data)						//				output data bus, connected to fft
+);
+
+endmodule
