@@ -231,7 +231,7 @@ zdbfbclk <> <GND>
 
 
 |PR3|phase_extract:pe1
-clk => clk.IN2
+clk => clk.IN3
 clk20 => clk20.IN1
 reset => reset.IN1
 sink[0] => sink[0].IN1
@@ -250,7 +250,7 @@ sink[12] => sink[12].IN1
 sink[13] => sink[13].IN1
 
 
-|PR3|phase_extract:pe1|raw_buffer:inpbuff
+|PR3|phase_extract:pe1|time_buffer:timebuff
 reset => ready~reg0.ACLR
 reset => sink_pos[0].ACLR
 reset => sink_pos[1].ACLR
@@ -490,11 +490,6 @@ source_Re[16] <= cascade_n:gen[11].cn.source_Re[16]
 source_Re[17] <= cascade_n:gen[11].cn.source_Re[17]
 source_Re[18] <= cascade_n:gen[11].cn.source_Re[18]
 source_Re[19] <= cascade_n:gen[11].cn.source_Re[19]
-source_Re[20] <= cascade_n:gen[11].cn.source_Re[20]
-source_Re[21] <= cascade_n:gen[11].cn.source_Re[21]
-source_Re[22] <= cascade_n:gen[11].cn.source_Re[22]
-source_Re[23] <= cascade_n:gen[11].cn.source_Re[23]
-source_Re[24] <= cascade_n:gen[11].cn.source_Re[24]
 source_Im[0] <= cascade_n:gen[11].cn.source_Im[0]
 source_Im[1] <= cascade_n:gen[11].cn.source_Im[1]
 source_Im[2] <= cascade_n:gen[11].cn.source_Im[2]
@@ -515,11 +510,6 @@ source_Im[16] <= cascade_n:gen[11].cn.source_Im[16]
 source_Im[17] <= cascade_n:gen[11].cn.source_Im[17]
 source_Im[18] <= cascade_n:gen[11].cn.source_Im[18]
 source_Im[19] <= cascade_n:gen[11].cn.source_Im[19]
-source_Im[20] <= cascade_n:gen[11].cn.source_Im[20]
-source_Im[21] <= cascade_n:gen[11].cn.source_Im[21]
-source_Im[22] <= cascade_n:gen[11].cn.source_Im[22]
-source_Im[23] <= cascade_n:gen[11].cn.source_Im[23]
-source_Im[24] <= cascade_n:gen[11].cn.source_Im[24]
 error <= cascade_0:c0.error
 
 
@@ -12424,5 +12414,52 @@ yx_cnt[7] <= cnt[8].DB_MAX_OUTPUT_PORT_TYPE
 yx_cnt[8] <= cnt[9].DB_MAX_OUTPUT_PORT_TYPE
 yx_cnt[9] <= cnt[10].DB_MAX_OUTPUT_PORT_TYPE
 yx_cnt[10] <= cnt[0].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PR3|phase_extract:pe1|freq_buffer:freqbuff1
+sink_clk => ~NO_FANOUT~
+sink_sop => ~NO_FANOUT~
+sink_eop => ~NO_FANOUT~
+sink_valid => ~NO_FANOUT~
+sink_re[0] => ~NO_FANOUT~
+sink_re[1] => ~NO_FANOUT~
+sink_re[2] => ~NO_FANOUT~
+sink_re[3] => ~NO_FANOUT~
+sink_re[4] => ~NO_FANOUT~
+sink_re[5] => ~NO_FANOUT~
+sink_re[6] => ~NO_FANOUT~
+sink_re[7] => ~NO_FANOUT~
+sink_re[8] => ~NO_FANOUT~
+sink_re[9] => ~NO_FANOUT~
+sink_re[10] => ~NO_FANOUT~
+sink_re[11] => ~NO_FANOUT~
+sink_re[12] => ~NO_FANOUT~
+sink_re[13] => ~NO_FANOUT~
+sink_re[14] => ~NO_FANOUT~
+sink_re[15] => ~NO_FANOUT~
+sink_re[16] => ~NO_FANOUT~
+sink_re[17] => ~NO_FANOUT~
+sink_re[18] => ~NO_FANOUT~
+sink_re[19] => ~NO_FANOUT~
+sink_im[0] => ~NO_FANOUT~
+sink_im[1] => ~NO_FANOUT~
+sink_im[2] => ~NO_FANOUT~
+sink_im[3] => ~NO_FANOUT~
+sink_im[4] => ~NO_FANOUT~
+sink_im[5] => ~NO_FANOUT~
+sink_im[6] => ~NO_FANOUT~
+sink_im[7] => ~NO_FANOUT~
+sink_im[8] => ~NO_FANOUT~
+sink_im[9] => ~NO_FANOUT~
+sink_im[10] => ~NO_FANOUT~
+sink_im[11] => ~NO_FANOUT~
+sink_im[12] => ~NO_FANOUT~
+sink_im[13] => ~NO_FANOUT~
+sink_im[14] => ~NO_FANOUT~
+sink_im[15] => ~NO_FANOUT~
+sink_im[16] => ~NO_FANOUT~
+sink_im[17] => ~NO_FANOUT~
+sink_im[18] => ~NO_FANOUT~
+sink_im[19] => ~NO_FANOUT~
 
 

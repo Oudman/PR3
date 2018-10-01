@@ -1,4 +1,0 @@
-module raw_buffer #(
-	parameter DATA_WIDTH = 14,
-	parameter BUFF_SIZE = 2048,
-)()
