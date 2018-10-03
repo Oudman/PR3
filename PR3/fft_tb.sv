@@ -13,15 +13,19 @@ wire [SINK_WIDTH-1:0] sin, time_fft_re;
 bit signed [SINK_WIDTH-1:0] time_fft_im = 0;
 bit clk = 0, reset = 0, time_fft_sop = 0, time_fft_eop = 0, time_fft_valid = 0;
 wire fft_freq_sop, fft_freq_eop, fft_freq_valid, error;
-wire [FFT_WIDTH-1:0] fft_peak_re, fft_peak_im;
+wire signed [FFT_WIDTH-1:0] fft_peak_re, fft_peak_im;
+shortreal fft_peak_r, fft_peak_theta;
 
 // clock generator(s)
 always #(25ns) clk++; // F = 20.0MHz
 
 // sine approx generator
-always #(10ns) cnt++; // F = 50MHz / 32 = 1.56MHz = 7.8% of 20MHz
+always #(10ns) cnt++; // F = 100MHz / 32 = 3.13MHz = 15.6% of 20MHz
 assign sin = (cnt < 0) ? (512 * cnt + 32 * cnt * cnt) : (512 * cnt - 32 * cnt * cnt);
 assign time_fft_re = sin;
+
+assign fft_peak_r = $hypot(shortreal'(fft_peak_re), shortreal'(fft_peak_im));
+assign fft_peak_theta = $atan2(fft_peak_im, fft_peak_re);
 
 initial
 begin

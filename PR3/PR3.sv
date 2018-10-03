@@ -20,13 +20,13 @@ pll pll (
 
 // phase extraction on antenna #1
 phase_extract #(
-	DATA_WIDTH,																// number of input bits
-	11																			// fft over 2^11=2048 entris
+	DATA_WIDTH,
+	11,
+	3
 ) pe1 (
-	.clk						(clk),										// clock:	main
-	.clk20					(clk20),										// clock:	20MHz
-	.reset					(reset),										// posedge:	reset all
-	.sink						(data1)										//				connected to antenna #1
+	.clk						(clk),
+	.clk20					(clk20),
+	.sink						(data1)
 );
 
 

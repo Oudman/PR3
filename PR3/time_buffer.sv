@@ -5,10 +5,10 @@ module time_buffer #(
 )(
 	input		wire							reset,						// high: 	synchronous reset, synced with sink_clk
 	output	reg							ready,						// high:		ready to output
+	input		wire							start,						//	high:		start output batch
 	input		wire							sink_clk,					// clock:	input data speed
 	input		wire	[DATA_WIDTH-1:0]	sink_data,					//				input data bus, connected to antenna A2D
 	input		wire							source_clk,					// clock:	output data speed
-	input		wire							source_ready,				//	high:		ready to output data
 	output	reg							source_sop,					// high:		first output entry
 	output	reg							source_eop,					// high:		last output entry
 	output	reg							source_valid,				// high:		output is valid
@@ -45,7 +45,7 @@ end
 // source control
 always @(posedge source_clk)
 begin
-	if (ready && source_ready)											// output next entry
+	if (start && ready)													// output next entry
 	begin
 		source_valid <= 1;
 		source_sop <= (source_pos == source_offset) ? 1 : 0;

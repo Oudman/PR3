@@ -1,5 +1,5 @@
 Fitter report for PR3
-Fri Sep 28 17:20:31 2018
+Tue Oct 02 15:10:17 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -57,7 +57,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Fitter Summary                                                                ;
 +---------------------------------+---------------------------------------------+
-; Fitter Status                   ; Successful - Fri Sep 28 17:20:31 2018       ;
+; Fitter Status                   ; Successful - Tue Oct 02 15:10:17 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
@@ -1822,7 +1822,7 @@ Info (184021): Fitter periphery placement operations ending: elapsed time is 00:
 Info (176233): Starting register packing
 Info (176235): Finished register packing
     Extra Info (176219): No registers were packed into other blocks
-Info (11798): Fitter preparation operations ending: elapsed time is 00:00:16
+Info (11798): Fitter preparation operations ending: elapsed time is 00:00:15
 Critical Warning (332012): Synopsys Design Constraints File file not found: 'PR3.sdc'. A Synopsys Design Constraints File is required by the Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
 Info (332144): No user constrained base clocks found in the design
 Info (332096): The command derive_clocks did not find any clocks to derive.  No clocks were created or changed.
@@ -1852,8 +1852,8 @@ Info (11801): Fitter post-fit operations ending: elapsed time is 00:00:02
 Warning (171167): Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
 Info (144001): Generated suppressed messages file C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/output_files/PR3.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 7 warnings
-    Info: Peak virtual memory: 6230 megabytes
-    Info: Processing ended: Fri Sep 28 17:20:32 2018
+    Info: Peak virtual memory: 6226 megabytes
+    Info: Processing ended: Tue Oct 02 15:10:18 2018
     Info: Elapsed time: 00:00:47
     Info: Total CPU time (on all processors): 00:01:08
 

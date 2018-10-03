@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PR3
-Mon Oct 01 20:57:26 2018
+Wed Oct 03 16:55:55 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -237,36 +237,34 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 229. Parameter Settings for User Entity Instance: phase_extract:pe1|fft_int:fft|cascade_n:gen[11].cn|delay_line_reg:dly1
 230. Parameter Settings for User Entity Instance: phase_extract:pe1|fft_int:fft|cascade_n:gen[11].cn|yx_addr:yx1
 231. Parameter Settings for User Entity Instance: phase_extract:pe1|freq_buffer:freqbuff1
-232. Port Connectivity Checks: "phase_extract:pe1|freq_buffer:freqbuff1"
-233. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[11].cn|delay_line_reg:dly1"
-234. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[11].cn|delay_lines_reg:dly0"
-235. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[11].cn"
-236. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[10].cn|delay_line_reg:dly1"
-237. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[10].cn|delay_lines_reg:dly0"
-238. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[9].cn|delay_line_reg:dly1"
-239. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[9].cn|delay_lines_reg:dly0"
-240. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[8].cn|delay_line_reg:dly1"
-241. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[8].cn|delay_lines_reg:dly0"
-242. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[7].cn|delay_line_reg:dly1"
-243. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[7].cn|delay_lines_reg:dly0"
-244. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[6].cn|delay_line_reg:dly1"
-245. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[6].cn|delay_lines_reg:dly0"
-246. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[5].cn|delay_line_reg:dly1"
-247. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[5].cn|delay_lines_reg:dly0"
-248. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[4].cn|delay_line_reg:dly1"
-249. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[4].cn|delay_lines_reg:dly0"
-250. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[3].cn|delay_line_reg:dly1"
-251. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[3].cn|delay_lines_reg:dly0"
-252. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[2].cn|delay_line_reg:dly1"
-253. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[2].cn|delay_lines_reg:dly0"
-254. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[1].cn|delay_line_reg:dly1"
-255. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[1].cn|delay_lines_reg:dly0"
-256. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft"
-257. Port Connectivity Checks: "phase_extract:pe1|time_buffer:timebuff"
-258. Post-Synthesis Netlist Statistics for Top Partition
-259. Elapsed Time Per Partition
-260. Analysis & Synthesis Messages
-261. Analysis & Synthesis Suppressed Messages
+232. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[11].cn|delay_line_reg:dly1"
+233. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[11].cn|delay_lines_reg:dly0"
+234. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[11].cn"
+235. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[10].cn|delay_line_reg:dly1"
+236. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[10].cn|delay_lines_reg:dly0"
+237. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[9].cn|delay_line_reg:dly1"
+238. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[9].cn|delay_lines_reg:dly0"
+239. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[8].cn|delay_line_reg:dly1"
+240. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[8].cn|delay_lines_reg:dly0"
+241. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[7].cn|delay_line_reg:dly1"
+242. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[7].cn|delay_lines_reg:dly0"
+243. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[6].cn|delay_line_reg:dly1"
+244. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[6].cn|delay_lines_reg:dly0"
+245. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[5].cn|delay_line_reg:dly1"
+246. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[5].cn|delay_lines_reg:dly0"
+247. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[4].cn|delay_line_reg:dly1"
+248. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[4].cn|delay_lines_reg:dly0"
+249. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[3].cn|delay_line_reg:dly1"
+250. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[3].cn|delay_lines_reg:dly0"
+251. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[2].cn|delay_line_reg:dly1"
+252. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[2].cn|delay_lines_reg:dly0"
+253. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[1].cn|delay_line_reg:dly1"
+254. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[1].cn|delay_lines_reg:dly0"
+255. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft"
+256. Post-Synthesis Netlist Statistics for Top Partition
+257. Elapsed Time Per Partition
+258. Analysis & Synthesis Messages
+259. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -292,7 +290,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Mon Oct 01 20:57:26 2018       ;
+; Analysis & Synthesis Status     ; Successful - Wed Oct 03 16:55:55 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
@@ -320,6 +318,10 @@ refer to the applicable agreement for further details.
 ; Device                                                                          ; 5CSXFC6D6F31C6     ;                    ;
 ; Top-level entity name                                                           ; PR3                ; PR3                ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
+; VHDL Show LMF Mapping Messages                                                  ; Off                ;                    ;
+; Verilog Show LMF Mapping Messages                                               ; Off                ;                    ;
+; Verilog Version                                                                 ; SystemVerilog_2005 ; Verilog_2001       ;
+; VHDL Version                                                                    ; VHDL_2008          ; VHDL_1993          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
 ; Enable compact report table                                                     ; Off                ; Off                ;
@@ -328,8 +330,6 @@ refer to the applicable agreement for further details.
 ; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
 ; Preserve fewer node names                                                       ; On                 ; On                 ;
 ; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
-; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
-; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
 ; State Machine Processing                                                        ; Auto               ; Auto               ;
 ; Safe State Machine                                                              ; Off                ; Off                ;
 ; Extract Verilog State Machines                                                  ; On                 ; On                 ;
@@ -764,6 +764,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+-------+---------------------------------------+
 ; SINK_WIDTH     ; 14    ; Signed Integer                        ;
 ; FFT_DEPTH      ; 11    ; Signed Integer                        ;
+; RUNS           ; 3     ; Signed Integer                        ;
 +----------------+-------+---------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -3045,19 +3046,9 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                                        ;
 +----------------+-------+-------------------------------------------------------------+
 ; DATA_WIDTH     ; 20    ; Signed Integer                                              ;
-; TOT_SIZE       ; 2048  ; Signed Integer                                              ;
+; TOT_SIZE       ; 1024  ; Signed Integer                                              ;
 +----------------+-------+-------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "phase_extract:pe1|freq_buffer:freqbuff1"                                                                                                            ;
-+---------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port    ; Type  ; Severity ; Details                                                                                                                                           ;
-+---------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------+
-; sink_re ; Input ; Warning  ; Input port expression (1 bits) is smaller than the input port (20 bits) it drives.  Extra input bit(s) "sink_re[19..1]" will be connected to GND. ;
-; sink_im ; Input ; Warning  ; Input port expression (1 bits) is smaller than the input port (20 bits) it drives.  Extra input bit(s) "sink_im[19..1]" will be connected to GND. ;
-+---------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------+
@@ -3301,27 +3292,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------+-------+----------+---------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "phase_extract:pe1|fft_int:fft"                                                                                                      ;
-+-----------+--------+----------+--------------------------------------------------------------------------------------------------------------------------------+
-; Port      ; Type   ; Severity ; Details                                                                                                                        ;
-+-----------+--------+----------+--------------------------------------------------------------------------------------------------------------------------------+
-; sink_Im   ; Input  ; Info     ; Explicitly unconnected                                                                                                         ;
-; source_Re ; Output ; Warning  ; Output or bidir port (20 bits) is wider than the port expression (1 bits) it drives; bit(s) "source_Re[19..1]" have no fanouts ;
-; source_Im ; Output ; Warning  ; Output or bidir port (20 bits) is wider than the port expression (1 bits) it drives; bit(s) "source_Im[19..1]" have no fanouts ;
-; error     ; Output ; Info     ; Explicitly unconnected                                                                                                         ;
-+-----------+--------+----------+--------------------------------------------------------------------------------------------------------------------------------+
-
-
-+--------------------------------------------------------------------+
-; Port Connectivity Checks: "phase_extract:pe1|time_buffer:timebuff" ;
-+--------------+--------+----------+---------------------------------+
-; Port         ; Type   ; Severity ; Details                         ;
-+--------------+--------+----------+---------------------------------+
-; reset        ; Input  ; Info     ; Explicitly unconnected          ;
-; ready        ; Output ; Info     ; Explicitly unconnected          ;
-; source_ready ; Input  ; Info     ; Explicitly unconnected          ;
-+--------------+--------+----------+---------------------------------+
++----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "phase_extract:pe1|fft_int:fft"                                                            ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port       ; Type   ; Severity ; Details                                                                             ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; aclr       ; Input  ; Info     ; Stuck at GND                                                                        ;
+; sink_Im    ; Input  ; Info     ; Stuck at GND                                                                        ;
+; source_eop ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; error      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------+
@@ -3351,7 +3331,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Mon Oct 01 20:56:53 2018
+    Info: Processing started: Wed Oct 03 16:55:20 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PR3 -c PR3
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -3381,8 +3361,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file pll.v
     Info (12023): Found entity 1: pll File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll.v Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file pll/pll_0002.v
     Info (12023): Found entity 1: pll_0002 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll/pll_0002.v Line: 2
-Warning (10236): Verilog HDL Implicit Net warning at phase_extract.sv(63): created implicit net for "fft_peak_re" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 63
-Warning (10236): Verilog HDL Implicit Net warning at phase_extract.sv(64): created implicit net for "fft_peak_im" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 64
+Info (12021): Found 1 design units, including 1 entities, in source file phase_extract_tb.sv
+    Info (12023): Found entity 1: phase_extract_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract_tb.sv Line: 3
 Info (12127): Elaborating entity "PR3" for the top level hierarchy
 Info (12128): Elaborating entity "pll" for hierarchy "pll:pll" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 19
 Info (12128): Elaborating entity "pll_0002" for hierarchy "pll:pll|pll_0002:pll_inst" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll.v Line: 19
@@ -3451,13 +3431,13 @@ Info (12133): Instantiated megafunction "pll:pll|pll_0002:pll_inst|altera_pll:al
     Info (12134): Parameter "pll_type" = "General"
     Info (12134): Parameter "pll_subtype" = "General"
 Info (12128): Elaborating entity "phase_extract" for hierarchy "phase_extract:pe1" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 30
-Info (12128): Elaborating entity "time_buffer" for hierarchy "phase_extract:pe1|time_buffer:timebuff" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 45
+Info (12128): Elaborating entity "time_buffer" for hierarchy "phase_extract:pe1|time_buffer:timebuff" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 89
 Warning (10230): Verilog HDL assignment warning at time_buffer.sv(41): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/time_buffer.sv Line: 41
 Warning (10230): Verilog HDL assignment warning at time_buffer.sv(51): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/time_buffer.sv Line: 51
 Warning (10230): Verilog HDL assignment warning at time_buffer.sv(52): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/time_buffer.sv Line: 52
 Warning (10230): Verilog HDL assignment warning at time_buffer.sv(56): truncated value with size 32 to match size of target (2) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/time_buffer.sv Line: 56
 Warning (10230): Verilog HDL assignment warning at time_buffer.sv(60): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/time_buffer.sv Line: 60
-Info (12128): Elaborating entity "fft_int" for hierarchy "phase_extract:pe1|fft_int:fft" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 66
+Info (12128): Elaborating entity "fft_int" for hierarchy "phase_extract:pe1|fft_int:fft" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 110
 Warning (10230): Verilog HDL assignment warning at fft_int.sv(77): truncated value with size 25 to match size of target (20) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 77
 Warning (10230): Verilog HDL assignment warning at fft_int.sv(78): truncated value with size 25 to match size of target (20) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 78
 Info (12128): Elaborating entity "cascade_0" for hierarchy "phase_extract:pe1|fft_int:fft|cascade_0:c0" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 40
@@ -3563,13 +3543,16 @@ Warning (10030): Net "W_Im_table.data_a" at W_int32.sv(697) has no driver or ini
 Warning (10030): Net "W_Im_table.waddr_a" at W_int32.sv(697) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 697
 Warning (10030): Net "W_Re_table.we_a" at W_int32.sv(566) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 566
 Warning (10030): Net "W_Im_table.we_a" at W_int32.sv(697) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 697
-Info (12128): Elaborating entity "freq_buffer" for hierarchy "phase_extract:pe1|freq_buffer:freqbuff1" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 79
-Warning (10036): Verilog HDL or VHDL warning at freq_buffer.sv(14): object "buff_re" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 14
-Warning (10036): Verilog HDL or VHDL warning at freq_buffer.sv(15): object "buff_im" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 15
+Info (12128): Elaborating entity "freq_buffer" for hierarchy "phase_extract:pe1|freq_buffer:freqbuff1" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 122
+Warning (10036): Verilog HDL or VHDL warning at freq_buffer.sv(17): object "buff_r" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 17
+Warning (10036): Verilog HDL or VHDL warning at freq_buffer.sv(18): object "buff_th" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 18
+Warning (10230): Verilog HDL assignment warning at freq_buffer.sv(43): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 43
+Warning (10230): Verilog HDL assignment warning at freq_buffer.sv(48): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 48
+Warning (10230): Verilog HDL assignment warning at freq_buffer.sv(49): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 49
+Warning (12158): Entity "freq_buffer" contains only dangling pins File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 122
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following PLL node(s):
         Warning (14320): Synthesized away node "pll:pll|pll_0002:pll_inst|altera_pll:altera_pll_i|outclk_wire[0]" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altera_pll.v Line: 748
-Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Info (144001): Generated suppressed messages file C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/output_files/PR3.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
@@ -3621,11 +3604,11 @@ Warning (21074): Design contains 44 input pin(s) that do not drive logic
 Info (21057): Implemented 44 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 44 input pins
     Info (21059): Implemented 0 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 115 warnings
-    Info: Peak virtual memory: 4983 megabytes
-    Info: Processing ended: Mon Oct 01 20:57:26 2018
-    Info: Elapsed time: 00:00:33
-    Info: Total CPU time (on all processors): 00:00:46
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 116 warnings
+    Info: Peak virtual memory: 5145 megabytes
+    Info: Processing ended: Wed Oct 03 16:55:55 2018
+    Info: Elapsed time: 00:00:35
+    Info: Total CPU time (on all processors): 00:00:50
 
 
 +------------------------------------------+
