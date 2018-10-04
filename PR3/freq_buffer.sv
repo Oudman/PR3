@@ -15,29 +15,16 @@ module freq_buffer #(
 
 // internal variables
 int											buff_r[0:TOT_SIZE-1];	// magnitude data (FP)
-int											buff_th[0:TOT_SIZE-1];	// phase data (FP)
+int											buff_th[0:TOT_SIZE-1];	// phase data, in degrees (FP)
 reg		[$clog2(TOT_SIZE)-1:0]		sink_pos;					// sink entry position
 
 // sqrt approximation (max -35% and +65% deviation) (in: non-FP; out non-FP)
-function int sqrt_h(longint s);
-	//sqrt2 = 1;
-	//for (byte i = 4; i <= 64; i += 2)
-	//begin
-	//	if (s[i-1] || s[i-2])
-	//		sqrt2 = s >>> (i/2);
-	//end
+function automatic int sqrt_h(const ref longint s);
 	for (byte i = 0; i < 32; i++)
 		sqrt_h[i] = s[2*i+1] || s[2*i];
-	//automatic longint tmp = s - 1;
-	//while (tmp > 0)
-	//begin
-	//	tmp >>>= 2;
-	//	s >>>= 1;
-	//end
-	//sqrt2 = s + 1;
 endfunction
 
-// sqrt approximation (max +-0.2% deviation) (in: non-FP; out non-FP)
+// sqrt approximation (max 0.2% deviation) (in: non-FP; out non-FP)
 function int sqrt(longint s);
 	if (s < 2)
 		sqrt = s;
@@ -55,24 +42,25 @@ function int hypot(bit signed [DATA_WIDTH-1:0] x, y);
 	hypot = sqrt(x*x + y*y) <<< 8;
 endfunction
 
-// arctan approximation (in: FP; out: FP)
+// arctan approximation (max 0.22deg deviation in range [0,1]) (in: FP; out: FP)
 // using https://math.stackexchange.com/questions/1098487/atan2-faster-approximation
 function int arctan_h(int z);
-	arctan_h = (z * (51472 - 70 * (z - 256))) >>> 16;
+	arctan_h = (z * (2949120 - 4009 * (z - 256))) >>> 16;
 endfunction
 
-function int arctan(int z);
+// arctan approximation (max 0.22deg deviation) (in: FP; out: FP)
+function automatic int arctan(const ref int z);
 	if (z >= 0)
 	begin
 		if (z > 256)
-			arctan = 402 - arctan_h(65536/z);
+			arctan = 23040 - arctan_h(65536/z);
 		else
 			arctan = arctan_h(z);
 	end
 	else
 	begin
 		if (z < -256)
-			arctan = arctan_h(65536/-z) - 402;
+			arctan = arctan_h(65536/-z) - 23040;
 		else
 			arctan = -arctan_h(-z);
 	end
@@ -82,16 +70,16 @@ endfunction
 // using https://en.wikipedia.org/wiki/Atan2
 function int atan2(bit signed [DATA_WIDTH-1:0] x, y);
 	if (x == 0)
-		atan2 = (y >= 0) ? 402 : -402;
+		atan2 = (y >= 0) ? 23040 : -23040;
 	else
 	begin
 		automatic int z = (y <<< 8) / x; // FP
 		if (x > 0)
 			atan2 = arctan(z);
 		else if (y >= 0)
-			atan2 = arctan(z) + 804;
+			atan2 = arctan(z) + 46080;
 		else
-			atan2 = arctan(z) - 804;
+			atan2 = arctan(z) - 46080;
 	end
 endfunction
 
