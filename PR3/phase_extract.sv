@@ -15,29 +15,29 @@ localparam	FFT_LENGTH = 2**FFT_DEPTH;								// number of entries over which to 
 localparam	FFT_WIDTH = SINK_WIDTH + (FFT_DEPTH+1) / 2;		// number of bits of the fft output
 
 /*----------------------------------------------------------------------------*/
-/*- wire declarations --------------------------------------------------------*/
+/*- wire/reg declarations ----------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 // time_buffer related
-reg							time_reset;
-wire							time_ready;
-wire							time_start;
-wire							time_clk;
-wire	[SINK_WIDTH-1:0]	time_sink_data;
-wire							time_fft_sop;
-wire							time_fft_eop;
-wire							time_fft_valid;
-wire 	[SINK_WIDTH-1:0]	time_fft_re;
-bit 	[SINK_WIDTH-1:0]	time_fft_im = 0;
+bit											time_reset;
+wire											time_ready;
+bit											time_start;
+wire											time_done;
+wire											time_clk;
+wire		[SINK_WIDTH-1:0]				time_sink_data;
+wire											time_fft_sop;
+wire											time_fft_eop;
+wire											time_fft_valid;
+wire 		[SINK_WIDTH-1:0]				time_fft_re;
 
 // fft_int related
-wire							fft_clk;
-bit							fft_reset = 0;
-wire							fft_freq_sop;
-wire							fft_freq_eop;
-wire							fft_freq_valid;
-wire	[FFT_WIDTH-1:0]	fft_freq_re;
-wire	[FFT_WIDTH-1:0]	fft_freq_im;
-wire							fft_error;
+wire											fft_clk;
+bit											fft_reset;
+wire											fft_freq_sop;
+wire											fft_freq_eop;
+wire											fft_freq_valid;
+wire		[FFT_WIDTH-1:0]				fft_freq_re;
+wire		[FFT_WIDTH-1:0]				fft_freq_im;
+wire											fft_error;
 
 // freq_buffer related
 
@@ -54,18 +54,29 @@ assign fft_clk = clk;
 // load time buffer
 initial
 begin
-	@(posedge time_clk);
-	time_reset = 1;
-	@(posedge time_clk);
-	time_reset = 0;
+	repeat (10) // TODO: rewrite this part
+	begin
+		@(posedge time_clk);
+		time_reset = 1;
+		@(posedge time_clk);
+		time_reset = 0;
+		@(posedge time_ready);
+		@(posedge fft_clk);
+		time_start = 1;
+		@(posedge fft_clk);
+		time_start = 0;
+		@(posedge time_done);
+	end
+end
+
+// load fft
+initial
+begin
 	@(posedge fft_clk);
 	fft_reset = 1;
 	@(posedge fft_clk);
 	fft_reset = 0;
 end
-
-// load fft
-assign time_start = time_ready; // assumes fft is always ready
 
 /*----------------------------------------------------------------------------*/
 /*- module instances ---------------------------------------------------------*/
@@ -79,6 +90,7 @@ time_buffer #(
 	.reset					(time_reset),
 	.ready					(time_ready),
 	.start					(time_start),
+	.done						(time_done),
 	.sink_clk				(time_clk),
 	.sink_data				(time_sink_data),
 	.source_clk				(fft_clk),
@@ -100,7 +112,7 @@ fft_int #(
 	.sink_eop				(time_fft_eop),
 	.sink_valid				(time_fft_valid),
 	.sink_Re					(time_fft_re),
-	.sink_Im					(time_fft_im),
+	.sink_Im					(0),
 	.source_sop				(fft_freq_sop),
 	.source_eop				(fft_freq_eop),
 	.source_valid			(fft_freq_valid),

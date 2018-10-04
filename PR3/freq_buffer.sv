@@ -87,14 +87,13 @@ endfunction
 // sink constrol
 always @(posedge sink_clk)
 begin
-	if (sink_valid)
+	if (sink_sop)
+		sink_pos = 0;
+	if (sink_valid && sink_pos < TOT_SIZE - 1)
 	begin
-		if (sink_sop)
-			sink_pos = 0;
 		buff_r[sink_pos] = hypot(sink_re, sink_im);
 		buff_th[sink_pos] = atan2(sink_re, sink_im);
-		if (sink_pos < TOT_SIZE-1)
-			sink_pos++;
+		sink_pos++;
 	end
 end
 
