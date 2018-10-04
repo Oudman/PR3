@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PR3
-Thu Oct 04 10:48:17 2018
+Thu Oct 04 11:22:29 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -290,7 +290,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu Oct 04 10:48:17 2018       ;
+; Analysis & Synthesis Status     ; Successful - Thu Oct 04 11:22:29 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
@@ -3331,7 +3331,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Thu Oct 04 10:47:43 2018
+    Info: Processing started: Thu Oct 04 11:21:55 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PR3 -c PR3
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -3549,13 +3549,14 @@ Warning (10036): Verilog HDL or VHDL warning at freq_buffer.sv(18): object "buff
 Warning (10230): Verilog HDL assignment warning at freq_buffer.sv(30): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 30
 Warning (10230): Verilog HDL assignment warning at freq_buffer.sv(35): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 35
 Warning (10230): Verilog HDL assignment warning at freq_buffer.sv(36): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 36
-Warning (10242): Verilog HDL Function Declaration warning at freq_buffer.sv(53): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 53
-Warning (10242): Verilog HDL Function Declaration warning at freq_buffer.sv(55): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 55
+Warning (10230): Verilog HDL assignment warning at freq_buffer.sv(37): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 37
+Warning (10242): Verilog HDL Function Declaration warning at freq_buffer.sv(54): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 54
 Warning (10242): Verilog HDL Function Declaration warning at freq_buffer.sv(56): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 56
-Warning (10242): Verilog HDL Function Declaration warning at freq_buffer.sv(58): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 58
-Warning (10242): Verilog HDL Function Declaration warning at freq_buffer.sv(62): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 62
+Warning (10242): Verilog HDL Function Declaration warning at freq_buffer.sv(57): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 57
+Warning (10242): Verilog HDL Function Declaration warning at freq_buffer.sv(59): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 59
 Warning (10242): Verilog HDL Function Declaration warning at freq_buffer.sv(63): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 63
-Warning (10242): Verilog HDL Function Declaration warning at freq_buffer.sv(65): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 65
+Warning (10242): Verilog HDL Function Declaration warning at freq_buffer.sv(64): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 64
+Warning (10242): Verilog HDL Function Declaration warning at freq_buffer.sv(66): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 66
 Warning (12158): Entity "freq_buffer" contains only dangling pins File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 122
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following PLL node(s):
@@ -3611,9 +3612,9 @@ Warning (21074): Design contains 44 input pin(s) that do not drive logic
 Info (21057): Implemented 44 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 44 input pins
     Info (21059): Implemented 0 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 123 warnings
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 124 warnings
     Info: Peak virtual memory: 5146 megabytes
-    Info: Processing ended: Thu Oct 04 10:48:17 2018
+    Info: Processing ended: Thu Oct 04 11:22:29 2018
     Info: Elapsed time: 00:00:34
     Info: Total CPU time (on all processors): 00:00:48
 

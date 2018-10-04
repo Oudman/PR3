@@ -18,13 +18,13 @@ int											buff_r[0:TOT_SIZE-1];	// magnitude data (FP)
 int											buff_th[0:TOT_SIZE-1];	// phase data, in degrees (FP)
 reg		[$clog2(TOT_SIZE)-1:0]		sink_pos;					// sink entry position
 
-// sqrt approximation (max -35% and +65% deviation) (in: non-FP; out non-FP)
+// sqrt approximation (max -42.3% and +73.2% deviation) (in: non-FP; out non-FP)
 function automatic int sqrt_h(const ref longint s);
 	for (byte i = 0; i < 32; i++)
 		sqrt_h[i] = s[2*i+1] || s[2*i];
 endfunction
 
-// sqrt approximation (max 0.2% deviation) (in: non-FP; out non-FP)
+// sqrt approximation (max 0.005% deviation, excluding rounding errors) (in: non-FP; out non-FP)
 function int sqrt(longint s);
 	if (s < 2)
 		sqrt = s;
@@ -32,8 +32,9 @@ function int sqrt(longint s);
 	begin
 		int tmp;
 		sqrt = sqrt_h(s);
-		sqrt = (sqrt + s / sqrt) / 2;
-		sqrt = (sqrt + s / sqrt) / 2;
+		sqrt = (sqrt + s / sqrt) / 2; // max 15% deviation
+		sqrt = (sqrt + s / sqrt) / 2; // max 1% deviation
+		sqrt = (sqrt + s / sqrt) / 2; // max 0.005% deviation
 	end
 endfunction
 
