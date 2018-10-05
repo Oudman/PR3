@@ -1,5 +1,5 @@
 Fitter report for PR3
-Tue Oct 02 15:10:17 2018
+Fri Oct 05 15:20:14 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -57,7 +57,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Fitter Summary                                                                ;
 +---------------------------------+---------------------------------------------+
-; Fitter Status                   ; Successful - Tue Oct 02 15:10:17 2018       ;
+; Fitter Status                   ; Successful - Fri Oct 05 15:20:14 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
@@ -1848,14 +1848,14 @@ Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
-Info (11801): Fitter post-fit operations ending: elapsed time is 00:00:02
+Info (11801): Fitter post-fit operations ending: elapsed time is 00:00:03
 Warning (171167): Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
 Info (144001): Generated suppressed messages file C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/output_files/PR3.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 7 warnings
-    Info: Peak virtual memory: 6226 megabytes
-    Info: Processing ended: Tue Oct 02 15:10:18 2018
-    Info: Elapsed time: 00:00:47
-    Info: Total CPU time (on all processors): 00:01:08
+    Info: Peak virtual memory: 6231 megabytes
+    Info: Processing ended: Fri Oct 05 15:20:15 2018
+    Info: Elapsed time: 00:00:53
+    Info: Total CPU time (on all processors): 00:01:07
 
 
 +----------------------------+
