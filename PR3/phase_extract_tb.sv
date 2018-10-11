@@ -28,9 +28,9 @@ end
 
 // Connect module(s) to test
 phase_extract #(
-	SINK_WIDTH,																// number of bits per entry
-	FFT_DEPTH,																// number of fft levels
-	RUNS																		// number of runs
+	.SINK_WIDTH				(SINK_WIDTH),								// number of bits per entry
+	.FFT_DEPTH				(FFT_DEPTH),								// number of fft levels
+	.RUNS						(RUNS)										// number of runs
 ) pe (
 	.clk						(clk50),										// clock:	main clock
 	.clk20					(clk20),										// clock:	20MHz

@@ -42,9 +42,9 @@ end
 
 // Connect module(s) to test
 maxheap #(
-	DATA_WIDTH,
-	PRIO_WIDTH,
-	TOT_SIZE
+	.DATA_WIDTH				(DATA_WIDTH),
+	.PRIO_WIDTH				(PRIO_WIDTH),
+	.TOT_SIZE				(TOT_SIZE)
 ) mh (
 	.reset					(reset),
 	.sink_clk				(clk),

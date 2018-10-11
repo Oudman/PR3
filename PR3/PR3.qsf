@@ -73,11 +73,10 @@ set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
 set_global_assignment -name VHDL_SHOW_LMF_MAPPING_MESSAGES OFF
 set_global_assignment -name VERILOG_INPUT_VERSION SYSTEMVERILOG_2005
 set_global_assignment -name VERILOG_SHOW_LMF_MAPPING_MESSAGES OFF
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name SYSTEMVERILOG_FILE input_buffer_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE input_buffer.sv
 set_global_assignment -name SYSTEMVERILOG_FILE maxheap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE fft_tb.sv
-set_global_assignment -name SYSTEMVERILOG_FILE time_buffer_tb.sv
-set_global_assignment -name SYSTEMVERILOG_FILE time_buffer.sv
 set_global_assignment -name SYSTEMVERILOG_FILE freq_buffer.sv
 set_global_assignment -name SYSTEMVERILOG_FILE PR3.sv
 set_global_assignment -name SYSTEMVERILOG_FILE phase_extract.sv
@@ -85,3 +84,5 @@ set_global_assignment -name QIP_FILE pll.qip
 set_global_assignment -name SIP_FILE pll.sip
 set_global_assignment -name SYSTEMVERILOG_FILE phase_extract_tb.sv
 set_global_assignment -name SYSTEMVERILOG_FILE maxheap_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE peak_detect.sv
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -17,36 +17,30 @@ localparam	FFT_WIDTH = SINK_WIDTH + (FFT_DEPTH+1) / 2;		// number of bits of the
 /*----------------------------------------------------------------------------*/
 /*- wire/reg declarations ----------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
-// time_buffer related
+// input_buffer related
 bit											time_reset;
-wire											time_ready;
-bit											time_start;
-wire											time_done;
-wire											time_clk;
-wire		[SINK_WIDTH-1:0]				time_sink_data;
 wire											time_fft_sop;
 wire											time_fft_eop;
 wire											time_fft_valid;
-wire 		[SINK_WIDTH-1:0]				time_fft_re;
+wire 			[SINK_WIDTH-1:0]			time_fft_re;
 
 // fft_int related
-wire											fft_clk;
 bit											fft_reset;
-wire											fft_freq_sop;
-wire											fft_freq_eop;
-wire											fft_freq_valid;
-wire		[FFT_WIDTH-1:0]				fft_freq_re;
-wire		[FFT_WIDTH-1:0]				fft_freq_im;
-wire											fft_error;
+wire											fft_peak_sop;
+wire											fft_peak_eop;
+wire											fft_peak_valid;
+wire			[FFT_WIDTH-1:0]			fft_peak_re;
+wire			[FFT_WIDTH-1:0]			fft_peak_im;
 
-// freq_buffer related
+// peak_detect related
+bit											peak_reset;
+wire											peak_sop;
+wire											peak_eop;
+wire											peak_valid;
+wire signed	[31:0]						peak_freq;
+wire signed	[31:0]						peak_mag;
+wire signed	[31:0]						peak_phase;
 
-/*----------------------------------------------------------------------------*/
-/*- wire assignments ---------------------------------------------------------*/
-/*----------------------------------------------------------------------------*/
-assign time_clk = clk20;
-assign time_sink_data = sink;
-assign fft_clk = clk;
 
 /*----------------------------------------------------------------------------*/
 /*- module synchronization and control ---------------------------------------*/
@@ -54,46 +48,34 @@ assign fft_clk = clk;
 // load time buffer
 initial
 begin
-	repeat (10) // TODO: rewrite this part
-	begin
-		@(posedge time_clk);
-		time_reset = 1;
-		@(posedge time_clk);
-		time_reset = 0;
-		@(posedge time_ready);
-		@(posedge fft_clk);
-		time_start = 1;
-		@(posedge fft_clk);
-		time_start = 0;
-		@(posedge time_done);
-	end
+	@(posedge clk20);
+	time_reset = 1;
+	@(posedge clk20);
+	time_reset = 0;
 end
 
 // load fft
 initial
 begin
-	@(posedge fft_clk);
+	@(posedge clk);
 	fft_reset = 1;
-	@(posedge fft_clk);
+	@(posedge clk);
 	fft_reset = 0;
 end
 
 /*----------------------------------------------------------------------------*/
 /*- module instances ---------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
-// time domain buffer
-time_buffer #(
-	SINK_WIDTH,
-	FFT_LENGTH,
-	RUNS
-) timebuff (
+// input buffer
+input_buffer #(
+	.BATCH_SIZE				(FFT_LENGTH),
+	.RUNS						(RUNS),
+	.DATA_WIDTH				(SINK_WIDTH)
+) buff (
+	.sink_clk				(clk20),
+	.source_clk				(clk),
 	.reset					(time_reset),
-	.ready					(time_ready),
-	.start					(time_start),
-	.done						(time_done),
-	.sink_clk				(time_clk),
-	.sink_data				(time_sink_data),
-	.source_clk				(fft_clk),
+	.sink_data				(sink),
 	.source_sop				(time_fft_sop),
 	.source_eop				(time_fft_eop),
 	.source_valid			(time_fft_valid),
@@ -102,35 +84,43 @@ time_buffer #(
 
 // fft operator
 fft_int #(
-	FFT_DEPTH,
-	SINK_WIDTH,
-	FFT_WIDTH
+	.POW						(FFT_DEPTH),
+	.DATA_WIDTH				(SINK_WIDTH),
+	.RES_WIDTH				(FFT_WIDTH)
 ) fft (
-	.clk						(fft_clk),
+	.clk						(clk),
 	.aclr						(fft_reset),
 	.sink_sop				(time_fft_sop),
 	.sink_eop				(time_fft_eop),
 	.sink_valid				(time_fft_valid),
 	.sink_Re					(time_fft_re),
 	.sink_Im					(0),
-	.source_sop				(fft_freq_sop),
-	.source_eop				(fft_freq_eop),
-	.source_valid			(fft_freq_valid),
-	.source_Re				(fft_freq_re),
-	.source_Im				(fft_freq_im),
-	.error					(fft_error)
+	.source_sop				(fft_peak_sop),
+	.source_eop				(fft_peak_eop),
+	.source_valid			(fft_peak_valid),
+	.source_Re				(fft_peak_re),
+	.source_Im				(fft_peak_im),
+	.error					()
 );
 
-// frequency domain buffer
-freq_buffer #(
-	FFT_WIDTH,
-	FFT_LENGTH / 2
-) freqbuff1 (
-	.sink_clk				(fft_clk),
-	.sink_sop				(fft_freq_sop),
-	.sink_valid				(fft_freq_valid),
-	.sink_re					(fft_freq_re),
-	.sink_im					(fft_freq_im)
+// peak detection
+peak_detect #(
+	.BATCH_SIZE				(FFT_LENGTH/2),
+	.DATA_WIDTH				(FFT_WIDTH)
+) pd (
+	.clk						(clk),
+	.reset					(peak_reset),
+	.sink_sop				(fft_peak_sop),
+	.sink_eop				(fft_peak_eop),
+	.sink_valid				(fft_peak_valid),
+	.sink_re					(fft_peak_re),
+	.sink_im					(fft_peak_im),
+	.source_sop				(peak_sop),
+	.source_eop				(peak_eop),
+	.source_valid			(peak_valid),
+	.source_freq			(peak_freq),
+	.source_mag				(peak_mag),
+	.source_phase			(peak_phase)
 );
 
 endmodule

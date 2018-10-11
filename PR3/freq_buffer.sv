@@ -97,4 +97,17 @@ begin
 	end
 end
 
+// module instance
+maxheap #(
+	DATA_WIDTH,
+	32,
+	4
+) mh (
+	.reset					(),
+	.sink_clk				(sink_clk),
+	.sink_valid				(sink_valid),
+	.sink_data				(),
+	.sink_prio				()
+);
+
 endmodule

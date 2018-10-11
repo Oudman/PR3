@@ -1,0 +1,20 @@
+module peak_detect #(
+	parameter BATCH_SIZE	= 1024,										// number of entries per input batch
+	parameter DATA_WIDTH	= 20											// number of bits per entry
+) pd (
+	input		wire							clk,							// clock:	input data speed
+	input		wire							reset,						// high:		synchronous reset
+	input		wire							sink_sop,					// high: 	first input entry
+	input		wire							sink_eop,					// high:		last input entry
+	input		wire							sink_valid,					// high:		input is valid
+	input		wire	[DATA_WIDTH-1:0]	sink_re,						//				real part of input data
+	input		wire	[DATA_WIDTH-1:0]	sink_im,						//				imaginair part of input data
+	.source_sop				(peak_sop),
+	.source_eop				(peak_eop),
+	.source_valid			(peak_valid),
+	.source_freq			(peak_freq),
+	.source_mag				(peak_mag),
+	.source_phase			(peak_phase)
+)
+
+endmodule

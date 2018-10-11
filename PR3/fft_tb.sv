@@ -51,9 +51,9 @@ end
 
 // Connect module(s) to test
 fft_int #(
-	FFT_DEPTH,																// FFT length N = 2**POW
-	SINK_WIDTH,																// input width
-	FFT_WIDTH                                    				// output width
+	.POW						(FFT_DEPTH),								// FFT length N = 2**POW
+	.DATA_WIDTH				(SINK_WIDTH),								// input width
+	.RES_WIDTH				(FFT_WIDTH)									// output width
 ) fft (
 	.clk						(clk),										// clock:	processing speed
 	.aclr						(reset),										// high:		reset
