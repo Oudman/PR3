@@ -1,8 +1,0 @@
-module stuff (
-  input   wire          iClk,                 // clock: 50MHz
-  input   wire  [13:0]  iData1                //        connected to antenna #1
-  input   wire  [13:0]  iData2                //        connected to antenna #2
-  input   wire  [13:0]  iData3                //        connected to antenna #3
-);
-
-endmodule
