@@ -61,9 +61,9 @@ begin
 	end
 	if (!source_done && sink_done)									// continue output
 	begin
-		source_valid <= 1;
-		source_sop <= (source_pos == source_offset) ? 1 : 0;
-		source_eop <= (source_pos == source_offset + BATCH_SIZE - 1) ? 1 : 0;
+		source_valid = 1;
+		source_sop = (source_pos == source_offset) ? 1 : 0;
+		source_eop = (source_pos == source_offset + BATCH_SIZE - 1) ? 1 : 0;
 		source_data = buffer[source_pos];
 		if (source_pos == source_offset + BATCH_SIZE - 1)		// last entry of batch
 		begin
@@ -80,9 +80,9 @@ begin
 	end
 	else
 	begin
-		source_valid <= 0;
-		source_sop <= 0;
-		source_eop <= 0;
+		source_valid = 0;
+		source_sop = 0;
+		source_eop = 0;
 	end
 end
 

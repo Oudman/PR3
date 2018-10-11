@@ -1,1 +1,2 @@
 Warning (10268): Verilog HDL information at time_buffer.sv(52): always construct contains both blocking and non-blocking assignments File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/time_buffer.sv Line: 52
+Warning (10268): Verilog HDL information at pqueue.sv(20): always construct contains both blocking and non-blocking assignments File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pqueue.sv Line: 20
