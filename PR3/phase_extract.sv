@@ -31,6 +31,7 @@ wire											fft_peak_eop;
 wire											fft_peak_valid;
 wire			[FFT_WIDTH-1:0]			fft_peak_re;
 wire			[FFT_WIDTH-1:0]			fft_peak_im;
+wire											fft_error;					// unused
 
 // peak_detect related
 bit											peak_reset;
@@ -100,7 +101,7 @@ fft_int #(
 	.source_valid			(fft_peak_valid),
 	.source_Re				(fft_peak_re),
 	.source_Im				(fft_peak_im),
-	.error					()
+	.error					(fft_error)
 );
 
 // peak detection

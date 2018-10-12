@@ -11,10 +11,8 @@ module maxheap #(
 );
 
 // internal variables
-reg		[DATA_WIDTH-1:0]				heap_data[0:TOT_SIZE-1];// heap data
-reg		[PRIO_WIDTH-1:0]				heap_prio[0:TOT_SIZE-1];// heap priorities
-
-
+reg		[DATA_WIDTH-1:0]			heap_data[0:TOT_SIZE-1];	// heap data
+reg		[PRIO_WIDTH-1:0]			heap_prio[0:TOT_SIZE-1];	// heap priorities
 
 // sink constrol
 always @(posedge sink_clk)

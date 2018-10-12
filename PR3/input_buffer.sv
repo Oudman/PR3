@@ -68,7 +68,7 @@ begin
 			end
 		end
 		else																	// non-last entry of batch
-			source_pos <= source_offset + 1;
+			source_pos <= source_pos + 1;
 	end
 	else
 	begin
