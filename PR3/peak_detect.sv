@@ -22,21 +22,22 @@ module peak_detect #(
 // - the lower 8 bits represent the fractional part
 
 // more parameters
-localparam PEAKS = 4;													// number of peaks to detect
+localparam NPEAKS = 4;													// number of peaks to detect
+localparam shortint EXPEAKS[NPEAKS] = '{205, 410, 614, 819};// expected locations of peaks (bin)
+localparam PEAKDEV = 51;												// maximum deviation between expectation and reality (bins)
 localparam ADDR_WIDTH = $clog2(BATCH_SIZE);						// memory address width
-
 
 /*----------------------------------------------------------------------------*/
 /*- wire/logic declarations --------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
-int											sink_r;						// radius of complex input
-int											sink_th;						// phase of complex input
+int											sink_r;						// magnitude of complex input (FP)
+int											sink_th;						// phase of complex input in degrees (FP)
 int											buff_r[0:BATCH_SIZE-1];	// magnitude data (FP)
 int											buff_th[0:BATCH_SIZE-1];// phase data in degrees (FP)
-bit		[ADDR_WIDTH-1:0]				maxheap[0:PEAKS-1];		// indices of peaks
+bit		[ADDR_WIDTH-1:0]				peaks[0:NPEAKS-1];		// indices of peaks
 bit		[$clog2(BATCH_SIZE)-1:0]	sink_pos;					// sink entry position
 bit											sink_done;					// high:		buffer is fully loaded
-bit		[$clog2(PEAKS)-1:0]			source_pos;					// source entry position
+bit		[$clog2(NPEAKS)-1:0]			source_pos;					// source entry position
 bit											source_done;				// high:		peaks have all been output
 
 /*----------------------------------------------------------------------------*/
@@ -108,21 +109,6 @@ function int atan2(bit signed [DATA_WIDTH-1:0] x, y);
 	end
 endfunction
 
-// resets the maxheap
-task maxheap_reset();
-	for (bit [$clog2(PEAKS+1)-1:0] i = 0; i < PEAKS; i++)
-		maxheap[i] <= 0;
-endtask
-
-// updates the maxheap
-task maxheap_update();
-	if (sink_r > buff_r[maxheap[0]])
-		buff_r[0] <= sink_pos;
-	for (bit [$clog2(PEAKS+1)-1:0] i = 1; i < PEAKS; i++)
-		if (sink_r > buff_r[maxheap[i]])
-			maxheap[i] <= (sink_r > buff_r[maxheap[i-1]]) ? maxheap[i-1] : sink_pos;
-endtask
-
 /*----------------------------------------------------------------------------*/
 /*- main code ----------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
@@ -133,7 +119,8 @@ always @(posedge clk)
 begin
 	if (reset)																// reset all
 	begin
-		maxheap_reset();
+		for (bit [$clog2(NPEAKS+1)-1:0] i = 0; i < NPEAKS; i++)
+			peaks[i] <= 0;
 		sink_pos <= 0;
 		sink_done <= 0;
 		source_pos <= 0;
@@ -141,7 +128,9 @@ begin
 	end
 	else if (!sink_done && sink_valid)								// continue loading of buffer
 	begin
-		maxheap_update();
+		for (bit [$clog2(NPEAKS+1)-1:0] i = 0; i < NPEAKS; i++)
+			if (EXPEAKS[i] - PEAKDEV <= sink_pos && sink_pos < EXPEAKS[i] + PEAKDEV && sink_r > buff_r[peaks[i]])
+				peaks[i] <= sink_pos;
 		buff_r[sink_pos] <= sink_r;
 		buff_th[sink_pos] <= sink_th;
 		sink_done <= (sink_pos == BATCH_SIZE - 1) ? 1 : 0;

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PR3
-Fri Oct 12 14:15:24 2018
+Fri Oct 12 16:25:14 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -290,7 +290,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri Oct 12 14:15:24 2018       ;
+; Analysis & Synthesis Status     ; Successful - Fri Oct 12 16:25:14 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
@@ -3313,7 +3313,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; sink_Im        ; Input  ; Warning  ; Input port expression (32 bits) is wider than the input port (14 bits) it drives.  The 18 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
 ; sink_Im[13..0] ; Input  ; Info     ; Stuck at GND                                                                                                                                                                        ;
-; error          ; Output ; Info     ; Explicitly unconnected                                                                                                                                                              ;
+; error          ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                                 ;
 +----------------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -3344,7 +3344,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Fri Oct 12 14:14:42 2018
+    Info: Processing started: Fri Oct 12 16:24:30 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PR3 -c PR3
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -3450,14 +3450,14 @@ Info (12133): Instantiated megafunction "pll:pll|pll_0002:pll_inst|altera_pll:al
     Info (12134): Parameter "pll_type" = "General"
     Info (12134): Parameter "pll_subtype" = "General"
 Info (12128): Elaborating entity "phase_extract" for hierarchy "phase_extract:pe1" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 30
-Info (12128): Elaborating entity "input_buffer" for hierarchy "phase_extract:pe1|input_buffer:buff" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 83
+Info (12128): Elaborating entity "input_buffer" for hierarchy "phase_extract:pe1|input_buffer:buff" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 84
 Warning (10230): Verilog HDL assignment warning at input_buffer.sv(41): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 41
 Warning (10230): Verilog HDL assignment warning at input_buffer.sv(57): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 57
 Warning (10230): Verilog HDL assignment warning at input_buffer.sv(58): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 58
 Warning (10230): Verilog HDL assignment warning at input_buffer.sv(66): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 66
 Warning (10230): Verilog HDL assignment warning at input_buffer.sv(67): truncated value with size 32 to match size of target (2) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 67
 Warning (10230): Verilog HDL assignment warning at input_buffer.sv(71): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 71
-Info (12128): Elaborating entity "fft_int" for hierarchy "phase_extract:pe1|fft_int:fft" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 104
+Info (12128): Elaborating entity "fft_int" for hierarchy "phase_extract:pe1|fft_int:fft" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 105
 Warning (10230): Verilog HDL assignment warning at fft_int.sv(77): truncated value with size 25 to match size of target (20) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 77
 Warning (10230): Verilog HDL assignment warning at fft_int.sv(78): truncated value with size 25 to match size of target (20) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 78
 Info (12128): Elaborating entity "cascade_0" for hierarchy "phase_extract:pe1|fft_int:fft|cascade_0:c0" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 40
@@ -3563,29 +3563,29 @@ Warning (10030): Net "W_Im_table.data_a" at W_int32.sv(697) has no driver or ini
 Warning (10030): Net "W_Im_table.waddr_a" at W_int32.sv(697) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 697
 Warning (10030): Net "W_Re_table.we_a" at W_int32.sv(566) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 566
 Warning (10030): Net "W_Im_table.we_a" at W_int32.sv(697) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 697
-Info (12128): Elaborating entity "peak_detect" for hierarchy "phase_extract:pe1|peak_detect:pd" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 124
-Warning (10036): Verilog HDL or VHDL warning at peak_detect.sv(35): object "buff_th" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 35
-Warning (10036): Verilog HDL or VHDL warning at peak_detect.sv(39): object "source_pos" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 39
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(54): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 54
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(59): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 59
+Info (12128): Elaborating entity "peak_detect" for hierarchy "phase_extract:pe1|peak_detect:pd" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 125
+Warning (10036): Verilog HDL or VHDL warning at peak_detect.sv(36): object "buff_th" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 36
+Warning (10036): Verilog HDL or VHDL warning at peak_detect.sv(40): object "source_pos" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 40
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(55): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 55
 Warning (10230): Verilog HDL assignment warning at peak_detect.sv(60): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 60
 Warning (10230): Verilog HDL assignment warning at peak_detect.sv(61): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 61
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(78): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 78
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(80): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 80
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(62): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 62
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(79): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 79
 Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(81): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 81
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(83): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 83
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(87): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 87
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(82): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 82
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(84): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 84
 Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(88): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 88
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(90): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 90
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(147): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 147
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(148): truncated value with size 32 to match size of target (10) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 148
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(89): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 89
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(91): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 91
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(145): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 145
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(146): truncated value with size 32 to match size of target (10) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 146
 Warning (10034): Output port "source_freq" at peak_detect.sv(15) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 15
 Warning (10034): Output port "source_mag" at peak_detect.sv(16) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 16
 Warning (10034): Output port "source_phase" at peak_detect.sv(18) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 18
 Warning (10034): Output port "source_sop" at peak_detect.sv(12) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 12
 Warning (10034): Output port "source_eop" at peak_detect.sv(13) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 13
 Warning (10034): Output port "source_valid" at peak_detect.sv(14) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 14
-Warning (12158): Entity "peak_detect" contains only dangling pins File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 124
+Warning (12158): Entity "peak_detect" contains only dangling pins File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 125
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following PLL node(s):
         Warning (14320): Synthesized away node "pll:pll|pll_0002:pll_inst|altera_pll:altera_pll_i|outclk_wire[0]" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altera_pll.v Line: 748
@@ -3641,9 +3641,9 @@ Info (21057): Implemented 44 device resources after synthesis - the final resour
     Info (21058): Implemented 44 input pins
     Info (21059): Implemented 0 output pins
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 134 warnings
-    Info: Peak virtual memory: 5162 megabytes
-    Info: Processing ended: Fri Oct 12 14:15:24 2018
-    Info: Elapsed time: 00:00:42
-    Info: Total CPU time (on all processors): 00:00:57
+    Info: Peak virtual memory: 5153 megabytes
+    Info: Processing ended: Fri Oct 12 16:25:14 2018
+    Info: Elapsed time: 00:00:44
+    Info: Total CPU time (on all processors): 00:00:59
 
 
