@@ -37,7 +37,7 @@ int											buff_th[0:BATCH_SIZE-1];// phase data in degrees (FP)
 bit		[ADDR_WIDTH-1:0]				peaks[0:NPEAKS-1];		// indices of peaks
 bit		[$clog2(BATCH_SIZE)-1:0]	sink_pos;					// sink entry position
 bit											sink_done;					// high:		buffer is fully loaded
-bit		[$clog2(NPEAKS)-1:0]			source_pos;					// source entry position
+bit		[$clog2(NPEAKS):0]			source_pos;					// source entry position
 bit											source_done;				// high:		peaks have all been output
 
 /*----------------------------------------------------------------------------*/
@@ -117,7 +117,7 @@ assign sink_th = atan2(sink_re, sink_im);
 
 always @(posedge clk)
 begin
-	if (reset)																// reset all
+	if (reset || sink_eop)												// reset all
 	begin
 		for (bit [$clog2(NPEAKS+1)-1:0] i = 0; i < NPEAKS; i++)
 			peaks[i] <= 0;
@@ -138,7 +138,8 @@ begin
 	end
 	else if (sink_done && !source_done)								// continue export of data
 	begin
-		
+		source_done <= (source_pos == 2 * NPEAKS - 1) ? 1 : 0;
+		source_pos <= source_pos + 1;
 	end
 end
 
