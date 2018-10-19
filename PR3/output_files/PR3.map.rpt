@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PR3
-Fri Oct 12 16:38:46 2018
+Fri Oct 19 14:03:21 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -290,7 +290,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri Oct 12 16:38:46 2018       ;
+; Analysis & Synthesis Status     ; Successful - Fri Oct 19 14:03:20 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
@@ -3051,18 +3051,19 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "phase_extract:pe1|peak_detect:pd"                                                           ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port         ; Type   ; Severity ; Details                                                                             ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; source_sop   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; source_eop   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; source_valid ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; source_freq  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; source_mag   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; source_phase ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "phase_extract:pe1|peak_detect:pd"                                                            ;
++---------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port          ; Type   ; Severity ; Details                                                                             ;
++---------------+--------+----------+-------------------------------------------------------------------------------------+
+; source_sop    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; source_eop    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; source_valid  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; source_freq   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; source_mag    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; source_phaseA ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; source_phaseB ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------+
@@ -3344,22 +3345,18 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Fri Oct 12 16:38:05 2018
+    Info: Processing started: Fri Oct 19 14:02:22 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PR3 -c PR3
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file input_buffer_tb.sv
-    Info (12023): Found entity 1: input_buffer_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer_tb.sv Line: 3
+    Info (12023): Found entity 1: input_buffer_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer_tb.sv Line: 14
 Info (12021): Found 1 design units, including 1 entities, in source file input_buffer.sv
-    Info (12023): Found entity 1: input_buffer File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file maxheap.sv
-    Info (12023): Found entity 1: maxheap File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/maxheap.sv Line: 1
+    Info (12023): Found entity 1: input_buffer File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 16
 Info (12021): Found 1 design units, including 1 entities, in source file fft_tb.sv
     Info (12023): Found entity 1: fft_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft_tb.sv Line: 3
-Info (12021): Found 1 design units, including 1 entities, in source file freq_buffer.sv
-    Info (12023): Found entity 1: freq_buffer File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/freq_buffer.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file pr3.sv
-    Info (12023): Found entity 1: PR3 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 1
+    Info (12023): Found entity 1: PR3 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 20
 Info (12021): Found 11 design units, including 11 entities, in source file phase_extract.sv
     Info (12023): Found entity 1: bitrev File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/bitrev.sv Line: 4
     Info (12023): Found entity 2: cascade_0 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/cascade_0.sv Line: 5
@@ -3371,19 +3368,17 @@ Info (12021): Found 11 design units, including 11 entities, in source file phase
     Info (12023): Found entity 8: delay_line_reg File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/delay_line.sv Line: 19
     Info (12023): Found entity 9: cascade_n File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/cascade_n.sv Line: 7
     Info (12023): Found entity 10: fft_int File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 7
-    Info (12023): Found entity 11: phase_extract File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 3
+    Info (12023): Found entity 11: phase_extract File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file pll.v
     Info (12023): Found entity 1: pll File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll.v Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file pll/pll_0002.v
     Info (12023): Found entity 1: pll_0002 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll/pll_0002.v Line: 2
 Info (12021): Found 1 design units, including 1 entities, in source file phase_extract_tb.sv
     Info (12023): Found entity 1: phase_extract_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract_tb.sv Line: 3
-Info (12021): Found 1 design units, including 1 entities, in source file maxheap_tb.sv
-    Info (12023): Found entity 1: maxheap_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/maxheap_tb.sv Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file peak_detect.sv
-    Info (12023): Found entity 1: peak_detect File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 1
+    Info (12023): Found entity 1: peak_detect File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 21
 Info (12127): Elaborating entity "PR3" for the top level hierarchy
-Info (12128): Elaborating entity "pll" for hierarchy "pll:pll" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 19
+Info (12128): Elaborating entity "pll" for hierarchy "pll:pll" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 38
 Info (12128): Elaborating entity "pll_0002" for hierarchy "pll:pll|pll_0002:pll_inst" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll.v Line: 19
 Info (12128): Elaborating entity "altera_pll" for hierarchy "pll:pll|pll_0002:pll_inst|altera_pll:altera_pll_i" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll/pll_0002.v Line: 85
 Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "wire_to_nowhere_64" into its bus
@@ -3449,15 +3444,15 @@ Info (12133): Instantiated megafunction "pll:pll|pll_0002:pll_inst|altera_pll:al
     Info (12134): Parameter "duty_cycle17" = "50"
     Info (12134): Parameter "pll_type" = "General"
     Info (12134): Parameter "pll_subtype" = "General"
-Info (12128): Elaborating entity "phase_extract" for hierarchy "phase_extract:pe1" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 30
-Info (12128): Elaborating entity "input_buffer" for hierarchy "phase_extract:pe1|input_buffer:buff" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 84
-Warning (10230): Verilog HDL assignment warning at input_buffer.sv(41): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 41
-Warning (10230): Verilog HDL assignment warning at input_buffer.sv(57): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 57
-Warning (10230): Verilog HDL assignment warning at input_buffer.sv(58): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 58
-Warning (10230): Verilog HDL assignment warning at input_buffer.sv(66): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 66
-Warning (10230): Verilog HDL assignment warning at input_buffer.sv(67): truncated value with size 32 to match size of target (2) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 67
-Warning (10230): Verilog HDL assignment warning at input_buffer.sv(71): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 71
-Info (12128): Elaborating entity "fft_int" for hierarchy "phase_extract:pe1|fft_int:fft" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 105
+Info (12128): Elaborating entity "phase_extract" for hierarchy "phase_extract:pe1" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 49
+Info (12128): Elaborating entity "input_buffer" for hierarchy "phase_extract:pe1|input_buffer:buff" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 104
+Warning (10230): Verilog HDL assignment warning at input_buffer.sv(56): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 56
+Warning (10230): Verilog HDL assignment warning at input_buffer.sv(72): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 72
+Warning (10230): Verilog HDL assignment warning at input_buffer.sv(73): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 73
+Warning (10230): Verilog HDL assignment warning at input_buffer.sv(81): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 81
+Warning (10230): Verilog HDL assignment warning at input_buffer.sv(82): truncated value with size 32 to match size of target (2) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 82
+Warning (10230): Verilog HDL assignment warning at input_buffer.sv(86): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 86
+Info (12128): Elaborating entity "fft_int" for hierarchy "phase_extract:pe1|fft_int:fft" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 125
 Warning (10230): Verilog HDL assignment warning at fft_int.sv(77): truncated value with size 25 to match size of target (20) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 77
 Warning (10230): Verilog HDL assignment warning at fft_int.sv(78): truncated value with size 25 to match size of target (20) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 78
 Info (12128): Elaborating entity "cascade_0" for hierarchy "phase_extract:pe1|fft_int:fft|cascade_0:c0" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 40
@@ -3563,29 +3558,46 @@ Warning (10030): Net "W_Im_table.data_a" at W_int32.sv(697) has no driver or ini
 Warning (10030): Net "W_Im_table.waddr_a" at W_int32.sv(697) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 697
 Warning (10030): Net "W_Re_table.we_a" at W_int32.sv(566) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 566
 Warning (10030): Net "W_Im_table.we_a" at W_int32.sv(697) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 697
-Info (12128): Elaborating entity "peak_detect" for hierarchy "phase_extract:pe1|peak_detect:pd" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 125
-Warning (10036): Verilog HDL or VHDL warning at peak_detect.sv(36): object "buff_th" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 36
-Warning (10036): Verilog HDL or VHDL warning at peak_detect.sv(40): object "source_pos" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 40
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(55): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 55
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(60): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 60
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(61): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 61
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(62): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 62
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(79): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 79
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(81): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 81
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(82): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 82
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(84): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 84
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(88): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 88
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(89): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 89
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(91): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 91
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(136): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 136
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(137): truncated value with size 32 to match size of target (10) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 137
-Warning (10034): Output port "source_freq" at peak_detect.sv(15) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 15
-Warning (10034): Output port "source_mag" at peak_detect.sv(16) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 16
-Warning (10034): Output port "source_phase" at peak_detect.sv(18) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 18
-Warning (10034): Output port "source_sop" at peak_detect.sv(12) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 12
-Warning (10034): Output port "source_eop" at peak_detect.sv(13) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 13
-Warning (10034): Output port "source_valid" at peak_detect.sv(14) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 14
-Warning (12158): Entity "peak_detect" contains only dangling pins File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 125
+Info (12128): Elaborating entity "peak_detect" for hierarchy "phase_extract:pe1|peak_detect:pd" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 146
+Warning (10036): Verilog HDL or VHDL warning at peak_detect.sv(53): object "buff_th" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 53
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(99): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 99
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(104): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 104
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(105): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 105
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(106): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 106
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(150): truncated value with size 20 to match size of target (16) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 150
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(123): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 123
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(125): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 125
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(126): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 126
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(127): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 127
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(130): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 130
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(134): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 134
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(135): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 135
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(136): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 136
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(139): variable "z" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 139
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(185): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 185
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(186): truncated value with size 32 to match size of target (10) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 186
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(191): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 191
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(192): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 192
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(65): variable "i" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 65
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(66): variable "i" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 66
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(67): variable "i" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 67
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(73): variable "i" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 73
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(74): variable "delta" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 74
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(74): variable "i" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 74
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(75): variable "delta" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 75
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(82): variable "i" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 82
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(83): variable "delta" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 83
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(83): variable "i" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 83
+Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(84): variable "delta" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 84
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(197): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 197
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(198): truncated value with size 32 to match size of target (2) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 198
+Warning (10030): Net "barycentric_delta.i" at peak_detect.sv(64) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 64
+Warning (10030): Net "phase_A.i" at peak_detect.sv(72) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 72
+Warning (10030): Net "phase_A.delta" at peak_detect.sv(72) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 72
+Warning (10030): Net "phase_B.i" at peak_detect.sv(81) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 81
+Warning (10030): Net "phase_B.delta" at peak_detect.sv(81) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 81
+Warning (10030): Net "sqrt_h.s" at peak_detect.sv(91) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 91
+Warning (10030): Net "arctan.z" at peak_detect.sv(122) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 122
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following PLL node(s):
         Warning (14320): Synthesized away node "pll:pll|pll_0002:pll_inst|altera_pll:altera_pll_i|outclk_wire[0]" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altera_pll.v Line: 748
@@ -3593,57 +3605,57 @@ Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 44 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "clk" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 4
-    Warning (15610): No output dependent on input pin "reset" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 5
-    Warning (15610): No output dependent on input pin "data1[0]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data1[1]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data1[2]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data1[3]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data1[4]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data1[5]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data1[6]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data1[7]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data1[8]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data1[9]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data1[10]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data1[11]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data1[12]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data1[13]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 6
-    Warning (15610): No output dependent on input pin "data2[0]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data2[1]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data2[2]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data2[3]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data2[4]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data2[5]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data2[6]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data2[7]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data2[8]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data2[9]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data2[10]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data2[11]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data2[12]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data2[13]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 7
-    Warning (15610): No output dependent on input pin "data3[0]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
-    Warning (15610): No output dependent on input pin "data3[1]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
-    Warning (15610): No output dependent on input pin "data3[2]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
-    Warning (15610): No output dependent on input pin "data3[3]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
-    Warning (15610): No output dependent on input pin "data3[4]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
-    Warning (15610): No output dependent on input pin "data3[5]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
-    Warning (15610): No output dependent on input pin "data3[6]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
-    Warning (15610): No output dependent on input pin "data3[7]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
-    Warning (15610): No output dependent on input pin "data3[8]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
-    Warning (15610): No output dependent on input pin "data3[9]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
-    Warning (15610): No output dependent on input pin "data3[10]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
-    Warning (15610): No output dependent on input pin "data3[11]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
-    Warning (15610): No output dependent on input pin "data3[12]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
-    Warning (15610): No output dependent on input pin "data3[13]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 9
+    Warning (15610): No output dependent on input pin "clk" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 23
+    Warning (15610): No output dependent on input pin "reset" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 24
+    Warning (15610): No output dependent on input pin "data1[0]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data1[1]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data1[2]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data1[3]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data1[4]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data1[5]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data1[6]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data1[7]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data1[8]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data1[9]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data1[10]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data1[11]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data1[12]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data1[13]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 25
+    Warning (15610): No output dependent on input pin "data2[0]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data2[1]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data2[2]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data2[3]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data2[4]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data2[5]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data2[6]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data2[7]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data2[8]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data2[9]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data2[10]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data2[11]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data2[12]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data2[13]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 26
+    Warning (15610): No output dependent on input pin "data3[0]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
+    Warning (15610): No output dependent on input pin "data3[1]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
+    Warning (15610): No output dependent on input pin "data3[2]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
+    Warning (15610): No output dependent on input pin "data3[3]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
+    Warning (15610): No output dependent on input pin "data3[4]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
+    Warning (15610): No output dependent on input pin "data3[5]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
+    Warning (15610): No output dependent on input pin "data3[6]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
+    Warning (15610): No output dependent on input pin "data3[7]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
+    Warning (15610): No output dependent on input pin "data3[8]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
+    Warning (15610): No output dependent on input pin "data3[9]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
+    Warning (15610): No output dependent on input pin "data3[10]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
+    Warning (15610): No output dependent on input pin "data3[11]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
+    Warning (15610): No output dependent on input pin "data3[12]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
+    Warning (15610): No output dependent on input pin "data3[13]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 28
 Info (21057): Implemented 44 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 44 input pins
     Info (21059): Implemented 0 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 134 warnings
-    Info: Peak virtual memory: 5157 megabytes
-    Info: Processing ended: Fri Oct 12 16:38:46 2018
-    Info: Elapsed time: 00:00:41
-    Info: Total CPU time (on all processors): 00:00:58
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 151 warnings
+    Info: Peak virtual memory: 5152 megabytes
+    Info: Processing ended: Fri Oct 19 14:03:21 2018
+    Info: Elapsed time: 00:00:59
+    Info: Total CPU time (on all processors): 00:01:12
 
 

@@ -1,3 +1,18 @@
+// -----------------------------------------------------------------------------
+// Copyright (c) 2018 F.H. Oudman
+// -----------------------------------------------------------------------------
+// File:		input_buffer.sv
+// Author:	F.H. Oudman
+// Mail:		f.h.oudman@student.tue.nl
+// -----------------------------------------------------------------------------
+// Type:		module
+// Purpose:	data input buffer with shifted repeated output
+// -----------------------------------------------------------------------------
+// Control:	sink_clk, source_clk, reset
+// Sink:		data
+// Source:	sop, eop, valid, data
+// -----------------------------------------------------------------------------
+
 module input_buffer #(
 	parameter BATCH_SIZE = 2048,										// number of entries per output batch
 	parameter RUNS = 3,													// number of succeeding output batches

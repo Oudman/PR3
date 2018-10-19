@@ -1,3 +1,22 @@
+// -----------------------------------------------------------------------------
+// Copyright (c) 2018 F.H. Oudman
+// -----------------------------------------------------------------------------
+// File:		phase_extract.sv
+// Author:	F.H. Oudman
+// Mail:		f.h.oudman@student.tue.nl
+// -----------------------------------------------------------------------------
+// Type:		module
+// Purpose:	phase extraction from data signal
+// -----------------------------------------------------------------------------
+// Control:	clk, clk20
+// Sink:		data
+// Source:	-
+// -----------------------------------------------------------------------------
+// Fixed point notation, marked FP, is used in the following manner:
+// - 32 bit two's complement
+// - the lower 8 bits represent the fractional part
+// -----------------------------------------------------------------------------
+
 `include "fft/fft_int.sv"
 
 module phase_extract #(
@@ -5,9 +24,9 @@ module phase_extract #(
 	parameter FFT_DEPTH = 11,											// number of fft levels
 	parameter RUNS	= 3													// number of runs
 )(
-	input		wire							clk,							// clock:	main clock
-	input		wire							clk20,						// clock:	20MHz
-	input		wire	[SINK_WIDTH-1:0]	sink							//				connected to antenna
+	input		wire							clk,							// main clock
+	input		wire							clk20,						// 20.48MHz
+	input		wire	[SINK_WIDTH-1:0]	sink							//	connected to antenna
 );
 
 // more parameters
@@ -38,9 +57,10 @@ bit											peak_reset;
 wire											peak_sop;
 wire											peak_eop;
 wire											peak_valid;
-wire signed	[31:0]						peak_freq;
-wire signed	[31:0]						peak_mag;
-wire signed	[31:0]						peak_phase;
+wire signed	[31:0]						peak_freq;					// kHz; FP
+wire signed	[31:0]						peak_mag;					// FP
+wire signed	[31:0]						peak_phaseA;				// deg; FP
+wire signed	[31:0]						peak_phaseB;				// deg; FP
 
 
 /*----------------------------------------------------------------------------*/
@@ -121,7 +141,8 @@ peak_detect #(
 	.source_valid			(peak_valid),
 	.source_freq			(peak_freq),
 	.source_mag				(peak_mag),
-	.source_phase			(peak_phase)
+	.source_phaseA			(peak_phaseA),
+	.source_phaseB			(peak_phaseB)
 );
 
 endmodule
