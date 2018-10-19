@@ -9,7 +9,7 @@
 // Purpose:	testing of phase_extract.sv
 // -----------------------------------------------------------------------------
 
-`timescale 1ns/100ps
+`timescale 1ns/10ps
 
 module phase_extract_tb();
 
@@ -50,7 +50,7 @@ begin
 	noise = $random / 2**(32-4);
 end
 
-assign data = sin1 + sin2 + sin3 + sin4 + noise;
+assign data = sin1 + sin2 + sin3 + sin4;
 
 initial
 begin

@@ -9,7 +9,7 @@
 // Purpose:	testing of input_buffer.sv
 // -----------------------------------------------------------------------------
 
-`timescale 1ns/100ps
+`timescale 1ns/10ps
 
 module input_buffer_tb();
 
@@ -39,8 +39,8 @@ const real					sin4_mag = 1024;
 const real					sin4_off = 278;
 
 // clock generator(s)
-always #(24414ps) clk20++;	// F = 20.48 MHz
-always #(10ns) clk50++;		// F = 50.00 MHz
+always #(24414ps) sink_clk++;	// F = 20.48 MHz
+always #(10ns) source_clk++;	// F = 50.00 MHz
 
 // sine approx generator
 always @(negedge sink_clk)

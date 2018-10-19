@@ -57,6 +57,7 @@ bit		[$clog2(BATCH_SIZE)-1:0]	sink_pos;					// sink entry position
 bit											sink_done;					// high:		buffer is fully loaded
 bit		[$clog2(NPEAKS)-1:0]			source_pos;					// source entry position
 bit											source_done;				// high:		peaks have all been output
+int											delta;						// delta at source_pos
 
 /*----------------------------------------------------------------------------*/
 /*- functions and tasks ------------------------------------------------------*/
@@ -113,20 +114,18 @@ function int hypot(bit signed [DATA_WIDTH-1:0] x, y);
 	hypot = sqrt(x*x + y*y) <<< 8;
 endfunction
 
-// arctan approximation (max 0.22deg deviation in range [0,1]) (in: FP; out: FP)
+// arctan approximation (max 0.22deg deviation in range z=[0,1]) (in: FP; out: FP)
 // using https://math.stackexchange.com/questions/1098487/atan2-faster-approximation
-function int arctan_h(byte z);
+function int arctan_h(shortint z);
 	arctan_h = (z * (2949120 - 4009 * (z - 256))) >>> 16;
 endfunction
 
 // arctan approximation (max 0.22deg deviation) (in: FP; out: FP)
-function automatic int arctan(const ref shortint z);
+function automatic int arctan(const ref int z);
 	if (z >= 0)
 	begin
 		if (z > 256)
 			arctan = 23040 - arctan_h(65536/z);
-		else if (z == 256)
-			arctan = 11520;
 		else
 			arctan = arctan_h(z);
 	end
@@ -134,8 +133,6 @@ function automatic int arctan(const ref shortint z);
 	begin
 		if (z < -256)
 			arctan = arctan_h(65536/-z) - 23040;
-		else if (z == -256)
-			arctan = -11520;
 		else
 			arctan = -arctan_h(-z);
 	end
@@ -143,12 +140,12 @@ endfunction
 
 // atan2 approximation (in: non-FP; out: FP)
 // using https://en.wikipedia.org/wiki/Atan2
-function int atan2(bit signed [DATA_WIDTH-1:0] x, y);
+function int atan2(bit signed [DATA_WIDTH-1:0] y, x);
 	if (x == 0)
 		atan2 = (y >= 0) ? 23040 : -23040;
 	else
 	begin
-		automatic shortint z = (y <<< 8) / x; // FP
+		automatic int z = (y <<< 8) / x; // FP
 		if (x > 0)
 			atan2 = arctan(z);
 		else if (y >= 0)
@@ -162,7 +159,8 @@ endfunction
 /*- main code ----------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 assign sink_r = hypot(sink_re, sink_im);
-assign sink_th = atan2(sink_re, sink_im);
+assign sink_th = atan2(sink_im, sink_re);
+assign delta = barycentric_delta(peaks[source_pos]);
 
 always @(posedge clk)
 begin
@@ -191,10 +189,10 @@ begin
 		source_valid <= 1;
 		source_sop <= (source_pos == 0) ? 1 : 0;
 		source_eop <= (source_pos == NPEAKS-1) ? 1 : 0;
-		source_freq <= ((peaks[source_pos] <<< 8) + barycentric_delta(peaks[source_pos])) * BIN_WIDTH;
+		source_freq <= ((peaks[source_pos] <<< 8) + delta) * BIN_WIDTH;
 		source_mag <= buff_r[peaks[source_pos]];
-		//source_phaseA <= phase_A(peaks[source_pos], barycentric_delta(peaks[source_pos]));
-		//source_phaseB <= phase_B(peaks[source_pos], barycentric_delta(peaks[source_pos]));
+		source_phaseA <= phase_A(peaks[source_pos], delta);
+		source_phaseB <= phase_B(peaks[source_pos], delta);
 		source_done <= (source_pos == NPEAKS-1) ? 1 : 0;
 		source_pos <= source_pos + 1;
 	end

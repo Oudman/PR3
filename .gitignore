@@ -8,5 +8,6 @@
 # and these folders
 !PR3/
 
-# except db folders
+# except these folders and categories
 PR3/db/*
+*.sv.bak
