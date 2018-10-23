@@ -5,6 +5,11 @@
 // Author:	F.H. Oudman
 // Mail:		f.h.oudman@student.tue.nl
 // -----------------------------------------------------------------------------
+// Dependencies:
+//  ~ input_buffer.sv
+//  ~ fft_int.sv
+//  ~ peak_detect.sv
+// -----------------------------------------------------------------------------
 // Type:		module
 // Purpose:	phase extraction from data signal
 // -----------------------------------------------------------------------------
