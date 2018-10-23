@@ -9,7 +9,8 @@
 //  ~ none
 // -----------------------------------------------------------------------------
 // Type:		function
-// Purpose:	Approximate the arctan of a fixed point int
+// Purpose:	Approximate the arctan of a fixed point int, result in degrees
+//				Testing has shown a maximum deviation of 0.36deg
 // -----------------------------------------------------------------------------
 // Input:	z
 // Output:	arctan
@@ -20,7 +21,7 @@
 // -----------------------------------------------------------------------------
 
 // arctan approximation (max 0.22deg deviation) (in: FP; out: FP)
-function automatic int arctan(const ref int z);
+function automatic int arctan(int z);
 	if (z >= 0)
 	begin
 		if (z > 256)

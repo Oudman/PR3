@@ -9,7 +9,8 @@
 //  ~ arctan.sv
 // -----------------------------------------------------------------------------
 // Type:		function
-// Purpose:	Approximate the atan2 of two ints
+// Purpose:	Approximate the atan2 of two ints, result in degrees
+//				Testing has shown a maximum deviation of 0.36deg
 // -----------------------------------------------------------------------------
 // Input:	z
 // Output:	atan2

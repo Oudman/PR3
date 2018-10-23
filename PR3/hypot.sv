@@ -10,6 +10,8 @@
 // -----------------------------------------------------------------------------
 // Type:		function
 // Purpose:	Approximate the Euclidean length of a vector of two ints
+//				Testing has shown a maximum deviation of 1 for results < 100 and a
+// 			maximum deviation of 1% for results > 100
 // -----------------------------------------------------------------------------
 // Input:	x, y
 // Output:	hypot

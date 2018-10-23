@@ -10,12 +10,14 @@
 // -----------------------------------------------------------------------------
 // Type:		function
 // Purpose:	Approximate the square root of a given longint
+//				Testing has shown a maximum deviation of 1 for numbers < 10000 and a
+// 			maximum deviation of 1% for numbers > 10000
 // -----------------------------------------------------------------------------
 // Input:	s
 // Output:	sqrt
 // -----------------------------------------------------------------------------
 
-// sqrt approximation (max 0.005% deviation, excluding rounding errors)
+// sqrt approximation (max 1% deviation, excluding rounding errors)
 function int sqrt(longint s);
 	if (s < 2)
 		sqrt = s;
@@ -24,7 +26,6 @@ function int sqrt(longint s);
 		sqrt = sqrt_h(s);
 		sqrt = (sqrt + s / sqrt) / 2; // max 15% deviation
 		sqrt = (sqrt + s / sqrt) / 2; // max 1% deviation
-		sqrt = (sqrt + s / sqrt) / 2; // max 0.005% deviation
 	end
 endfunction
 

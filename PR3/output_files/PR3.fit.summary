@@ -1,11 +1,11 @@
-Fitter Status : Successful - Fri Oct 19 19:45:31 2018
+Fitter Status : Successful - Tue Oct 23 16:37:52 2018
 Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 Revision Name : PR3
 Top-level Entity Name : PR3
 Family : Cyclone V
 Device : 5CSXFC6D6F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 1 / 41,910 ( < 1 % )
+Logic utilization (in ALMs) : 33 / 41,910 ( < 1 % )
 Total registers : 0
 Total pins : 44 / 499 ( 9 % )
 Total virtual pins : 0
