@@ -6,13 +6,13 @@
 // Mail:		f.h.oudman@student.tue.nl
 // -----------------------------------------------------------------------------
 // Dependencies:
-//  ~ arctan.sv
+//  ~ arctan_lim.sv
 // -----------------------------------------------------------------------------
 // Type:		function
 // Purpose:	Approximate the atan2 of two ints, result in degrees
-//				Testing has shown a maximum deviation of 0.36deg
+//				Testing has shown a maximum deviation of 0.23deg
 // -----------------------------------------------------------------------------
-// Input:	z
+// Input:	y, x
 // Output:	atan2
 // -----------------------------------------------------------------------------
 // Fixed point notation, marked FP, is used in the following manner:
@@ -20,19 +20,26 @@
 // - the lower 8 bits represent the fractional part
 // -----------------------------------------------------------------------------
 
-// atan2 approximation (in: non-FP; out: FP)
-// using https://en.wikipedia.org/wiki/Atan2
+// atan2 approximation (out: FP)
 function int atan2(int y, x);
 	if (x == 0)
 		atan2 = (y >= 0) ? 23040 : -23040;
-	else
-	begin
-		automatic int z = (y <<< 8) / x; // FP
-		if (x > 0)
-			atan2 = arctan(z);
-		else if (y >= 0)
-			atan2 = arctan(z) + 46080;
-		else
-			atan2 = arctan(z) - 46080;
-	end
+	else if (y == 0)
+		atan2 = (x >= 0) ? 0 : 46080;
+	else if (x > 0 && y > 0 && x > y)
+		atan2 =  arctan_lim( (y <<< 8) / x);
+	else if (x > 0 && y > 0 && x < y)
+		atan2 = -arctan_lim( (x <<< 8) / y) + 23040;
+	else if (x > 0 && y < 0 && x > -y)
+		atan2 = -arctan_lim(-(y <<< 8) / x);
+	else if (x > 0 && y < 0 && x < -y)
+		atan2 =  arctan_lim(-(x <<< 8) / y) - 23040;
+	else if (x < 0 && y > 0 && -x > y)
+		atan2 = -arctan_lim(-(y <<< 8) / x) + 46080;
+	else if (x < 0 && y > 0 && -x < y)
+		atan2 =  arctan_lim(-(x <<< 8) / y) + 23040;
+	else if (x < 0 && y < 0 && -x > -y)
+		atan2 =  arctan_lim( (y <<< 8) / x) - 46080;
+	else if (x < 0 && y < 0 && -x < -y)
+		atan2 = -arctan_lim( (x <<< 8) / y) - 23040;
 endfunction

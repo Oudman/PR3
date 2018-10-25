@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PR3
-Tue Oct 23 16:36:44 2018
+Thu Oct 25 14:33:04 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -290,7 +290,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Tue Oct 23 16:36:44 2018       ;
+; Analysis & Synthesis Status     ; Successful - Thu Oct 25 14:33:04 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
@@ -3346,7 +3346,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Tue Oct 23 16:36:11 2018
+    Info: Processing started: Thu Oct 25 14:32:27 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PR3 -c PR3
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -3386,6 +3386,9 @@ Info (12021): Found 1 design units, including 1 entities, in source file sqrt_tb
     Info (12023): Found entity 1: sqrt_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt_tb.sv Line: 14
 Info (12021): Found 1 design units, including 1 entities, in source file arctan_tb.sv
     Info (12023): Found entity 1: arctan_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/arctan_tb.sv Line: 14
+Info (12021): Found 1 design units, including 1 entities, in source file atan2_tb.sv
+    Info (12023): Found entity 1: atan2_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/atan2_tb.sv Line: 14
+Info (12021): Found 0 design units, including 0 entities, in source file arctan_lim.sv
 Info (12127): Elaborating entity "PR3" for the top level hierarchy
 Info (12128): Elaborating entity "pll" for hierarchy "pll:pll" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 42
 Info (12128): Elaborating entity "pll_0002" for hierarchy "pll:pll|pll_0002:pll_inst" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll.v Line: 19
@@ -3774,9 +3777,9 @@ Info (21057): Implemented 108 device resources after synthesis - the final resou
     Info (21059): Implemented 0 output pins
     Info (21061): Implemented 64 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 197 warnings
-    Info: Peak virtual memory: 4987 megabytes
-    Info: Processing ended: Tue Oct 23 16:36:44 2018
-    Info: Elapsed time: 00:00:33
-    Info: Total CPU time (on all processors): 00:00:49
+    Info: Peak virtual memory: 4994 megabytes
+    Info: Processing ended: Thu Oct 25 14:33:04 2018
+    Info: Elapsed time: 00:00:37
+    Info: Total CPU time (on all processors): 00:00:54
 
 

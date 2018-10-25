@@ -16,7 +16,7 @@ module fft_tb();
 // testing parameters
 localparam FFT_DEPTH = 12;
 localparam SINK_WIDTH = 14;
-localparam FFT_WIDTH = SINK_WIDTH + (FFT_DEPTH+1) / 2;
+localparam FFT_WIDTH = SINK_WIDTH + FFT_DEPTH;
 
 // Declare inputs as regs and outputs as wires
 bit signed [SINK_WIDTH-1:0] time_fft_re, time_fft_im = 0;
