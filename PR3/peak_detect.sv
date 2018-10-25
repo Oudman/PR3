@@ -23,8 +23,8 @@
 // -----------------------------------------------------------------------------
 
 module peak_detect #(
-	parameter BATCH_SIZE	= 1024,										// number of entries per input batch
-	parameter DATA_WIDTH	= 20											// number of bits per entry
+	parameter BATCH_SIZE,												// number of entries per input batch
+	parameter DATA_WIDTH													// number of bits per entry
 )(
 	input		wire							clk,							// input data speed
 	input		wire							reset,						// synchronous reset
@@ -47,76 +47,98 @@ localparam BIN_WIDTH = 10;												// bin width (kHz)
 localparam NPEAKS = 4;													// number of peaks to detect
 localparam shortint EXPEAKS[NPEAKS] = '{200, 400, 600, 800};// expected locations of peaks (bin)
 localparam PEAKDEV = 50;												// maximum deviation between expectation and reality (bins)
-localparam ADDR_WIDTH = $clog2(BATCH_SIZE);						// memory address width
+
+/*----------------------------------------------------------------------------*/
+/*- struct + task + function definitions -------------------------------------*/
+/*----------------------------------------------------------------------------*/
+typedef struct {
+	shortint	bin;
+	byte		delta;
+	int		re[0:2];
+	int		im[0:2];
+	int		mag[0:2];
+} chunk;
+
+// reset chunk
+task automatic chunk_reset(ref chunk chnk);
+	chnk.bin			<= 0;
+	chnk.delta		<= 0;
+	for (byte i = 0; i < 3; i++)
+	begin
+		chnk.re[i]		<= 0;
+		chnk.im[i]		<= 0;
+		chnk.mag[i]		<= 0;
+	end
+endtask
+
+// shift data in chunk
+task automatic chunk_shift(ref chunk chnk);
+	chnk.bin			<= chnk.bin + 1;
+	for (byte i = 0; i < 2; i++)
+	begin
+		chnk.re[i]		<= chnk.re[i+1];
+		chnk.im[i]		<= chnk.im[i+1];
+		chnk.mag[i]		<= chnk.mag[i+1];
+	end
+	chnk.re[2]		<= sink_re;
+	chnk.im[2]		<= sink_im;
+	chnk.mag[2]		<= hypot(sink_re, sink_im) <<< 8;
+endtask
+
+// quadratic interpolation (out: FP)
+task automatic chunk_quadratic_delta(ref chunk chnk);
+	chnk.delta 		<= ((chnk.mag[2] - chnk.mag[0]) <<< 7) / (2*chnk.mag[1] - chnk.mag[0] - chnk.mag[2]);
+endtask
 
 /*----------------------------------------------------------------------------*/
 /*- wire/logic declarations --------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
-int										sink_mag;						// magnitude of complex input (FP)
-int										buff_re[0:BATCH_SIZE-1];	// data buffer, real part (FP)
-int										buff_im[0:BATCH_SIZE-1];	// data buffer, imaginair part (FP)
-int										buff_mag[0:BATCH_SIZE-1];	// data buffer, magnitude (FP)
-bit	[ADDR_WIDTH-1:0]				peaks[0:NPEAKS-1];			// indices of peaks
+chunk										buffer;							// data buffer
+chunk										peaks[0:NPEAKS-1];			// peak data
 bit	[$clog2(BATCH_SIZE)-1:0]	sink_pos;						// sink entry position
 bit										sink_done;						// high:		buffer is fully loaded
 bit	[$clog2(NPEAKS)-1:0]			source_pos;						// source entry position
 bit										source_done;					// high:		peaks have all been output
-int										delta;							// delta at source_pos
-
-/*----------------------------------------------------------------------------*/
-/*- functions and tasks ------------------------------------------------------*/
-/*----------------------------------------------------------------------------*/
-// quadratic interpolation (out: FP)
-function automatic int quadratic_delta(const ref bit [$clog2(BATCH_SIZE)-1:0] i);
-	automatic int y1 = buff_mag[i-1];
-	automatic int y2 = buff_mag[i];
-	automatic int y3 = buff_mag[i+1];
-	quadratic_delta = ((y3 - y1) <<< 7) / (2*y2 - y1 - y3);
-endfunction
 
 /*----------------------------------------------------------------------------*/
 /*- main code ----------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
-assign delta = quadratic_delta(peaks[source_pos]);
-
 always @(posedge clk)
 begin
 	if (reset || sink_eop)												// reset all
 	begin
 		for (byte i = 0; i < NPEAKS; i++)
-			peaks[i]					<= 0;
-		sink_pos					<= 0;
-		sink_done				<= 0;
-		source_pos				<= 0;
-		source_done				<= 0;
-		source_valid			<= 0;
+			chunk_reset(peaks[i]);
+		sink_pos			<= 0;
+		sink_done		<= 0;
+		source_pos		<= 0;
+		source_done		<= 0;
+		source_valid	<= 0;
 	end
 	else if (!sink_done && sink_valid)								// loading of buffer
 	begin
 		for (byte i = 0; i < NPEAKS; i++)
-			if (EXPEAKS[i] - PEAKDEV <= sink_pos && sink_pos < EXPEAKS[i] + PEAKDEV && sink_re > buff_mag[peaks[i]])
-				peaks[i]					<= sink_pos;
-		buff_re[sink_pos]		<= sink_re;
-		buff_im[sink_pos]		<= sink_im;
-		buff_mag[sink_pos]	<= hypot(sink_re, sink_im) <<< 8;
-		sink_done				<= (sink_pos == BATCH_SIZE - 1) ? 1 : 0;
-		sink_pos					<= sink_pos + 1;
+			if (EXPEAKS[i]-PEAKDEV <= sink_pos && sink_pos < EXPEAKS[i]+PEAKDEV && buffer.mag[1] > peaks[i].mag[1])
+				peaks[i] 		<= buffer;
+		chunk_shift(buffer);
+		sink_done		<= (sink_pos == BATCH_SIZE - 1) ? 1 : 0;
+		sink_pos			<= sink_pos + 1;
 	end
 	else if (sink_done && !source_done)								// export of data
 	begin
-		source_valid			<= 1;
-		source_sop				<= (source_pos == 0) ? 1 : 0;
-		source_eop				<= (source_pos == NPEAKS-1) ? 1 : 0;
-		//source_freq <= ((peaks[source_pos] <<< 8) + delta) * BIN_WIDTH;
-		//source_mag <= buff_r[peaks[source_pos]];
-		//source_phaseA <= phase_A(peaks[source_pos], delta);
-		//source_phaseB <= phase_B(peaks[source_pos], delta);
-		source_done				<= (source_pos == NPEAKS-1) ? 1 : 0;
-		source_pos				<= source_pos + 1;
+		source_valid	<= 1;
+		source_sop		<= (source_pos == 0) ? 1 : 0;
+		source_eop		<= (source_pos == NPEAKS-1) ? 1 : 0;
+		//source_freq		<= ((peaks[source_pos] <<< 8) + delta) * BIN_WIDTH;
+		//source_mag		<= buff_r[peaks[source_pos]];
+		//source_phaseA	<= phase_A(peaks[source_pos], delta);
+		//source_phaseB	<= phase_B(peaks[source_pos], delta);
+		source_done		<= (source_pos == NPEAKS-1) ? 1 : 0;
+		source_pos		<= source_pos + 1;
 	end
 	else																		// wait
 	begin
-		source_valid			<= 0;
+		source_valid	<= 0;
 	end
 end
 

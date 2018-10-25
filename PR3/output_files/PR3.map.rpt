@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PR3
-Thu Oct 25 14:33:04 2018
+Thu Oct 25 23:07:39 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -290,7 +290,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu Oct 25 14:33:04 2018       ;
+; Analysis & Synthesis Status     ; Successful - Thu Oct 25 23:07:39 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
@@ -3346,7 +3346,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Thu Oct 25 14:32:27 2018
+    Info: Processing started: Thu Oct 25 23:06:45 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PR3 -c PR3
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -3571,22 +3571,17 @@ Warning (10030): Net "W_Im_table.waddr_a" at W_int32.sv(697) has no driver or in
 Warning (10030): Net "W_Re_table.we_a" at W_int32.sv(566) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 566
 Warning (10030): Net "W_Im_table.we_a" at W_int32.sv(697) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 697
 Info (12128): Elaborating entity "peak_detect" for hierarchy "phase_extract:pe1|peak_detect:pd" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 151
-Warning (10036): Verilog HDL or VHDL warning at peak_detect.sv(56): object "buff_re" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 56
-Warning (10036): Verilog HDL or VHDL warning at peak_detect.sv(57): object "buff_im" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 57
-Warning (10036): Verilog HDL or VHDL warning at peak_detect.sv(64): object "delta" assigned a value but never read File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 64
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(71): variable "i" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 71
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(72): variable "i" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 72
-Warning (10242): Verilog HDL Function Declaration warning at peak_detect.sv(73): variable "i" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 73
-Warning (10230): Verilog HDL assignment warning at sqrt.sv(21): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 21
-Warning (10230): Verilog HDL assignment warning at sqrt.sv(25): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 25
-Warning (10230): Verilog HDL assignment warning at sqrt.sv(26): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 26
+Warning (10858): Verilog HDL warning at peak_detect.sv(96): object buffer used but never assigned File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 96
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(76): truncated value with size 32 to match size of target (16) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 76
+Warning (10230): Verilog HDL assignment warning at sqrt.sv(23): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 23
 Warning (10230): Verilog HDL assignment warning at sqrt.sv(27): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 27
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(102): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 102
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(103): truncated value with size 32 to match size of target (10) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 103
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(108): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 108
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(109): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 109
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(114): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 114
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(115): truncated value with size 32 to match size of target (2) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 115
+Warning (10230): Verilog HDL assignment warning at sqrt.sv(28): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 28
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(124): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 124
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(125): truncated value with size 32 to match size of target (10) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 125
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(130): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 130
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(131): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 131
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(136): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 136
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(137): truncated value with size 32 to match size of target (2) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 137
 Warning (10034): Output port "source_freq" at peak_detect.sv(39) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 39
 Warning (10034): Output port "source_mag" at peak_detect.sv(40) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 40
 Warning (10034): Output port "source_phaseA" at peak_detect.sv(41) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 41
@@ -3776,10 +3771,10 @@ Info (21057): Implemented 108 device resources after synthesis - the final resou
     Info (21058): Implemented 44 input pins
     Info (21059): Implemented 0 output pins
     Info (21061): Implemented 64 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 197 warnings
-    Info: Peak virtual memory: 4994 megabytes
-    Info: Processing ended: Thu Oct 25 14:33:04 2018
-    Info: Elapsed time: 00:00:37
-    Info: Total CPU time (on all processors): 00:00:54
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 192 warnings
+    Info: Peak virtual memory: 4996 megabytes
+    Info: Processing ended: Thu Oct 25 23:07:39 2018
+    Info: Elapsed time: 00:00:54
+    Info: Total CPU time (on all processors): 00:00:56
 
 
