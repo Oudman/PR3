@@ -32,20 +32,20 @@ module peak_detect #(
 	parameter BATCH_SIZE,												// number of entries per input batch
 	parameter DATA_WIDTH													// number of bits per entry
 )(
-	input		wire							clk,							// input data speed
-	input		wire							reset,						// synchronous reset
-	input		wire							sink_sop,					// first input entry
-	input		wire							sink_eop,					// last input entry
-	input		wire							sink_valid,					// input is valid
-	input		wire	[DATA_WIDTH-1:0]	sink_re,						//	real part of input data
-	input		wire	[DATA_WIDTH-1:0]	sink_im,						//	imaginair part of input data
-	output	bit							source_sop,					// first output entry
-	output	bit							source_eop,					// last output entry
-	output	bit							source_valid,				// output is valid
-	output	int							source_freq,				// frequency of peak (kHz; FP)
-	output	int							source_mag,					// magnitude of peak (FP)
-	output	int							source_phaseA,				// possible phase of peak (deg; FP)
-	output	int							source_phaseB				// alternative phase of peak (deg; FP)
+	input		wire									clk,					// input data speed
+	input		wire									reset,				// synchronous reset
+	input		wire									sink_sop,			// first input entry
+	input		wire									sink_eop,			// last input entry
+	input		wire									sink_valid,			// input is valid
+	input		wire signed	[DATA_WIDTH-1:0]	sink_re,				//	real part of input data
+	input		wire signed	[DATA_WIDTH-1:0]	sink_im,				//	imaginair part of input data
+	output	bit									source_sop,			// first output entry
+	output	bit									source_eop,			// last output entry
+	output	bit									source_valid,		// output is valid
+	output	int									source_freq,		// frequency of peak (kHz; FP)
+	output	int									source_mag,			// magnitude of peak (FP)
+	output	int									source_phaseA,		// possible phase of peak (deg; FP)
+	output	int									source_phaseB		// alternative phase of peak (deg; FP)
 );
 
 // more parameters
@@ -58,9 +58,9 @@ localparam PEAKDEV = 50;												// maximum deviation between expectation and
 /*- struct + task + function definitions -------------------------------------*/
 /*----------------------------------------------------------------------------*/
 typedef struct {
-	shortint	bin;
-	int		mag[0:2];
-	int		phs[0:2];
+	bit signed	[$clog2(BATCH_SIZE):0]	bin;
+	int											mag[0:2];
+	int											phs[0:2];
 } chunk;
 
 // quadratic interpolation (out: FP)
@@ -73,7 +73,6 @@ endfunction
 /*----------------------------------------------------------------------------*/
 chunk										buffer;							// data buffer
 chunk										peaks[0:NPEAKS-1];			// peak data
-bit	[$clog2(BATCH_SIZE)-1:0]	sink_pos;						// sink entry position
 bit										sink_done;						// high:		buffer is fully loaded
 bit	[$clog2(NPEAKS)-1:0]			source_pos;						// source entry position
 bit										source_done;					// high:		peaks have all been output
@@ -88,7 +87,6 @@ begin
 		buffer 			<= '{0, '{3{0}}, '{3{0}}};
 		for (byte i = 0; i < NPEAKS; i++)
 			peaks[i]			<= '{0, '{3{0}}, '{3{0}}};
-		sink_pos			<= 0;
 		sink_done		<= 0;
 		source_pos		<= 0;
 		source_done		<= 0;
@@ -97,25 +95,24 @@ begin
 	else if (!sink_done && sink_valid)								// loading of buffer
 	begin
 		for (byte i = 0; i < NPEAKS; i++)
-			if (EXPEAKS[i]-PEAKDEV <= sink_pos && sink_pos < EXPEAKS[i]+PEAKDEV && buffer.mag[1] > peaks[i].mag[1])
+			if (EXPEAKS[i]-PEAKDEV <= buffer.bin && buffer.bin < EXPEAKS[i]+PEAKDEV && buffer.mag[1] > peaks[i].mag[1])
 				peaks[i] 		<= buffer;
 		buffer.bin		<= buffer.bin + 1;
 		buffer.mag[0:1]<= buffer.mag[1:2];
 		buffer.phs[0:1]<= buffer.phs[1:2];
 		buffer.mag[2]	<= hypot(sink_re, sink_im) <<< 8;
 		buffer.phs[2]	<= atan2(sink_im, sink_re);
-		sink_done		<= (sink_pos == BATCH_SIZE - 1) ? 1 : 0;
-		sink_pos			<= sink_pos + 1;
+		sink_done		<= (buffer.bin >= BATCH_SIZE - 1) ? 1 : 0;
 	end
 	else if (sink_done && !source_done)								// export of data
 	begin
 		source_valid	<= 1;
 		source_sop		<= (source_pos == 0) ? 1 : 0;
 		source_eop		<= (source_pos == NPEAKS-1) ? 1 : 0;
-		//source_freq		<= ((peaks[source_pos] <<< 8) + delta) * BIN_WIDTH;
-		//source_mag		<= buff_r[peaks[source_pos]];
-		//source_phaseA	<= phase_A(peaks[source_pos], delta);
-		//source_phaseB	<= phase_B(peaks[source_pos], delta);
+		//source_freq		<= stuff;
+		//source_mag		<= stuff;
+		//source_phaseA	<= stuff;
+		//source_phaseB	<= stuff;
 		source_done		<= (source_pos == NPEAKS-1) ? 1 : 0;
 		source_pos		<= source_pos + 1;
 	end
