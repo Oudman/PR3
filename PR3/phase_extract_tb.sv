@@ -5,9 +5,17 @@
 // Author:	F.H. Oudman
 // Mail:		f.h.oudman@student.tue.nl
 // -----------------------------------------------------------------------------
+// Dependencies:
+//  ~ phase_extract.sv
+// -----------------------------------------------------------------------------
 // Type:		testbench
 // Purpose:	testing of phase_extract.sv
 // -----------------------------------------------------------------------------
+
+`ifndef PHASE_EXTRACT_TB_SV
+`define PHASE_EXTRACT_TB_SV
+
+`include "phase_extract.sv"
 
 `timescale 1ns/10ps
 
@@ -69,3 +77,5 @@ phase_extract #(
 );
 
 endmodule
+
+`endif

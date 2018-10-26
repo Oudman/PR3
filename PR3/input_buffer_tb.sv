@@ -5,9 +5,17 @@
 // Author:	F.H. Oudman
 // Mail:		f.h.oudman@student.tue.nl
 // -----------------------------------------------------------------------------
+// Dependencies:
+//  ~ input_buffer.sv
+// -----------------------------------------------------------------------------
 // Type:		testbench
 // Purpose:	testing of input_buffer.sv
 // -----------------------------------------------------------------------------
+
+`ifndef INPUT_BUFFER_TB_SV
+`define INPUT_BUFFER_TB_SV
+
+`include "input_buffer.sv"
 
 `timescale 1ns/10ps
 
@@ -87,3 +95,5 @@ input_buffer #(
 );
 
 endmodule
+
+`endif

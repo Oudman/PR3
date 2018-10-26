@@ -22,7 +22,12 @@
 // - the lower 8 bits represent the fractional part
 // -----------------------------------------------------------------------------
 
+`ifndef PHASE_EXTRACT_SV
+`define PHASE_EXTRACT_SV
+
+`include "input_buffer.sv"
 `include "fft/fft_int.sv"
+`include "peak_detect.sv"
 
 module phase_extract #(
 	parameter SINK_WIDTH = 14,											// number of bits per entry
@@ -151,3 +156,5 @@ peak_detect #(
 );
 
 endmodule
+
+`endif

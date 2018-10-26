@@ -22,6 +22,12 @@
 // - the lower 8 bits represent the fractional part
 // -----------------------------------------------------------------------------
 
+`ifndef PEAK_DETECT_SV
+`define PEAK_DETECT_SV
+
+`include "hypot.sv"
+`include "atan2.sv"
+
 module peak_detect #(
 	parameter BATCH_SIZE,												// number of entries per input batch
 	parameter DATA_WIDTH													// number of bits per entry
@@ -53,42 +59,15 @@ localparam PEAKDEV = 50;												// maximum deviation between expectation and
 /*----------------------------------------------------------------------------*/
 typedef struct {
 	shortint	bin;
-	byte		delta;
 	int		re[0:2];
 	int		im[0:2];
 	int		mag[0:2];
 } chunk;
 
-// reset chunk
-task automatic chunk_reset(ref chunk chnk);
-	chnk.bin			<= 0;
-	chnk.delta		<= 0;
-	for (byte i = 0; i < 3; i++)
-	begin
-		chnk.re[i]		<= 0;
-		chnk.im[i]		<= 0;
-		chnk.mag[i]		<= 0;
-	end
-endtask
-
-// shift data in chunk
-task automatic chunk_shift(ref chunk chnk);
-	chnk.bin			<= chnk.bin + 1;
-	for (byte i = 0; i < 2; i++)
-	begin
-		chnk.re[i]		<= chnk.re[i+1];
-		chnk.im[i]		<= chnk.im[i+1];
-		chnk.mag[i]		<= chnk.mag[i+1];
-	end
-	chnk.re[2]		<= sink_re;
-	chnk.im[2]		<= sink_im;
-	chnk.mag[2]		<= hypot(sink_re, sink_im) <<< 8;
-endtask
-
 // quadratic interpolation (out: FP)
-task automatic chunk_quadratic_delta(ref chunk chnk);
-	chnk.delta 		<= ((chnk.mag[2] - chnk.mag[0]) <<< 7) / (2*chnk.mag[1] - chnk.mag[0] - chnk.mag[2]);
-endtask
+function quadratic_delta(chunk chnk);
+	quadratic_delta = ((chnk.mag[2] - chnk.mag[0]) <<< 7) / (2*chnk.mag[1] - chnk.mag[0] - chnk.mag[2]);
+endfunction
 
 /*----------------------------------------------------------------------------*/
 /*- wire/logic declarations --------------------------------------------------*/
@@ -107,8 +86,9 @@ always @(posedge clk)
 begin
 	if (reset || sink_eop)												// reset all
 	begin
+		buffer 			<= '{0, '{3{0}}, '{3{0}}, '{3{0}}};
 		for (byte i = 0; i < NPEAKS; i++)
-			chunk_reset(peaks[i]);
+			peaks[i]			<= '{0, '{3{0}}, '{3{0}}, '{3{0}}};
 		sink_pos			<= 0;
 		sink_done		<= 0;
 		source_pos		<= 0;
@@ -120,7 +100,13 @@ begin
 		for (byte i = 0; i < NPEAKS; i++)
 			if (EXPEAKS[i]-PEAKDEV <= sink_pos && sink_pos < EXPEAKS[i]+PEAKDEV && buffer.mag[1] > peaks[i].mag[1])
 				peaks[i] 		<= buffer;
-		chunk_shift(buffer);
+		buffer.bin		<= buffer.bin + 1;
+		buffer.re[0:1]	<= buffer.re[1:2];
+		buffer.im[0:1]	<= buffer.im[1:2];
+		buffer.mag[0:1]<= buffer.mag[1:2];
+		buffer.re[2]	<= sink_re;
+		buffer.im[2]	<= sink_im;
+		buffer.mag[2]	<= hypot(sink_re, sink_im) <<< 8;
 		sink_done		<= (sink_pos == BATCH_SIZE - 1) ? 1 : 0;
 		sink_pos			<= sink_pos + 1;
 	end
@@ -143,3 +129,5 @@ begin
 end
 
 endmodule
+
+`endif

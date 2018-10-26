@@ -5,9 +5,17 @@
 // Author:	F.H. Oudman
 // Mail:		f.h.oudman@student.tue.nl
 // -----------------------------------------------------------------------------
+// Dependencies:
+//  ~ fft_int.sv
+// -----------------------------------------------------------------------------
 // Type:		testbench
 // Purpose:	testing of fft_int.sv
 // -----------------------------------------------------------------------------
+
+`ifndef FFT_TB_SV
+`define FFT_TB_SV
+
+`include "fft/fft_int.sv"
 
 `timescale 1ns/10ps
 
@@ -94,3 +102,5 @@ fft_int #(
 );
 
 endmodule
+
+`endif

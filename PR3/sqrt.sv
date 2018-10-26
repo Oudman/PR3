@@ -17,6 +17,9 @@
 // Output:	sqrt
 // -----------------------------------------------------------------------------
 
+`ifndef SQRT_SV
+`define SQRT_SV
+
 // sqrt approximation (max 1% deviation, excluding rounding errors)
 function int sqrt(longint s);
 	if (s < 2)
@@ -34,3 +37,5 @@ function automatic int sqrt_h(const ref longint s);
 	for (byte i = 0; i < 32; i++)
 		sqrt_h[i] = s[2*i+1] || s[2*i];
 endfunction
+
+`endif

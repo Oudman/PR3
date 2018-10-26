@@ -16,6 +16,9 @@
 // Source:	sop, eop, valid, data
 // -----------------------------------------------------------------------------
 
+`ifndef INPUT_BUFFER_SV
+`define INPUT_BUFFER_SV
+
 module input_buffer #(
 	parameter BATCH_SIZE = 2048,										// number of entries per output batch
 	parameter RUNS = 3,													// number of succeeding output batches
@@ -97,3 +100,5 @@ begin
 end
 
 endmodule
+
+`endif

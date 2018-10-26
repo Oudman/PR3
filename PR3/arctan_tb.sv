@@ -5,9 +5,17 @@
 // Author:	F.H. Oudman
 // Mail:		f.h.oudman@student.tue.nl
 // -----------------------------------------------------------------------------
+// Dependencies:
+//  ~ arctan.sv
+// -----------------------------------------------------------------------------
 // Type:		testbench
 // Purpose:	testing of arctan.sv
 // -----------------------------------------------------------------------------
+
+`ifndef ARCTAN_TB_SV
+`define ARCTAN_TB_SV
+
+`include "arctan.sv"
 
 `timescale 1ns/100ps
 
@@ -34,8 +42,6 @@ begin
 end
 assign z = zfp / 256.0;
 
-//`include "arctan.sv"
-
 assign atan_pos_approx = arctan(zfp);
 assign atan_neg_approx = arctan(-zfp);
 assign atan_pos_exact = 256 * $atan(z) * 57.29577951308;
@@ -49,3 +55,5 @@ begin
 end
 
 endmodule
+
+`endif

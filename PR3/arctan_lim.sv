@@ -20,6 +20,9 @@
 // - the lower 8 bits represent the fractional part
 // -----------------------------------------------------------------------------
 
+`ifndef ARCTAN_LIM_SV
+`define ARCTAN_LIM_SV
+
 // arctan approximation (max 0.22deg deviation in range z=[0,1]) (in: FP; out: FP)
 // using https://math.stackexchange.com/questions/1098487/atan2-faster-approximation
 function int arctan_lim(byte unsigned z);
@@ -282,3 +285,5 @@ function int arctan_lim(byte unsigned z);
 		255: arctan_lim = 11491;
 	endcase
 endfunction
+
+`endif

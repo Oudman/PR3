@@ -5,9 +5,17 @@
 // Author:	F.H. Oudman
 // Mail:		f.h.oudman@student.tue.nl
 // -----------------------------------------------------------------------------
+// Dependencies:
+//  ~ atan2.sv
+// -----------------------------------------------------------------------------
 // Type:		testbench
 // Purpose:	testing of atan2.sv
 // -----------------------------------------------------------------------------
+
+`ifndef ATAN2_TB_SV
+`define ATAN2_TB_SV
+
+`include "atan2.sv"
 
 `timescale 1ns/100ps
 
@@ -37,9 +45,6 @@ begin
 	end
 end
 
-//`include "atan2.sv"
-//`include "arctan_lim.sv"
-
 assign x = 16384.0 * $cos(phase * pi/180.0);
 assign y = 16384.0 * $sin(phase * pi/180.0);
 assign xfp = 256 * x;
@@ -53,3 +58,5 @@ begin
 end
 
 endmodule
+
+`endif

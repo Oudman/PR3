@@ -19,6 +19,11 @@
 // - the lower 8 bits represent the fractional part
 // -----------------------------------------------------------------------------
 
+`ifndef ARCTAN_SV
+`define ARCTAN_SV
+
+`include "arctan_lim.sv"
+
 // arctan approximation (in: FP; out: FP)
 function automatic int arctan(int z);
 	if (z >= 0)
@@ -36,3 +41,5 @@ function automatic int arctan(int z);
 			arctan = -arctan_lim(-z);
 	end
 endfunction
+
+`endif

@@ -17,7 +17,14 @@
 // Output:	hypot
 // -----------------------------------------------------------------------------
 
+`ifndef HYPOT_SV
+`define HYPOT_SV
+
+`include "sqrt.sv"
+
 // hypot approximation
 function int hypot(int x, y);
 	hypot = sqrt(x*x + y*y);
 endfunction
+
+`endif

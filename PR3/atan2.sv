@@ -20,6 +20,11 @@
 // - the lower 8 bits represent the fractional part
 // -----------------------------------------------------------------------------
 
+`ifndef ATAN2_SV
+`define ATAN2_SV
+
+`include "arctan_lim.sv"
+
 // atan2 approximation (out: FP)
 function int atan2(int y, x);
 	if (x == 0)
@@ -43,3 +48,5 @@ function int atan2(int y, x);
 	else if (x < 0 && y < 0 && -x < -y)
 		atan2 = -arctan_lim( (x <<< 8) / y) - 23040;
 endfunction
+
+`endif

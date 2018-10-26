@@ -5,9 +5,17 @@
 // Author:	F.H. Oudman
 // Mail:		f.h.oudman@student.tue.nl
 // -----------------------------------------------------------------------------
+// Dependencies:
+//  ~ sqrt.sv
+// -----------------------------------------------------------------------------
 // Type:		testbench
 // Purpose:	testing of sqrt.sv
 // -----------------------------------------------------------------------------
+
+`ifndef SQRT_TB_SV
+`define SQRT_TB_SV
+
+`include "sqrt.sv"
 
 `timescale 1ns/100ps
 
@@ -30,8 +38,6 @@ begin
 	s2 <= s2 + 1;
 end
 
-//`include "sqrt.sv"
-
 assign s_approx = sqrt(s2);
 assign s_exact = $sqrt(s2);
 assign diff_abs = s_approx - s_exact;
@@ -43,3 +49,5 @@ begin
 end
 
 endmodule
+
+`endif
