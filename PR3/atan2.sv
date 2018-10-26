@@ -26,26 +26,26 @@
 `include "arctan_lim.sv"
 
 // atan2 approximation (out: FP)
-function int atan2(int y, x);
+function automatic int atan2(int y, x);
 	if (x == 0)
 		atan2 = (y >= 0) ? 23040 : -23040;
 	else if (y == 0)
 		atan2 = (x >= 0) ? 0 : 46080;
-	else if (x > 0 && y > 0 && x > y)
+	else if (x > 0 && y > 0 && x >= y)
 		atan2 =  arctan_lim( (y <<< 8) / x);
 	else if (x > 0 && y > 0 && x < y)
 		atan2 = -arctan_lim( (x <<< 8) / y) + 23040;
-	else if (x > 0 && y < 0 && x > -y)
+	else if (x > 0 && y < 0 && x >= -y)
 		atan2 = -arctan_lim(-(y <<< 8) / x);
 	else if (x > 0 && y < 0 && x < -y)
 		atan2 =  arctan_lim(-(x <<< 8) / y) - 23040;
-	else if (x < 0 && y > 0 && -x > y)
+	else if (x < 0 && y > 0 && -x >= y)
 		atan2 = -arctan_lim(-(y <<< 8) / x) + 46080;
 	else if (x < 0 && y > 0 && -x < y)
 		atan2 =  arctan_lim(-(x <<< 8) / y) + 23040;
-	else if (x < 0 && y < 0 && -x > -y)
+	else if (x < 0 && y < 0 && -x >= -y)
 		atan2 =  arctan_lim( (y <<< 8) / x) - 46080;
-	else if (x < 0 && y < 0 && -x < -y)
+	else // (x < 0 && y < 0 && -x < -y)
 		atan2 = -arctan_lim( (x <<< 8) / y) - 23040;
 endfunction
 

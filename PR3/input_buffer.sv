@@ -20,9 +20,9 @@
 `define INPUT_BUFFER_SV
 
 module input_buffer #(
-	parameter BATCH_SIZE = 2048,										// number of entries per output batch
-	parameter RUNS = 3,													// number of succeeding output batches
-	parameter DATA_WIDTH = 14											// number of bits per entry
+	parameter BATCH_SIZE,												// number of entries per output batch
+	parameter RUNS,														// number of succeeding output batches
+	parameter DATA_WIDTH													// number of bits per entry
 )(
 	input		wire							sink_clk,					// clock:	input data speed
 	input		wire							source_clk,					// clock:	output data speed

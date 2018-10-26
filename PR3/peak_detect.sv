@@ -59,9 +59,8 @@ localparam PEAKDEV = 50;												// maximum deviation between expectation and
 /*----------------------------------------------------------------------------*/
 typedef struct {
 	shortint	bin;
-	int		re[0:2];
-	int		im[0:2];
 	int		mag[0:2];
+	int		phs[0:2];
 } chunk;
 
 // quadratic interpolation (out: FP)
@@ -86,9 +85,9 @@ always @(posedge clk)
 begin
 	if (reset || sink_eop)												// reset all
 	begin
-		buffer 			<= '{0, '{3{0}}, '{3{0}}, '{3{0}}};
+		buffer 			<= '{0, '{3{0}}, '{3{0}}};
 		for (byte i = 0; i < NPEAKS; i++)
-			peaks[i]			<= '{0, '{3{0}}, '{3{0}}, '{3{0}}};
+			peaks[i]			<= '{0, '{3{0}}, '{3{0}}};
 		sink_pos			<= 0;
 		sink_done		<= 0;
 		source_pos		<= 0;
@@ -101,12 +100,10 @@ begin
 			if (EXPEAKS[i]-PEAKDEV <= sink_pos && sink_pos < EXPEAKS[i]+PEAKDEV && buffer.mag[1] > peaks[i].mag[1])
 				peaks[i] 		<= buffer;
 		buffer.bin		<= buffer.bin + 1;
-		buffer.re[0:1]	<= buffer.re[1:2];
-		buffer.im[0:1]	<= buffer.im[1:2];
 		buffer.mag[0:1]<= buffer.mag[1:2];
-		buffer.re[2]	<= sink_re;
-		buffer.im[2]	<= sink_im;
+		buffer.phs[0:1]<= buffer.phs[1:2];
 		buffer.mag[2]	<= hypot(sink_re, sink_im) <<< 8;
+		buffer.phs[2]	<= atan2(sink_im, sink_re);
 		sink_done		<= (sink_pos == BATCH_SIZE - 1) ? 1 : 0;
 		sink_pos			<= sink_pos + 1;
 	end

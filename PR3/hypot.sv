@@ -23,7 +23,7 @@
 `include "sqrt.sv"
 
 // hypot approximation
-function int hypot(int x, y);
+function automatic int hypot(int x, y);
 	hypot = sqrt(x*x + y*y);
 endfunction
 

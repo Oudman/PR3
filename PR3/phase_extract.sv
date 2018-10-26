@@ -30,9 +30,9 @@
 `include "peak_detect.sv"
 
 module phase_extract #(
-	parameter SINK_WIDTH = 14,											// number of bits per entry
-	parameter FFT_DEPTH = 11,											// number of fft levels
-	parameter RUNS	= 3													// number of runs
+	parameter SINK_WIDTH,												// number of bits per entry
+	parameter FFT_DEPTH,													// number of fft levels
+	parameter RUNS															// number of runs
 )(
 	input		wire							clk,							// main clock
 	input		wire							clk20,						// 20.48MHz
@@ -41,36 +41,36 @@ module phase_extract #(
 
 // more parameters
 localparam	FFT_LENGTH = 2**FFT_DEPTH;								// number of entries over which to apply fft
-localparam	FFT_WIDTH = SINK_WIDTH + (FFT_DEPTH+1) / 2;		// number of bits of the fft output
+localparam	FFT_WIDTH = SINK_WIDTH + FFT_DEPTH;					// number of bits of the fft output
 
 /*----------------------------------------------------------------------------*/
 /*- wire/reg declarations ----------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 // input_buffer related
-bit											time_reset;
-wire											time_fft_sop;
-wire											time_fft_eop;
-wire											time_fft_valid;
-wire 			[SINK_WIDTH-1:0]			time_fft_re;
+bit										time_reset;
+wire										time_fft_sop;
+wire										time_fft_eop;
+wire										time_fft_valid;
+wire 	[SINK_WIDTH-1:0]				time_fft_re;
 
 // fft_int related
-bit											fft_reset;
-wire											fft_peak_sop;
-wire											fft_peak_eop;
-wire											fft_peak_valid;
-wire			[FFT_WIDTH-1:0]			fft_peak_re;
-wire			[FFT_WIDTH-1:0]			fft_peak_im;
-wire											fft_error;					// unused
+bit										fft_reset;
+wire										fft_peak_sop;
+wire										fft_peak_eop;
+wire										fft_peak_valid;
+wire	[FFT_WIDTH-1:0]				fft_peak_re;
+wire	[FFT_WIDTH-1:0]				fft_peak_im;
+wire										fft_error;						// unused
 
 // peak_detect related
-bit											peak_reset;
-wire											peak_sop;
-wire											peak_eop;
-wire											peak_valid;
-wire signed	[31:0]						peak_freq;					// kHz; FP
-wire signed	[31:0]						peak_mag;					// FP
-wire signed	[31:0]						peak_phaseA;				// deg; FP
-wire signed	[31:0]						peak_phaseB;				// deg; FP
+bit										peak_reset;
+wire										peak_sop;
+wire										peak_eop;
+wire										peak_valid;
+int										peak_freq;						// kHz; FP
+int										peak_mag;						// FP
+int										peak_phaseA;					// deg; FP
+int										peak_phaseB;					// deg; FP
 
 
 /*----------------------------------------------------------------------------*/

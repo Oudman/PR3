@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PR3
-Fri Oct 26 19:33:09 2018
+Fri Oct 26 22:03:13 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -240,31 +240,30 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 232. Port Connectivity Checks: "phase_extract:pe1|peak_detect:pd"
 233. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[11].cn|delay_line_reg:dly1"
 234. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[11].cn|delay_lines_reg:dly0"
-235. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[11].cn"
-236. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[10].cn|delay_line_reg:dly1"
-237. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[10].cn|delay_lines_reg:dly0"
-238. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[9].cn|delay_line_reg:dly1"
-239. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[9].cn|delay_lines_reg:dly0"
-240. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[8].cn|delay_line_reg:dly1"
-241. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[8].cn|delay_lines_reg:dly0"
-242. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[7].cn|delay_line_reg:dly1"
-243. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[7].cn|delay_lines_reg:dly0"
-244. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[6].cn|delay_line_reg:dly1"
-245. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[6].cn|delay_lines_reg:dly0"
-246. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[5].cn|delay_line_reg:dly1"
-247. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[5].cn|delay_lines_reg:dly0"
-248. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[4].cn|delay_line_reg:dly1"
-249. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[4].cn|delay_lines_reg:dly0"
-250. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[3].cn|delay_line_reg:dly1"
-251. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[3].cn|delay_lines_reg:dly0"
-252. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[2].cn|delay_line_reg:dly1"
-253. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[2].cn|delay_lines_reg:dly0"
-254. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[1].cn|delay_line_reg:dly1"
-255. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[1].cn|delay_lines_reg:dly0"
-256. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft"
-257. Post-Synthesis Netlist Statistics for Top Partition
-258. Elapsed Time Per Partition
-259. Analysis & Synthesis Messages
+235. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[10].cn|delay_line_reg:dly1"
+236. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[10].cn|delay_lines_reg:dly0"
+237. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[9].cn|delay_line_reg:dly1"
+238. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[9].cn|delay_lines_reg:dly0"
+239. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[8].cn|delay_line_reg:dly1"
+240. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[8].cn|delay_lines_reg:dly0"
+241. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[7].cn|delay_line_reg:dly1"
+242. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[7].cn|delay_lines_reg:dly0"
+243. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[6].cn|delay_line_reg:dly1"
+244. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[6].cn|delay_lines_reg:dly0"
+245. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[5].cn|delay_line_reg:dly1"
+246. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[5].cn|delay_lines_reg:dly0"
+247. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[4].cn|delay_line_reg:dly1"
+248. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[4].cn|delay_lines_reg:dly0"
+249. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[3].cn|delay_line_reg:dly1"
+250. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[3].cn|delay_lines_reg:dly0"
+251. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[2].cn|delay_line_reg:dly1"
+252. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[2].cn|delay_lines_reg:dly0"
+253. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[1].cn|delay_line_reg:dly1"
+254. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[1].cn|delay_lines_reg:dly0"
+255. Port Connectivity Checks: "phase_extract:pe1|fft_int:fft"
+256. Post-Synthesis Netlist Statistics for Top Partition
+257. Elapsed Time Per Partition
+258. Analysis & Synthesis Messages
 
 
 
@@ -290,7 +289,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri Oct 26 19:33:08 2018       ;
+; Analysis & Synthesis Status     ; Successful - Fri Oct 26 22:03:13 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
@@ -448,14 +447,14 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimate of Logic utilization (ALMs needed) ; 32    ;
+; Estimate of Logic utilization (ALMs needed) ; 0     ;
 ;                                             ;       ;
-; Combinational ALUT usage for logic          ; 64    ;
+; Combinational ALUT usage for logic          ; 0     ;
 ;     -- 7 input functions                    ; 0     ;
 ;     -- 6 input functions                    ; 0     ;
 ;     -- 5 input functions                    ; 0     ;
 ;     -- 4 input functions                    ; 0     ;
-;     -- <=3 input functions                  ; 64    ;
+;     -- <=3 input functions                  ; 0     ;
 ;                                             ;       ;
 ; Dedicated logic registers                   ; 0     ;
 ;                                             ;       ;
@@ -466,7 +465,7 @@ refer to the applicable agreement for further details.
 ; Maximum fan-out node                        ; clk   ;
 ; Maximum fan-out                             ; 1     ;
 ; Total fan-out                               ; 44    ;
-; Average fan-out                             ; 0.29  ;
+; Average fan-out                             ; 0.50  ;
 +---------------------------------------------+-------+
 
 
@@ -475,7 +474,7 @@ refer to the applicable agreement for further details.
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
 ; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; |PR3                       ; 64 (64)             ; 0 (0)                     ; 0                 ; 0          ; 44   ; 0            ; |PR3                ; PR3         ; work         ;
+; |PR3                       ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 44   ; 0            ; |PR3                ; PR3         ; work         ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -792,7 +791,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+-------+---------------------------------------------------+
 ; POW            ; 11    ; Signed Integer                                    ;
 ; DATA_WIDTH     ; 14    ; Signed Integer                                    ;
-; RES_WIDTH      ; 20    ; Signed Integer                                    ;
+; RES_WIDTH      ; 25    ; Signed Integer                                    ;
 +----------------+-------+---------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -3050,7 +3049,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                                 ;
 +----------------+-------+------------------------------------------------------+
 ; BATCH_SIZE     ; 1024  ; Signed Integer                                       ;
-; DATA_WIDTH     ; 20    ; Signed Integer                                       ;
+; DATA_WIDTH     ; 25    ; Signed Integer                                       ;
 +----------------+-------+------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -3089,16 +3088,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; sclr      ; Input ; Info     ; Stuck at GND                                                         ;
 ; clock_ena ; Input ; Info     ; Stuck at VCC                                                         ;
 +-----------+-------+----------+----------------------------------------------------------------------+
-
-
-+-----------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "phase_extract:pe1|fft_int:fft|cascade_n:gen[11].cn"                                              ;
-+-------------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port              ; Type   ; Severity ; Details                                                                             ;
-+-------------------+--------+----------+-------------------------------------------------------------------------------------+
-; source_Re[24..20] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; source_Im[24..20] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+-------------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------+
@@ -3327,8 +3316,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------+---------------------------------+
 ; Type              ; Count                           ;
 +-------------------+---------------------------------+
-; arriav_io_obuf    ; 64                              ;
-; boundary_port     ; 108                             ;
+; boundary_port     ; 44                              ;
 ;                   ;                                 ;
 ; Max LUT depth     ; 0.00                            ;
 ; Average LUT depth ; 0.00                            ;
@@ -3350,7 +3338,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Fri Oct 26 19:32:28 2018
+    Info: Processing started: Fri Oct 26 22:02:30 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PR3 -c PR3
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -3469,8 +3457,6 @@ Warning (10230): Verilog HDL assignment warning at input_buffer.sv(87): truncate
 Warning (10230): Verilog HDL assignment warning at input_buffer.sv(88): truncated value with size 32 to match size of target (2) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 88
 Warning (10230): Verilog HDL assignment warning at input_buffer.sv(92): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 92
 Info (12128): Elaborating entity "fft_int" for hierarchy "phase_extract:pe1|fft_int:fft" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 135
-Warning (10230): Verilog HDL assignment warning at fft_int.sv(77): truncated value with size 25 to match size of target (20) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 77
-Warning (10230): Verilog HDL assignment warning at fft_int.sv(78): truncated value with size 25 to match size of target (20) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 78
 Info (12128): Elaborating entity "cascade_0" for hierarchy "phase_extract:pe1|fft_int:fft|cascade_0:c0" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 40
 Info (12128): Elaborating entity "bitrev" for hierarchy "phase_extract:pe1|fft_int:fft|cascade_0:c0|bitrev:bitrev_inst" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/cascade_0.sv Line: 36
 Info (12128): Elaborating entity "cascade_n" for hierarchy "phase_extract:pe1|fft_int:fft|cascade_n:gen[1].cn" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 54
@@ -3575,16 +3561,15 @@ Warning (10030): Net "W_Im_table.waddr_a" at W_int32.sv(697) has no driver or in
 Warning (10030): Net "W_Re_table.we_a" at W_int32.sv(566) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 566
 Warning (10030): Net "W_Im_table.we_a" at W_int32.sv(697) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 697
 Info (12128): Elaborating entity "peak_detect" for hierarchy "phase_extract:pe1|peak_detect:pd" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 156
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(103): truncated value with size 32 to match size of target (16) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 103
-Warning (10230): Verilog HDL assignment warning at sqrt.sv(26): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 26
-Warning (10230): Verilog HDL assignment warning at sqrt.sv(30): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 30
-Warning (10230): Verilog HDL assignment warning at sqrt.sv(31): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 31
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(110): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 110
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(111): truncated value with size 32 to match size of target (10) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 111
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(116): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 116
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(117): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 117
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(122): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 122
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(123): truncated value with size 32 to match size of target (2) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 123
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(102): truncated value with size 32 to match size of target (16) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 102
+Warning (10230): Verilog HDL assignment warning at sqrt.sv(27): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 27
+Warning (10230): Verilog HDL assignment warning at sqrt.sv(28): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 28
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(107): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 107
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(108): truncated value with size 32 to match size of target (10) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 108
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(113): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 113
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(114): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 114
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(119): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 119
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(120): truncated value with size 32 to match size of target (2) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 120
 Warning (10034): Output port "source_freq" at peak_detect.sv(45) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 45
 Warning (10034): Output port "source_mag" at peak_detect.sv(46) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 46
 Warning (10034): Output port "source_phaseA" at peak_detect.sv(47) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 47
@@ -3593,136 +3578,6 @@ Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following PLL node(s):
         Warning (14320): Synthesized away node "pll:pll|pll_0002:pll_inst|altera_pll:altera_pll_i|outclk_wire[0]" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altera_pll.v Line: 748
 Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
-Warning (13039): The following bidirectional pins have no drivers
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_0_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_1_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_2_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_3_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_4_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_5_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_6_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_7_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_8_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_9_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_10_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_11_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_12_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_13_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_14_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_15_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_16_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_17_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_18_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_19_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_20_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_21_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_22_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_23_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_24_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_25_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_26_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_27_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_28_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_29_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_30_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_31_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_32_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_33_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_34_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_35_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_36_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_37_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_38_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_39_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_40_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_41_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_42_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_43_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_44_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_45_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_46_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_47_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_48_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_49_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_50_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_51_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_52_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_53_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_54_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_55_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_56_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_57_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_58_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_59_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_60_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_61_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_62_" has no driver
-    Warning (13040): bidirectional pin "global.bp.work.work.sqrt_h.s_63_" has no driver
-Info (35026): Attempting to remove 64 I/O cell(s) that do not connect to top-level pins or have illegal connectivity
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_0_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_1_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_2_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_3_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_4_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_5_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_6_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_7_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_8_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_9_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_10_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_11_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_12_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_13_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_14_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_15_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_16_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_17_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_18_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_19_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_20_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_21_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_22_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_23_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_24_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_25_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_26_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_27_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_28_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_29_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_30_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_31_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_32_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_33_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_34_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_35_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_36_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_37_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_38_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_39_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_40_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_41_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_42_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_43_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_44_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_45_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_46_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_47_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_48_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_49_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_50_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_51_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_52_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_53_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_54_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_55_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_56_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_57_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_58_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_59_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_60_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_61_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_62_~output"
-    Info (35027): Removed I/O cell "global.bp.work.work.sqrt_h.s_63_~output"
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 44 input pin(s) that do not drive logic
@@ -3770,14 +3625,13 @@ Warning (21074): Design contains 44 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "data3[11]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 32
     Warning (15610): No output dependent on input pin "data3[12]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 32
     Warning (15610): No output dependent on input pin "data3[13]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 32
-Info (21057): Implemented 108 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 44 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 44 input pins
     Info (21059): Implemented 0 output pins
-    Info (21061): Implemented 64 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 191 warnings
-    Info: Peak virtual memory: 4996 megabytes
-    Info: Processing ended: Fri Oct 26 19:33:09 2018
-    Info: Elapsed time: 00:00:41
-    Info: Total CPU time (on all processors): 00:00:55
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 123 warnings
+    Info: Peak virtual memory: 4993 megabytes
+    Info: Processing ended: Fri Oct 26 22:03:13 2018
+    Info: Elapsed time: 00:00:43
+    Info: Total CPU time (on all processors): 00:01:00
 
 

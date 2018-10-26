@@ -25,7 +25,7 @@
 
 // arctan approximation (max 0.22deg deviation in range z=[0,1]) (in: FP; out: FP)
 // using https://math.stackexchange.com/questions/1098487/atan2-faster-approximation
-function int arctan_lim(byte unsigned z);
+function automatic int arctan_lim(byte unsigned z);
 	case (z)
 		0: arctan_lim = 0;
 		1: arctan_lim = 57;

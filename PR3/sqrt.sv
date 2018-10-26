@@ -21,21 +21,11 @@
 `define SQRT_SV
 
 // sqrt approximation (max 1% deviation, excluding rounding errors)
-function int sqrt(longint s);
-	if (s < 2)
-		sqrt = s;
-	else
-	begin
-		sqrt = sqrt_h(s);
-		sqrt = (sqrt + s / sqrt) / 2; // max 15% deviation
-		sqrt = (sqrt + s / sqrt) / 2; // max 1% deviation
-	end
-endfunction
-
-// sqrt approximation (max -42.3% and +73.2% deviation)
-function automatic int sqrt_h(const ref longint s);
+function automatic int sqrt(longint s);
 	for (byte i = 0; i < 32; i++)
-		sqrt_h[i] = s[2*i+1] || s[2*i];
+		sqrt[i] = s[2*i+1] || s[2*i];	// max -42.3% and +73.2% deviation
+	sqrt = (sqrt + s / sqrt) / 2;		// max 15% deviation
+	sqrt = (sqrt + s / sqrt) / 2; 	// max 1% deviation
 endfunction
 
 `endif
