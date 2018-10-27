@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PR3
-Fri Oct 26 22:53:31 2018
+Sat Oct 27 22:33:11 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -289,7 +289,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri Oct 26 22:53:31 2018       ;
+; Analysis & Synthesis Status     ; Successful - Sat Oct 27 22:33:10 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
@@ -419,16 +419,16 @@ refer to the applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------------+---------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                        ; Library ;
 +----------------------------------+-----------------+------------------------------------+---------------------------------------------------------------------+---------+
-; input_buffer.sv                  ; yes             ; User SystemVerilog HDL File        ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv       ;         ;
 ; PR3.sv                           ; yes             ; User SystemVerilog HDL File        ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv                ;         ;
-; phase_extract.sv                 ; yes             ; User SystemVerilog HDL File        ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv      ;         ;
 ; pll.v                            ; yes             ; User Wizard-Generated File         ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll.v                 ; pll     ;
 ; pll/pll_0002.v                   ; yes             ; User Verilog HDL File              ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll/pll_0002.v        ; pll     ;
+; phase_extract.sv                 ; yes             ; User SystemVerilog HDL File        ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv      ;         ;
+; input_buffer.sv                  ; yes             ; User SystemVerilog HDL File        ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv       ;         ;
 ; peak_detect.sv                   ; yes             ; User SystemVerilog HDL File        ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv        ;         ;
+; arctan_lim.sv                    ; yes             ; User SystemVerilog HDL File        ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/arctan_lim.sv         ;         ;
+; atan2.sv                         ; yes             ; User SystemVerilog HDL File        ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/atan2.sv              ;         ;
 ; sqrt.sv                          ; yes             ; User SystemVerilog HDL File        ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv               ;         ;
 ; hypot.sv                         ; yes             ; User SystemVerilog HDL File        ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/hypot.sv              ;         ;
-; atan2.sv                         ; yes             ; User SystemVerilog HDL File        ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/atan2.sv              ;         ;
-; arctan_lim.sv                    ; yes             ; User SystemVerilog HDL File        ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/arctan_lim.sv         ;         ;
 ; fft/bitrev.sv                    ; yes             ; Auto-Found SystemVerilog HDL File  ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/bitrev.sv         ;         ;
 ; fft/cascade_0.sv                 ; yes             ; Auto-Found SystemVerilog HDL File  ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/cascade_0.sv      ;         ;
 ; fft/round32.sv                   ; yes             ; Auto-Found SystemVerilog HDL File  ; C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/round32.sv        ;         ;
@@ -3338,49 +3338,49 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Fri Oct 26 22:52:57 2018
+    Info: Processing started: Sat Oct 27 22:32:34 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PR3 -c PR3
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
-Info (12021): Found 2 design units, including 2 entities, in source file input_buffer_tb.sv
-    Info (12023): Found entity 1: input_buffer File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 22
-    Info (12023): Found entity 2: input_buffer_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer_tb.sv Line: 22
-Info (12021): Found 0 design units, including 0 entities, in source file input_buffer.sv
-Info (12021): Found 11 design units, including 11 entities, in source file fft_tb.sv
-    Info (12023): Found entity 1: bitrev File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/bitrev.sv Line: 4
-    Info (12023): Found entity 2: cascade_0 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/cascade_0.sv Line: 5
-    Info (12023): Found entity 3: round32 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/round32.sv Line: 5
-    Info (12023): Found entity 4: W_int32 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 5
-    Info (12023): Found entity 5: butterfly File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/butterfly.sv Line: 6
-    Info (12023): Found entity 6: yx_addr File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/yx_addr.sv Line: 4
-    Info (12023): Found entity 7: delay_lines_reg File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/delay_line.sv Line: 4
-    Info (12023): Found entity 8: delay_line_reg File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/delay_line.sv Line: 19
-    Info (12023): Found entity 9: cascade_n File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/cascade_n.sv Line: 7
-    Info (12023): Found entity 10: fft_int File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 7
-    Info (12023): Found entity 11: fft_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft_tb.sv Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file pr3.sv
     Info (12023): Found entity 1: PR3 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 24
-Info (12021): Found 2 design units, including 2 entities, in source file phase_extract.sv
-    Info (12023): Found entity 1: peak_detect File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 31
-    Info (12023): Found entity 2: phase_extract File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 32
 Info (12021): Found 1 design units, including 1 entities, in source file pll.v
     Info (12023): Found entity 1: pll File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll.v Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file pll/pll_0002.v
     Info (12023): Found entity 1: pll_0002 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll/pll_0002.v Line: 2
-Info (12021): Found 1 design units, including 1 entities, in source file phase_extract_tb.sv
-    Info (12023): Found entity 1: phase_extract_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract_tb.sv Line: 22
+Info (12021): Found 13 design units, including 13 entities, in source file phase_extract.sv
+    Info (12023): Found entity 1: input_buffer File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer.sv Line: 22
+    Info (12023): Found entity 2: bitrev File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/bitrev.sv Line: 4
+    Info (12023): Found entity 3: cascade_0 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/cascade_0.sv Line: 5
+    Info (12023): Found entity 4: round32 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/round32.sv Line: 5
+    Info (12023): Found entity 5: W_int32 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 5
+    Info (12023): Found entity 6: butterfly File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/butterfly.sv Line: 6
+    Info (12023): Found entity 7: yx_addr File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/yx_addr.sv Line: 4
+    Info (12023): Found entity 8: delay_lines_reg File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/delay_line.sv Line: 4
+    Info (12023): Found entity 9: delay_line_reg File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/delay_line.sv Line: 19
+    Info (12023): Found entity 10: cascade_n File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/cascade_n.sv Line: 7
+    Info (12023): Found entity 11: fft_int File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/fft_int.sv Line: 7
+    Info (12023): Found entity 12: peak_detect File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 31
+    Info (12023): Found entity 13: phase_extract File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 32
+Info (12021): Found 0 design units, including 0 entities, in source file input_buffer.sv
 Info (12021): Found 0 design units, including 0 entities, in source file peak_detect.sv
-Info (12021): Found 0 design units, including 0 entities, in source file sqrt.sv
-Info (12021): Found 0 design units, including 0 entities, in source file hypot.sv
+Info (12021): Found 0 design units, including 0 entities, in source file arctan_lim.sv
 Info (12021): Found 0 design units, including 0 entities, in source file arctan.sv
 Info (12021): Found 0 design units, including 0 entities, in source file atan2.sv
-Info (12021): Found 1 design units, including 1 entities, in source file sqrt_tb.sv
-    Info (12023): Found entity 1: sqrt_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt_tb.sv Line: 22
+Info (12021): Found 0 design units, including 0 entities, in source file sqrt.sv
+Info (12021): Found 0 design units, including 0 entities, in source file hypot.sv
+Info (12021): Found 1 design units, including 1 entities, in source file phase_extract_tb.sv
+    Info (12023): Found entity 1: phase_extract_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract_tb.sv Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file input_buffer_tb.sv
+    Info (12023): Found entity 1: input_buffer_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/input_buffer_tb.sv Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file fft_tb.sv
+    Info (12023): Found entity 1: fft_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft_tb.sv Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file arctan_tb.sv
     Info (12023): Found entity 1: arctan_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/arctan_tb.sv Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file atan2_tb.sv
     Info (12023): Found entity 1: atan2_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/atan2_tb.sv Line: 22
-Info (12021): Found 0 design units, including 0 entities, in source file arctan_lim.sv
+Info (12021): Found 1 design units, including 1 entities, in source file sqrt_tb.sv
+    Info (12023): Found entity 1: sqrt_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt_tb.sv Line: 22
 Info (12127): Elaborating entity "PR3" for the top level hierarchy
 Info (12128): Elaborating entity "pll" for hierarchy "pll:pll" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 42
 Info (12128): Elaborating entity "pll_0002" for hierarchy "pll:pll|pll_0002:pll_inst" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll.v Line: 19
@@ -3561,18 +3561,17 @@ Warning (10030): Net "W_Im_table.waddr_a" at W_int32.sv(697) has no driver or in
 Warning (10030): Net "W_Re_table.we_a" at W_int32.sv(566) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 566
 Warning (10030): Net "W_Im_table.we_a" at W_int32.sv(697) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 697
 Info (12128): Elaborating entity "peak_detect" for hierarchy "phase_extract:pe1|peak_detect:pd" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 156
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(100): truncated value with size 32 to match size of target (11) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 100
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(116): truncated value with size 32 to match size of target (11) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 116
 Warning (10230): Verilog HDL assignment warning at sqrt.sv(27): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 27
 Warning (10230): Verilog HDL assignment warning at sqrt.sv(28): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 28
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(105): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 105
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(110): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 110
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(111): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 111
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(116): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 116
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(117): truncated value with size 32 to match size of target (2) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 117
-Warning (10034): Output port "source_freq" at peak_detect.sv(45) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 45
-Warning (10034): Output port "source_mag" at peak_detect.sv(46) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 46
-Warning (10034): Output port "source_phaseA" at peak_detect.sv(47) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 47
-Warning (10034): Output port "source_phaseB" at peak_detect.sv(49) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 49
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(121): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 121
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(73): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 73
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(141): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 141
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(142): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 142
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(143): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 143
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(149): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 149
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(150): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 150
+Warning (10030): Net "barycentric_delta.barycentric_delta.chnk.mag" at peak_detect.sv(72) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 72
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following PLL node(s):
         Warning (14320): Synthesized away node "pll:pll|pll_0002:pll_inst|altera_pll:altera_pll_i|outclk_wire[0]" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altera_pll.v Line: 748
@@ -3627,10 +3626,10 @@ Warning (21074): Design contains 44 input pin(s) that do not drive logic
 Info (21057): Implemented 44 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 44 input pins
     Info (21059): Implemented 0 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 122 warnings
-    Info: Peak virtual memory: 4989 megabytes
-    Info: Processing ended: Fri Oct 26 22:53:31 2018
-    Info: Elapsed time: 00:00:34
-    Info: Total CPU time (on all processors): 00:00:50
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 121 warnings
+    Info: Peak virtual memory: 4992 megabytes
+    Info: Processing ended: Sat Oct 27 22:33:11 2018
+    Info: Elapsed time: 00:00:37
+    Info: Total CPU time (on all processors): 00:00:51
 
 

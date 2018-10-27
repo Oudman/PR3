@@ -43,7 +43,7 @@ module peak_detect #(
 	output	bit									source_eop,			// last output entry
 	output	bit									source_valid,		// output is valid
 	output	int									source_freq,		// frequency of peak (kHz; FP)
-	output	int									source_mag,			// magnitude of peak (FP)
+	output	int									source_mag,			// magnitude of peak
 	output	int									source_phaseA,		// possible phase of peak (deg; FP)
 	output	int									source_phaseB		// alternative phase of peak (deg; FP)
 );
@@ -58,14 +58,19 @@ localparam PEAKDEV = 50;												// maximum deviation between expectation and
 /*- struct + task + function definitions -------------------------------------*/
 /*----------------------------------------------------------------------------*/
 typedef struct {
-	bit signed	[$clog2(BATCH_SIZE):0]	bin;
-	int											mag[0:2];
-	int											phs[0:2];
+	bit signed	[$clog2(BATCH_SIZE):0]	bin;						// central bin number
+	int											mag[0:2];				// magnitude (FP)
+	int											phs[0:2];				// phase (deg; FP)
 } chunk;
 
 // quadratic interpolation (out: FP)
-function quadratic_delta(chunk chnk);
+function automatic int quadratic_delta(const ref chunk chnk);
 	quadratic_delta = ((chnk.mag[2] - chnk.mag[0]) <<< 7) / (2*chnk.mag[1] - chnk.mag[0] - chnk.mag[2]);
+endfunction
+
+// barycentric interpolation (out: FP)
+function automatic int barycentric_delta(const ref chunk chnk);
+	barycentric_delta = ((chnk.mag[2] - chnk.mag[0]) <<< 8) / (chnk.mag[0] + chnk.mag[1] + chnk.mag[2]);
 endfunction
 
 /*----------------------------------------------------------------------------*/
@@ -74,8 +79,15 @@ endfunction
 chunk										buffer;							// data buffer
 chunk										peaks[0:NPEAKS-1];			// peak data
 bit										sink_done;						// high:		buffer is fully loaded
-bit	[$clog2(NPEAKS)-1:0]			source_pos;						// source entry position
 bit										source_done;					// high:		peaks have all been output
+bit 	[$clog2(NPEAKS+2)-1:0]		source_pos;						// source position
+int										freq[0:1];						// peak frequency (FP)
+int										mag[0:1];						// magnitude of peak
+int										delta[0:1];						// interpolation delta (FP)
+int										phs[0:1];						// phase at center bin (deg, FP)
+int										phsp;								// phase at neighbour bin (deg, FP)
+int										diffA;							// phase difference A between center bin and neighbour bin (deg, FP)
+int										diffB;							// phase difference B between center bin and neighbour bin (deg, FP)
 
 /*----------------------------------------------------------------------------*/
 /*- main code ----------------------------------------------------------------*/
@@ -84,7 +96,7 @@ always @(posedge clk)
 begin
 	if (reset || sink_eop)												// reset all
 	begin
-		buffer 			<= '{0, '{3{0}}, '{3{0}}};
+		buffer 			<= '{-2, '{3{0}}, '{3{0}}};
 		for (byte i = 0; i < NPEAKS; i++)
 			peaks[i]			<= '{0, '{3{0}}, '{3{0}}};
 		sink_done		<= 0;
@@ -100,20 +112,37 @@ begin
 		buffer.bin		<= buffer.bin + 1;
 		buffer.mag[0:1]<= buffer.mag[1:2];
 		buffer.phs[0:1]<= buffer.phs[1:2];
-		buffer.mag[2]	<= hypot(sink_re, sink_im) <<< 8;
+		buffer.mag[2]	<= hypot(sink_re, sink_im);
 		buffer.phs[2]	<= atan2(sink_im, sink_re);
 		sink_done		<= (buffer.bin >= BATCH_SIZE - 1) ? 1 : 0;
 	end
 	else if (sink_done && !source_done)								// export of data
 	begin
-		source_valid	<= 1;
-		source_sop		<= (source_pos == 0) ? 1 : 0;
-		source_eop		<= (source_pos == NPEAKS-1) ? 1 : 0;
-		//source_freq		<= stuff;
-		//source_mag		<= stuff;
-		//source_phaseA	<= stuff;
-		//source_phaseB	<= stuff;
-		source_done		<= (source_pos == NPEAKS-1) ? 1 : 0;
+		begin																	// stage I
+			freq[0]			<= peaks[source_pos].bin <<< 8;
+			mag[0]			<= peaks[source_pos].mag[1];
+			delta[0]			<= barycentric_delta(peaks[source_pos]);
+			phs[0]			<= peaks[source_pos].phs[1];
+			phsp				<= (peaks[source_pos].mag[0] > peaks[source_pos].mag[2]) ? peaks[source_pos].phs[0] : peaks[source_pos].phs[2];
+		end
+		begin																	// stage II
+			freq[1]			<= freq[0] + delta[0];
+			mag[1]			<= mag[0];
+			delta[1]			<= (delta[0] < 0) ? -delta[0] : delta[0];
+			phs[1]			<= phs[0];
+			diffA				<= phsp - phs[0];
+			diffB				<= (phsp > phs[0]) ? phsp - phs[0] - 92160 : phsp - phs[0] + 92160;
+		end
+		begin																	// stage III
+			source_valid	<= (source_pos >= 2) ? 1 : 0;
+			source_sop		<= (source_pos == 2) ? 1 : 0;
+			source_eop		<= (source_pos == NPEAKS+1) ? 1 : 0;
+			source_freq		<= freq[1] * BIN_WIDTH;
+			source_mag		<= mag[1];
+			source_phaseA	<= phs[1] + (delta[1] * diffA >>> 8);
+			source_phaseB	<= phs[1] + (delta[1] * diffB >>> 8);
+		end
+		source_done		<= (source_pos == NPEAKS+1) ? 1 : 0;
 		source_pos		<= source_pos + 1;
 	end
 	else																		// wait

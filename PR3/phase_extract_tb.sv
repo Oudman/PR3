@@ -45,7 +45,7 @@ const real					sin4_mag = 1024;
 const real					sin4_off = 278;
 
 // clock generator(s)
-always #(24414ps) clk20++;	// F = 20.48 MHz
+always #(25ns) clk20++;	// F = 20.48 MHz
 always #(10ns) clk50++;		// F = 50.00 MHz
 
 // sine approx generator
