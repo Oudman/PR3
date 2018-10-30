@@ -15,6 +15,14 @@
 // Sink:		data
 // Source:	sop, eop, valid, data
 // -----------------------------------------------------------------------------
+// In order to distinguish signed, unsigned, integer and fractional represen-
+// tation, the Q number format is used. The following definition is used:
+// - Qn.m:  signed; n integer bits; m fractional bits
+// - UQn.m: unsigned; n integer bits; m fractional bits
+// Two examples:
+// - Q32.0: 32 bit signed integer
+// - UQ6.2: 8 bit unsigned number with [0,64) range and 0.25 resolution
+// -----------------------------------------------------------------------------
 
 `ifndef INPUT_BUFFER_SV
 `define INPUT_BUFFER_SV
@@ -24,26 +32,26 @@ module input_buffer #(
 	parameter RUNS,														// number of succeeding output batches
 	parameter DATA_WIDTH													// number of bits per entry
 )(
-	input		wire							sink_clk,					// clock:	input data speed
-	input		wire							source_clk,					// clock:	output data speed
-	input		wire							reset,						// high: 	synchronous reset, synced with sink_clk
-	input		wire	[DATA_WIDTH-1:0]	sink_data,					//				input data bus, connected to antenna A2D
-	output	reg							source_sop,					// high:		first output entry
-	output	reg							source_eop,					// high:		last output entry
-	output	reg							source_valid,				// high:		output is valid
-	output	reg	[DATA_WIDTH-1:0]	source_data					//				output data bus, connected to fft
+	input		wire							sink_clk,					// input data speed
+	input		wire							source_clk,					// output data speed
+	input		wire							reset,						// synchronous reset
+	input		wire	[DATA_WIDTH-1:0]	sink_data,					//	input data bus					Q<DATA_WIDTH>.0
+	output	reg							source_sop,					// first output entry
+	output	reg							source_eop,					// last output entry
+	output	reg							source_valid,				// output is valid
+	output	reg	[DATA_WIDTH-1:0]	source_data					//	output data bus				Q<DATA_WIDTH>.0
 );
 
 // more parameters
 localparam TOT_SIZE = BATCH_SIZE + RUNS - 1;						// number of entries to allocate memory for
 
 // internal variables
-reg		[DATA_WIDTH-1:0]				buffer[0:TOT_SIZE-1];	// buffer data
-reg		[$clog2(TOT_SIZE)-1:0]		sink_pos;					// sink entry position
-reg		[$clog2(RUNS)-1:0]			source_offset;				// source entry position offset
-reg		[$clog2(TOT_SIZE)-1:0]		source_pos;					// source entry position
-reg											sink_done = 1;				// high:		buffer is fully loaded
-reg											source_done = 1;			// high:		RUNS batches have been output
+reg		[DATA_WIDTH-1:0]				buffer[0:TOT_SIZE-1];	// buffer data 					Q<DATA_WIDTH>.0
+reg		[$clog2(TOT_SIZE)-1:0]		sink_pos;					// sink entry position			UQ<lb(TOT_SIZE)>.0
+reg		[$clog2(RUNS)-1:0]			source_offset;				// source entry pos offset		UQ<lb(RUNS)>.0
+reg		[$clog2(TOT_SIZE)-1:0]		source_pos;					// source entry position		UQ<lb(TOT_SIZE)>.0
+reg											sink_done = 1;				// buffer is fully loaded
+reg											source_done = 1;			// RUNS batches have been output
 
 // sink constrol
 always @(posedge sink_clk)

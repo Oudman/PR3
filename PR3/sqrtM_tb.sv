@@ -24,8 +24,8 @@ module sqrt_m_tb();
 localparam LAT = 4;
 
 // Declare inputs as regs and outputs as wires
-bit	[23:0]	s2 = 0;
-wire 	[12:0]	s_approx;
+bit 	[63:0]	s2 = 0;
+wire 	[32:0]	s_approx;
 real				s_exact;
 real				diff_abs;
 real				diff_rel;
@@ -38,14 +38,14 @@ always #(5ns) clk++;
 // counter
 always @(posedge clk)
 begin
-	s2 <= s2 + 1;
+	s2 <= s2 + 2**48;
 	if (-0.5 <= diff_abs && diff_abs <= 0.5)
 		correct++;
 	else
 		wrong++;
 end
 
-assign s_exact = (s2 > LAT) ? $sqrt(s2-LAT) : 0;
+assign s_exact = (s2 > LAT) ? $sqrt(s2 - LAT * 2**48) : 0;
 assign diff_abs = (s2 > LAT) ? s_approx - s_exact : 0;
 assign diff_rel = (s2 > LAT) ? diff_abs / s_exact : 0;
 

@@ -17,9 +17,13 @@
 // Sink:		data
 // Source:	-
 // -----------------------------------------------------------------------------
-// Fixed point notation, marked FP, is used in the following manner:
-// - 32 bit two's complement
-// - the lower 8 bits represent the fractional part
+// In order to distinguish signed, unsigned, integer and fractional represen-
+// tation, the Q number format is used. The following definition is used:
+// - Qn.m:  signed; n integer bits; m fractional bits
+// - UQn.m: unsigned; n integer bits; m fractional bits
+// Two examples:
+// - Q32.0: 32 bit signed integer
+// - UQ6.2: 8 bit unsigned number with [0,64) range and 0.25 resolution
 // -----------------------------------------------------------------------------
 
 `ifndef PHASE_EXTRACT_SV
@@ -36,7 +40,7 @@ module phase_extract #(
 )(
 	input		wire							clk,							// main clock
 	input		wire							clk20,						// 20.48MHz
-	input		wire	[SINK_WIDTH-1:0]	sink							//	connected to antenna
+	input		wire	[SINK_WIDTH-1:0]	sink							//	connected to antenna			Q<SINK_WIDTH>.0
 );
 
 // more parameters
@@ -47,31 +51,29 @@ localparam	FFT_WIDTH = SINK_WIDTH + FFT_DEPTH;					// number of bits of the fft 
 /*- wire/reg declarations ----------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 // input_buffer related
-bit										time_reset;
-wire										time_fft_sop;
-wire										time_fft_eop;
-wire										time_fft_valid;
-wire 	[SINK_WIDTH-1:0]				time_fft_re;
+bit										time_reset;						// reintialize input buffer
+wire										time_fft_sop;					// sop output signal
+wire										time_fft_eop;					// eop output signal
+wire										time_fft_valid;				// valid output signal
+wire 	[SINK_WIDTH-1:0]				time_fft_re;					// real data output bus			Q<SINK_WIDTH>.0
 
 // fft_int related
-bit										fft_reset;
-wire										fft_peak_sop;
-wire										fft_peak_eop;
-wire										fft_peak_valid;
-wire	[FFT_WIDTH-1:0]				fft_peak_re;
-wire	[FFT_WIDTH-1:0]				fft_peak_im;
-wire										fft_error;						// unused
+bit										fft_reset;						// reset fft
+wire										fft_peak_sop;					// sop output signal
+wire										fft_peak_eop;					// eop output signal
+wire										fft_peak_valid;				// valid output signal
+wire	[FFT_WIDTH-1:0]				fft_peak_re;					// real data output bus			Q<FFT_WIDTH>.0
+wire	[FFT_WIDTH-1:0]				fft_peak_im;					// imaginair data output bus	Q<FFT_WIDTH>.0
 
 // peak_detect related
-bit										peak_reset;
-wire										peak_sop;
-wire										peak_eop;
-wire										peak_valid;
-int										peak_freq;						// kHz; FP
-int										peak_mag;						// FP
-int										peak_phaseA;					// deg; FP
-int										peak_phaseB;					// deg; FP
-
+bit										peak_reset;						// reset peak detection
+wire										peak_sop;						// sop output signal
+wire										peak_eop;						// eop output signal
+wire										peak_valid;						// valid output signal
+int										peak_freq;						// frequency output bus (kHz)	Q24.8
+int										peak_mag;						// magnitude output bus			Q24.8
+int										peak_phaseA;					// phase A output bus (deg)	Q24.8
+int										peak_phaseB;					// phase B output bus (deg)	Q24.8
 
 /*----------------------------------------------------------------------------*/
 /*- module synchronization and control ---------------------------------------*/
@@ -131,7 +133,7 @@ fft_int #(
 	.source_valid			(fft_peak_valid),
 	.source_Re				(fft_peak_re),
 	.source_Im				(fft_peak_im),
-	.error					(fft_error)
+	.error					()
 );
 
 // peak detection

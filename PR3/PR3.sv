@@ -16,9 +16,13 @@
 // Sink:		data1, data2, data3
 // Source:	-
 // -----------------------------------------------------------------------------
-// Fixed point notation, marked FP, is used in the following manner:
-// - 32 bit two's complement
-// - the lower 8 bits represent the fractional part
+// In order to distinguish signed, unsigned, integer and fractional represen-
+// tation, the Q number format is used. The following definition is used:
+// - Qn.m:  signed; n integer bits; m fractional bits
+// - UQn.m: unsigned; n integer bits; m fractional bits
+// Two examples:
+// - Q32.0: 32 bit signed integer
+// - UQ6.2: 8 bit unsigned number with [0,64) range and 0.25 resolution
 // -----------------------------------------------------------------------------
 
 module PR3 #(
@@ -26,9 +30,9 @@ module PR3 #(
 )(
 	input		wire							clk,							// 50.0MHz
 	input		wire							reset,						// synchronous reset
-	input		wire	[DATA_WIDTH-1:0]	data1,						//	connected to antenna #1
-	input		wire	[DATA_WIDTH-1:0]	data2,						//	connected to antenna #2
-	input		wire	[DATA_WIDTH-1:0]	data3							//	connected to antenna #3
+	input		wire	[DATA_WIDTH-1:0]	data1,						//	antenna #1 data bus		(Q<DATA_WIDTH>.0)
+	input		wire	[DATA_WIDTH-1:0]	data2,						//	antenna #2 data bus		(Q<DATA_WIDTH>.0)
+	input		wire	[DATA_WIDTH-1:0]	data3							//	antenna #3 data bus		(Q<DATA_WIDTH>.0)
 );
 
 // wires

@@ -55,10 +55,10 @@ begin
 	sin2 = sin2_mag * $sin(sin2_off + 2 * pi * sin2_freq * $time / 1E9);
 	sin3 = sin3_mag * $sin(sin3_off + 2 * pi * sin3_freq * $time / 1E9);
 	sin4 = sin4_mag * $sin(sin4_off + 2 * pi * sin4_freq * $time / 1E9);
-	noise = $random / 2**(32-4);
+	noise = $random / 2**(32-10);
 end
 
-assign data = sin1 + sin2 + sin3 + sin4;
+assign data = sin1 + sin2 + sin3 + sin4 + noise;
 
 initial
 begin

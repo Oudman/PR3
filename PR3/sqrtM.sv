@@ -10,11 +10,17 @@
 // -----------------------------------------------------------------------------
 // Type:		module
 // Purpose:	Approximate the square root of a given longint. Testing has shown
-//				a maximum deviation of 0.5 bit 99.8% of the time. The other 0.2%
-//				consists of output being off by slightly more than half a bit. Note 
-//				that the output bus width is one	bit wider than half of the input
-//				data bus.
+//				that output is correct within 0.05% + 0.5 deviation. Note that the
+//				output bus width is one	bit wider than half of the input data bus.
 // Latency:	4 clockticks
+// -----------------------------------------------------------------------------
+// In order to distinguish signed, unsigned, integer and fractional represen-
+// tation, the Q number format is used. The following definition is used:
+// - Qn.m:  signed; n integer bits; m fractional bits
+// - UQn.m: unsigned; n integer bits; m fractional bits
+// Two examples:
+// - Q32.0: 32 bit signed integer
+// - UQ6.2: 8 bit unsigned number with [0,64) range and 0.25 resolution
 // -----------------------------------------------------------------------------
 
 `ifndef SQRT_M_SV
@@ -24,13 +30,13 @@ module sqrt #(
 	parameter WIDTH														// input bus data width
 )(
 	input		wire									clk,					// clock signal
-	input		wire			[WIDTH-1:0]			sink,					// sink (unsigned!)
-	output	bit			[WIDTH/2:0]			source				// source (unsigned!)
+	input		wire			[WIDTH-1:0]			sink,					// sink								UQ<WIDTH>.0
+	output	bit			[WIDTH/2:0]			source				// source (unsigned!)			UQ<WIDTH/2+1>.0
 );
 
 // registers and such
-bit	[WIDTH-1:0]						s[0:3];
-bit	[WIDTH/2+1:0]					sqrt[0:3];
+bit	[WIDTH-1:0]						s[0:3];							//										UQ<WIDTH>.0
+bit	[WIDTH/2+1:0]					sqrt[0:3];						//										UQ<WIDTH/2+2>.0
 
 // the (pipelined) code
 always_ff @(posedge clk)

@@ -17,9 +17,13 @@
 // Sink:		sop, eop, valid, re, im
 // Source:	sop, eop, valid, freq, mag, phaseA, phaseB
 // -----------------------------------------------------------------------------
-// Fixed point notation, marked FP, is used in the following manner:
-// - 32 bit two's complement
-// - the lower 8 bits represent the fractional part
+// In order to distinguish signed, unsigned, integer and fractional represen-
+// tation, the Q number format is used. The following definition is used:
+// - Qn.m:  signed; n integer bits; m fractional bits
+// - UQn.m: unsigned; n integer bits; m fractional bits
+// Two examples:
+// - Q32.0: 32 bit signed integer
+// - UQ6.2: 8 bit unsigned number with [0,64) range and 0.25 resolution
 // -----------------------------------------------------------------------------
 
 `ifndef PEAK_DETECT_SV
@@ -37,15 +41,15 @@ module peak_detect #(
 	input		wire									sink_sop,			// first input entry
 	input		wire									sink_eop,			// last input entry
 	input		wire									sink_valid,			// input is valid
-	input		wire signed	[DATA_WIDTH-1:0]	sink_re,				//	real part of input data
-	input		wire signed	[DATA_WIDTH-1:0]	sink_im,				//	imaginair part of input data
+	input		wire signed	[DATA_WIDTH-1:0]	sink_re,				//	real input bus					Q<DATA_WIDTH>.0
+	input		wire signed	[DATA_WIDTH-1:0]	sink_im,				//	imaginair input bus			Q<DATA_WIDTH>.0
 	output	bit									source_sop,			// first output entry
 	output	bit									source_eop,			// last output entry
 	output	bit									source_valid,		// output is valid
-	output	int									source_freq,		// frequency of peak (kHz; FP)
-	output	int									source_mag,			// magnitude of peak
-	output	int									source_phaseA,		// possible phase of peak (deg; FP)
-	output	int									source_phaseB		// alternative phase of peak (deg; FP)
+	output	int									source_freq,		// frequency output bus (kHz)	Q24.8
+	output	int									source_mag,			// magnitude output bus			Q32.0
+	output	int									source_phaseA,		// phase A output bus (deg)	Q24.8
+	output	int									source_phaseB		// phase B output bus (deg)	Q24.8
 );
 
 // more parameters
@@ -58,17 +62,17 @@ localparam PEAKDEV = 50;												// maximum deviation between expectation and
 /*- struct + task + function definitions -------------------------------------*/
 /*----------------------------------------------------------------------------*/
 typedef struct {
-	bit signed	[$clog2(BATCH_SIZE):0]	bin;						// central bin number
-	int											mag[0:2];				// magnitude (FP)
-	int											phs[0:2];				// phase (deg; FP)
+	bit signed	[$clog2(BATCH_SIZE):0]	bin;						// central bin number			Q<lb(BATCH_SIZE)>.0
+	int											mag[0:2];				// magnitude						Q24.8
+	int											phs[0:2];				// phase (deg)						Q24.8
 } chunk;
 
-// quadratic interpolation (out: FP)
+// quadratic interpolation (out: Q24.8)
 function automatic int quadratic_delta(const ref chunk chnk);
 	quadratic_delta = ((chnk.mag[2] - chnk.mag[0]) <<< 7) / (2*chnk.mag[1] - chnk.mag[0] - chnk.mag[2]);
 endfunction
 
-// barycentric interpolation (out: FP)
+// barycentric interpolation (out: Q24.8)
 function automatic int barycentric_delta(const ref chunk chnk);
 	barycentric_delta = ((chnk.mag[2] - chnk.mag[0]) <<< 8) / (chnk.mag[0] + chnk.mag[1] + chnk.mag[2]);
 endfunction
@@ -80,14 +84,14 @@ chunk										buffer;							// data buffer
 chunk										peaks[0:NPEAKS-1];			// peak data
 bit										sink_done;						// high:		buffer is fully loaded
 bit										source_done;					// high:		peaks have all been output
-bit 	[$clog2(NPEAKS+2)-1:0]		source_pos;						// source position
-int										freq[0:1];						// peak frequency (FP)
-int										mag[0:1];						// magnitude of peak
-int										delta[0:1];						// interpolation delta (FP)
-int										phs[0:1];						// phase at center bin (deg, FP)
-int										phsp;								// phase at neighbour bin (deg, FP)
-int										diffA;							// phase difference A between center bin and neighbour bin (deg, FP)
-int										diffB;							// phase difference B between center bin and neighbour bin (deg, FP)
+bit 	[$clog2(NPEAKS+2)-1:0]		source_pos;						// source position				Q<lb(NPEAKS+2)>.0
+int										freq[0:1];						// peak frequency					Q24.8
+int										mag[0:1];						// magnitude of peak				Q32.0
+int										delta[0:1];						// interpolation delta			Q24.8
+int										phs[0:1];						// phase at center bin (deg)	Q24.8
+int										phsp;								// phase at neighbour bin (deg)	Q24.8
+int										diffA;							// phase difference A between center bin and neighbour bin (deg)	Q24.8
+int										diffB;							// phase difference B between center bin and neighbour bin (deg)	Q24.8
 
 /*----------------------------------------------------------------------------*/
 /*- main code ----------------------------------------------------------------*/
