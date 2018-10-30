@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PR3
-Sat Oct 27 22:33:11 2018
+Tue Oct 30 00:43:19 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -264,6 +264,7 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 256. Post-Synthesis Netlist Statistics for Top Partition
 257. Elapsed Time Per Partition
 258. Analysis & Synthesis Messages
+259. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -289,7 +290,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sat Oct 27 22:33:10 2018       ;
+; Analysis & Synthesis Status     ; Successful - Tue Oct 30 00:43:19 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
@@ -3338,7 +3339,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Sat Oct 27 22:32:34 2018
+    Info: Processing started: Tue Oct 30 00:42:43 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PR3 -c PR3
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -3381,6 +3382,10 @@ Info (12021): Found 1 design units, including 1 entities, in source file atan2_t
     Info (12023): Found entity 1: atan2_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/atan2_tb.sv Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file sqrt_tb.sv
     Info (12023): Found entity 1: sqrt_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt_tb.sv Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file sqrtm.sv
+    Info (12023): Found entity 1: sqrt File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrtM.sv Line: 21
+Info (12021): Found 1 design units, including 1 entities, in source file sqrtm_tb.sv
+    Info (12023): Found entity 1: sqrt_m_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrtM_tb.sv Line: 22
 Info (12127): Elaborating entity "PR3" for the top level hierarchy
 Info (12128): Elaborating entity "pll" for hierarchy "pll:pll" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/PR3.sv Line: 42
 Info (12128): Elaborating entity "pll_0002" for hierarchy "pll:pll|pll_0002:pll_inst" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/pll.v Line: 19
@@ -3561,21 +3566,21 @@ Warning (10030): Net "W_Im_table.waddr_a" at W_int32.sv(697) has no driver or in
 Warning (10030): Net "W_Re_table.we_a" at W_int32.sv(566) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 566
 Warning (10030): Net "W_Im_table.we_a" at W_int32.sv(697) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/fft/W_int32.sv Line: 697
 Info (12128): Elaborating entity "peak_detect" for hierarchy "phase_extract:pe1|peak_detect:pd" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 156
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(116): truncated value with size 32 to match size of target (11) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 116
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(112): truncated value with size 32 to match size of target (11) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 112
 Warning (10230): Verilog HDL assignment warning at sqrt.sv(27): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 27
 Warning (10230): Verilog HDL assignment warning at sqrt.sv(28): truncated value with size 64 to match size of target (32) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt.sv Line: 28
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(121): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 121
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(73): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 73
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(141): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 141
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(142): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 142
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(143): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 143
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(149): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 149
-Warning (10230): Verilog HDL assignment warning at peak_detect.sv(150): truncated value with size 32 to match size of target (12) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 150
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(117): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 117
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(137): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 137
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(138): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 138
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(139): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 139
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(145): truncated value with size 32 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 145
+Warning (10230): Verilog HDL assignment warning at peak_detect.sv(146): truncated value with size 32 to match size of target (3) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 146
 Warning (10030): Net "barycentric_delta.barycentric_delta.chnk.mag" at peak_detect.sv(72) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/peak_detect.sv Line: 72
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following PLL node(s):
         Warning (14320): Synthesized away node "pll:pll|pll_0002:pll_inst|altera_pll:altera_pll_i|outclk_wire[0]" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altera_pll.v Line: 748
 Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info (144001): Generated suppressed messages file C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/output_files/PR3.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 44 input pin(s) that do not drive logic
@@ -3626,10 +3631,16 @@ Warning (21074): Design contains 44 input pin(s) that do not drive logic
 Info (21057): Implemented 44 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 44 input pins
     Info (21059): Implemented 0 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 121 warnings
-    Info: Peak virtual memory: 4992 megabytes
-    Info: Processing ended: Sat Oct 27 22:33:11 2018
-    Info: Elapsed time: 00:00:37
-    Info: Total CPU time (on all processors): 00:00:51
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 120 warnings
+    Info: Peak virtual memory: 4995 megabytes
+    Info: Processing ended: Tue Oct 30 00:43:19 2018
+    Info: Elapsed time: 00:00:36
+    Info: Total CPU time (on all processors): 00:00:50
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/output_files/PR3.map.smsg.
 
 
