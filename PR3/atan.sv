@@ -10,7 +10,7 @@
 // -----------------------------------------------------------------------------
 // Type:		module
 // Purpose:	Approximate the atan2 of two given numbers. Result in radians.
-//				Testing has shown that output is correct within 0.0006 radians for
+//				Testing has shown that output is correct within 0.0004 radians for
 //				sufficient large input.
 // Latency:	4 clockticks
 // -----------------------------------------------------------------------------
@@ -36,7 +36,6 @@ module atan2 #(
 );
 
 // registers and such
-bit 			signed	[WIDTH-1:0]			x, y;						// input								Q0.<WIDTH>
 shortint 	signed							out[0:2];				// output WIP						Q3.13
 bit												add[0:2];				// add or substract stuff
 bit			unsigned	[WIDTH-1:0]			z;							// ratio between x and y		UQ0.<WIDTH>
@@ -47,101 +46,98 @@ const bit				[WIDTH-1:0]			zeros = 0;				// WIDTH concatenated zero's
 
 // lookup table
 shortint unsigned						lut[0:16] = '{
-	16'h0000, 16'h01FF, 16'h03FB, 16'h05EE, 16'h07D7, 16'h09B1,
-	16'h0B7B, 16'h0D32, 16'h0ED6, 16'h1065, 16'h11E0, 16'h1346,
-	16'h1498, 16'h15D6, 16'h1701, 16'h181A, 16'h1922};
+	16'h0000, 16'h0200, 16'h03FB, 16'h05EF, 16'h07D8, 16'h09B2,
+	16'h0B7B, 16'h0D34, 16'h0ED7, 16'h1067, 16'h11E1, 16'h1347,
+	16'h1499, 16'h15D7, 16'h1702, 16'h181B, 16'h1923};
 
 // the (pipelined) code
 always_ff @(posedge clk)
 begin
 	begin																		// stage I
-		x					<= sink_x;
-		y					<= sink_y;
-	end
-	begin																		// stage II
-		if (x == 0)
+		if (sink_x == 0)
 		begin
-			out[0]			<= (y >= 0) ? 16'h3244 : 16'hCDBC;
+			out[0]			<= (sink_y >= 0) ? 16'h3244 : 16'hCDBC;
 			z					<= zeros;
 		end
-		else if (y == 0)
+		else if (sink_y == 0)
 		begin
-			out[0]			<= (x >= 0) ? 16'h0000 : 16'h6488;
+			out[0]			<= (sink_x >= 0) ? 16'h0000 : 16'h6488;
 			z					<= zeros;
 		end
-		else if (x == y)
+		else if (sink_x == sink_y)
 		begin
-			out[0]			<= (x >= 0) ? 16'h1922 : 16'hB49A;
+			out[0]			<= (sink_x >= 0) ? 16'h1922 : 16'hB49A;
 			z					<= zeros;
 		end
-		else if (x == -y)
+		else if (sink_x == -sink_y)
 		begin
-			out[0]			<= (x >= 0) ? 16'hE6DE : 16'h4B66;
+			out[0]			<= (sink_x >= 0) ? 16'hE6DE : 16'h4B66;
 			z					<= zeros;
 		end
-		else if (x > 0 && y > 0 && x >= y)
+		else if (sink_x > 0 && sink_y > 0 && sink_x >= sink_y)
 		begin
 			out[0]			<= 16'h0000;
 			add[0]			<= 1;
-			z					<= {y, zeros} / x;
+			z					<= {sink_y, zeros} / sink_x;
 		end
-		else if (x > 0 && y > 0 && x < y)
+		else if (sink_x > 0 && sink_y > 0 && sink_x < sink_y)
 		begin
 			out[0]			<= 16'h3244;
 			add[0]			<= 0;
-			z					<= {x, zeros} / y;
+			z					<= {sink_x, zeros} / sink_y;
 		end
-		else if (x < 0 && y > 0 && -x < y)
+		else if (sink_x < 0 && sink_y > 0 && -sink_x < sink_y)
 		begin
 			out[0]			<= 16'h3244;
 			add[0]			<= 1;
-			z					<= {-x, zeros} / y;
+			z					<= {-sink_x, zeros} / sink_y;
 		end
-		else if (x < 0 && y > 0 && -x >= y)
+		else if (sink_x < 0 && sink_y > 0 && -sink_x >= sink_y)
 		begin
 			out[0]			<= 16'h6488;
 			add[0]			<= 0;
-			z					<= {y, zeros} / {-x};
+			z					<= {sink_y, zeros} / {-sink_x};
 		end
-		else if (x < 0 && y < 0 && -x >= -y)
+		else if (sink_x < 0 && sink_y < 0 && -sink_x >= -sink_y)
 		begin
 			out[0]			<= 16'h9B78;
 			add[0]			<= 1;
-			z					<= {-y, zeros} / {-x};
+			z					<= {-sink_y, zeros} / {-sink_x};
 		end
-		else if (x < 0 && y < 0 && -x < -y)
+		else if (sink_x < 0 && sink_y < 0 && -sink_x < -sink_y)
 		begin
 			out[0]			<= 16'hCDBC;
 			add[0]			<= 0;
-			z					<= {-x, zeros} / {-y};
+			z					<= {-sink_x, zeros} / {-sink_y};
 		end
-		else if (x > 0 && y < 0 && x < -y)
+		else if (sink_x > 0 && sink_y < 0 && sink_x < -sink_y)
 		begin
 			out[0]			<= 16'hCDBC;
 			add[0]			<= 1;
-			z					<= {x, zeros} / {-y};
+			z					<= {sink_x, zeros} / {-sink_y};
 		end
-		else // (x > 0 && y < 0 && x >= -y)
+		else // (sink_x > 0 && sink_y < 0 && sink_x >= -sink_y)
 		begin
 			out[0]			<= 16'h0000;
 			add[0]			<= 0;
-			z					<= {-y, zeros} / x;
+			z					<= {-sink_y, zeros} / sink_x;
 		end
 	end
-	begin																		// stage III
+	begin																		// stage II
 		out[1]			<= add[0] ? out[0] + lut[z[WIDTH-1:WIDTH-4]] : out[0] - lut[z[WIDTH-1:WIDTH-4]];
 		add[1]			<= add[0];
 		diff				<= lut[z[WIDTH-1:WIDTH-4] + 1] - lut[z[WIDTH-1:WIDTH-4]];
 		zp					<= z[WIDTH-5:0];
 	end
-	begin																		// stage IV
+	begin																		// stage III
 		out[2]			<= out[1];
 		add[2]			<= add[1];
 		frac				<= zp * diff;
 	end
+	begin																		// stage IV
+		source			<= add[2] ? out[2] + frac[WIDTH+11:WIDTH-4] : out[2] - frac[WIDTH+11:WIDTH-4];
+	end
 end
-
-assign source = add[2] ? out[2] + frac[WIDTH+11:WIDTH-4] : out[2] - frac[WIDTH+11:WIDTH-4];
 
 endmodule
 
