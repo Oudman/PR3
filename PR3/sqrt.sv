@@ -30,32 +30,46 @@ module sqrt #(
 	parameter WIDTH														// input bus data width
 )(
 	input		wire									clk,					// clock signal
+	input		wire									reset,				// synchronous reset
 	input		wire			[WIDTH-1:0]			sink,					// sink								UQ<WIDTH>.0
 	output	bit			[WIDTH/2:0]			source				// source (unsigned!)			UQ<WIDTH/2+1>.0
 );
 
-// registers and such
-bit	[WIDTH-1:0]						s[0:3];							//										UQ<WIDTH>.0
-bit	[WIDTH/2+1:0]					sqrt[0:3];						//										UQ<WIDTH/2+2>.0
+/*----------------------------------------------------------------------------*/
+/*- registers ----------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+bit	[WIDTH-1:0]						s[0:3];							//	input								UQ<WIDTH>.0
+bit	[WIDTH/2+1:0]					sqrt[0:3];						// output WIP						UQ<WIDTH/2+2>.0
 
-// the (pipelined) code
+/*----------------------------------------------------------------------------*/
+/*- code ---------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 always_ff @(posedge clk)
 begin
-	begin																		// stage I
-		for (byte i = 0; i < WIDTH/2; i++)
-			sqrt[0][i]		<= sink[2*i] || sink[2*i+1];
-		s[0]				<= sink;
+	if (reset)																// reset all
+	begin
+		s					<= '{4{0}};
+		sqrt				<= '{4{0}};
+		source			<= 0;
 	end
-	begin																		// stage II
-		s[1]				<= (s[0] > 1) ? s[0] - 1 : s[0];
-		sqrt[1]			<= (1 + sqrt[0] + s[0] / sqrt[0]) / 2;
-	end
-	begin																		// stage III
-		s[2]				<= s[1];
-		sqrt[2]			<= (1 + sqrt[1] + s[1] / sqrt[1]) / 2;
-	end
-	begin																		// stage IV
-		source			<= (1 + sqrt[2] + s[2] / sqrt[2]) / 2;
+	else																		// approximate sqrt
+	begin
+		begin																	// stage I
+			for (byte i = 0; i < WIDTH/2; i++)
+				sqrt[0][i]		<= sink[2*i] || sink[2*i+1];
+			s[0]				<= sink;
+		end
+		begin																	// stage II
+			s[1]				<= (s[0] > 1) ? s[0] - 1 : s[0];
+			sqrt[1]			<= (1 + sqrt[0] + s[0] / sqrt[0]) / 2;
+		end
+		begin																	// stage III
+			s[2]				<= s[1];
+			sqrt[2]			<= (1 + sqrt[1] + s[1] / sqrt[1]) / 2;
+		end
+		begin																	// stage IV
+			source			<= (1 + sqrt[2] + s[2] / sqrt[2]) / 2;
+		end
 	end
 end
 

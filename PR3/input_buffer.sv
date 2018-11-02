@@ -11,10 +11,6 @@
 // Type:		module
 // Purpose:	data input buffer with shifted repeated output
 // -----------------------------------------------------------------------------
-// Control:	sink_clk, source_clk, reset
-// Sink:		data
-// Source:	sop, eop, valid, data
-// -----------------------------------------------------------------------------
 // In order to distinguish signed, unsigned, integer and fractional represen-
 // tation, the Q number format is used. The following definition is used:
 // - Qn.m:  signed; n integer bits; m fractional bits
@@ -35,6 +31,7 @@ module input_buffer #(
 	input		wire							sink_clk,					// input data speed
 	input		wire							source_clk,					// output data speed
 	input		wire							reset,						// synchronous reset
+	input		wire							sink_start,					// start new run
 	input		wire	[DATA_WIDTH-1:0]	sink_data,					//	input data bus					Q<DATA_WIDTH>.0
 	output	reg							source_sop,					// first output entry
 	output	reg							source_eop,					// last output entry
@@ -58,16 +55,20 @@ always @(posedge sink_clk)
 begin
 	if (reset)																// reset all
 	begin
-		sink_pos <= 0;
-		sink_done <= 0;
+		sink_done		<= 1;
+	end
+	else if (sink_start)													// prepare next run
+	begin
+		sink_pos			<= 0;
+		sink_done		<= 0;
 	end
 	else if (!sink_done)													// continue loading buffer
 	begin
 		buffer[sink_pos] <= sink_data;
-		if (sink_pos == TOT_SIZE)										// buffer is completely loaded
-			sink_done <= 1;
+		if (sink_pos == TOT_SIZE-1)									// buffer is completely loaded
+			sink_done		<= 1;
 		else																	// continue loading buffer next clocktick
-			sink_pos <= sink_pos + 1;
+			sink_pos			<= sink_pos + 1;
 	end
 end
 
@@ -76,34 +77,38 @@ always @(posedge source_clk)
 begin
 	if (reset)																// reset all
 	begin
-		source_offset <= 0;
-		source_pos <= 0;
-		source_done <= 0;
+		source_done		<= 1;
+		source_valid	<= 0;
 	end
-	else if (sink_done && !source_done)								// continue output
+	else if (!source_done)												// continue output
 	begin
-		source_valid <= 1;
-		source_sop <= (source_pos == source_offset) ? 1 : 0;
-		source_eop <= (source_pos == source_offset + BATCH_SIZE - 1) ? 1 : 0;
-		source_data <= buffer[source_pos];
+		source_valid	<= 1;
+		source_sop		<= (source_pos == source_offset) ? 1 : 0;
+		source_eop		<= (source_pos == source_offset + BATCH_SIZE - 1) ? 1 : 0;
+		source_data		<= buffer[source_pos];
 		if (source_pos == source_offset + BATCH_SIZE - 1)		// last entry of batch
 		begin
 			if (source_offset == RUNS-1)								// last batch
-				source_done <= 1;
+				source_done		<= 1;
 			else																// prepare next batch
 			begin
-				source_pos <= source_offset + 1;
-				source_offset <= source_offset + 1;
+				source_pos		<= source_offset + 1;
+				source_offset	<= source_offset + 1;
 			end
 		end
 		else																	// non-last entry of batch
-			source_pos <= source_pos + 1;
+			source_pos		<= source_pos + 1;
+	end
+	else if (sink_done)													// prepare next run
+	begin
+		source_offset	<= 0;
+		source_pos		<= 0;
+		source_done		<= 0;
+		source_valid	<= 0;
 	end
 	else
 	begin
-		source_valid <= 0;
-		source_sop <= 0;
-		source_eop <= 0;
+		source_valid	<= 0;
 	end
 end
 

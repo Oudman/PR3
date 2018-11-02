@@ -1,1 +1,2 @@
+Info (10281): Verilog HDL Declaration information at phase_extract.sv(40): object "FFT" differs only in case from object "fft" in the same scope File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/phase_extract.sv Line: 40
 Warning (10268): Verilog HDL information at sqrt_tb.sv(39): always construct contains both blocking and non-blocking assignments File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR3/sqrt_tb.sv Line: 39

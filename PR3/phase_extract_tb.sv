@@ -24,11 +24,12 @@ module phase_extract_tb();
 // testing parameters
 localparam SINK_WIDTH = 14;
 localparam FFT_DEPTH = 11;
-localparam RUNS = 3;
+localparam RUNS = 1;
 
 // Declare inputs as regs and outputs as wires
-wire [SINK_WIDTH-1:0] data;
-bit clk50 = 0, clk20 = 0;
+wire	[SINK_WIDTH-1:0]	data;
+bit 							clk50 = 0, clk20 = 0;
+bit 							reset, start;
 const real					pi = 3.1416;
 real							sin1, sin2, sin3, sin4, noise;
 const real					sin1_freq = 2.0E6;
@@ -45,8 +46,8 @@ const real					sin4_mag = 1024;
 const real					sin4_off = 278;
 
 // clock generator(s)
-always #(25ns) clk20++;	// F = 20.48 MHz
-always #(10ns) clk50++;		// F = 50.00 MHz
+always #(25ns) clk20++; // F = 20.48 MHz
+always #(10ns) clk50++; // F = 50.00 MHz
 
 // sine approx generator
 always @(negedge clk20)
@@ -62,18 +63,41 @@ assign data = sin1 + sin2 + sin3 + sin4 + noise;
 
 initial
 begin
-	#(1ms) $stop(2);
+	reset = 1;
+	#(100ns);
+	reset = 0;
+	forever
+	begin
+		start = 1;
+		#(100ns);
+		start = 0;
+		#(124900ns);
+	end
+end
+
+initial
+begin
+	#(500us) $stop(2);
 end
 
 // Connect module(s) to test
 phase_extract #(
-	.SINK_WIDTH				(SINK_WIDTH),								// number of bits per entry
-	.FFT_DEPTH				(FFT_DEPTH),								// number of fft levels
-	.RUNS						(RUNS)										// number of runs
+	.I_WIDTH					(SINK_WIDTH),
+	.FFT						(FFT_DEPTH),
+	.RUNS						(RUNS)
 ) pe (
-	.clk						(clk50),										// clock:	main clock
-	.clk20					(clk20),										// clock:	20MHz
-	.sink						(data)										//				connected to antenna
+	.clk						(clk50),
+	.clk20					(clk20),
+	.reset					(reset),
+	.sink_start				(start),
+	.sink_data				(data),
+	.source_sop				(),
+	.source_eop				(),
+	.source_valid			(),
+	.source_freq			(),
+	.source_mag				(),
+	.source_phaseA			(),
+	.source_phaseB			()
 );
 
 endmodule

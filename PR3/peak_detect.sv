@@ -12,10 +12,6 @@
 // Purpose:	fft peak detection, peak interpolation and peak data output
 //				each fft bin is assumed to be 10kHz wide
 // -----------------------------------------------------------------------------
-// Control:	clk, reset
-// Sink:		sop, eop, valid, re, im
-// Source:	sop, eop, valid, freq, mag, phaseA, phaseB
-// -----------------------------------------------------------------------------
 // In order to distinguish signed, unsigned, integer and fractional represen-
 // tation, the Q number format is used. The following definition is used:
 // - Qn.m:  signed; n integer bits; m fractional bits
@@ -55,7 +51,7 @@ localparam shortint EXPEAKS[NPEAKS] = '{200, 400, 600, 800};// expected location
 localparam PEAKDEV = 50;												// maximum deviation between expectation and reality (bins)
 
 /*----------------------------------------------------------------------------*/
-/*- struct + variables -------------------------------------------------------*/
+/*- struct definition and registers ------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 typedef struct {
 	bit signed		[$clog2(SIZE):0]		bin;						// central bin number			Q<lb(SIZE)+1>.0
@@ -68,24 +64,10 @@ chunk												peaks[0:NPEAKS-1];	// peak data
 bit												sink_done;				// buffer is fully loaded
 bit												source_done;			// peaks have all been output
 bit unsigned	[$clog2(NPEAKS+2)-1:0]	source_pos;				// source position				UQ<lb(NPEAKS+2)>.0
-int												freq[0:1];				// peak frequency					Q24.8
-bit unsigned	[WIDTH-1:0]					mag[0:1];				// magnitude of peak				UQ<WIDTH>.0
-int												delta[0:1];				// interpolation delta			Q24.8
-shortint											phs[0:1];				// phase at center bin			Q3.13
-shortint											phsp;						// phase at neighbour bin		Q3.13
-shortint											diffA;					// phase difference A between center bin and neighbour bin	Q3.13
-shortint											diffB;					// phase difference B between center bin and neighbour bin	Q3.13
-const bit		[WIDTH-1:0]					zeros = 0;
 
 /*----------------------------------------------------------------------------*/
-/*- main code ----------------------------------------------------------------*/
+/*- code ---------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
-// barycentric interpolation (out: Q0.16)
-function automatic shortint barycentric_delta(const ref chunk chnk);
-	barycentric_delta = $signed({{chnk.mag[2] - chnk.mag[0]}, zeros} / {chnk.mag[0] + chnk.mag[1] + chnk.mag[2]});
-endfunction
-
-// clocked part
 always @(posedge clk)
 begin
 	if (reset || sink_eop)												// reset all

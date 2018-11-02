@@ -16,10 +16,6 @@
 // Type:		module
 // Purpose:	phase extraction from data signal
 // -----------------------------------------------------------------------------
-// Control:	clk, clk20
-// Sink:		data
-// Source:	-
-// -----------------------------------------------------------------------------
 // In order to distinguish signed, unsigned, integer and fractional represen-
 // tation, the Q number format is used. The following definition is used:
 // - Qn.m:  signed; n integer bits; m fractional bits
@@ -40,92 +36,66 @@
 `include "peak_detect.sv"
 
 module phase_extract #(
-	parameter SINK_WIDTH,												// number of bits per entry
-	parameter FFT_DEPTH,													// number of fft levels
+	parameter I_WIDTH,													// number of bits per entry
+	parameter FFT,															// number of fft levels
+	parameter O_WIDTH = I_WIDTH + FFT,								// number of bits of the fft output
 	parameter RUNS															// number of runs
 )(
-	input		wire							clk,							// main clock
-	input		wire							clk20,						// 20.48MHz
-	input		wire	[SINK_WIDTH-1:0]	sink							//	connected to antenna			Q<SINK_WIDTH>.0
+	input		wire									clk,					// main clock
+	input		wire									clk20,				// clock used to read sink
+	input		wire									reset,				// synchronous reset
+	input		wire									sink_start,			// start new run
+	input		wire				[I_WIDTH-1:0]	sink_data,			//	connected to antenna			Q<I_WIDTH>.0
+	output	bit									source_sop,			// first output entry
+	output	wire									source_eop,			// last output entry
+	output	wire									source_valid,		// output is valid
+	output	int									source_freq,		// frequency output bus (Hz)	Q24.8
+	output	wire unsigned	[O_WIDTH-1:0]	source_mag,			// magnitude output bus			UQ<WIDTH>.0
+	output	shortint								source_phaseA,		// phase A output bus			Q3.13
+	output	shortint								source_phaseB		// phase B output bus			Q3.13
 );
 
 // more parameters
-localparam	FFT_LENGTH = 2**FFT_DEPTH;								// number of entries over which to apply fft
-localparam	FFT_WIDTH = SINK_WIDTH + FFT_DEPTH;					// number of bits of the fft output
+localparam	FFT_LENGTH = 2**FFT;										// number of entries over which to apply fft
 
 /*----------------------------------------------------------------------------*/
-/*- wire/reg declarations ----------------------------------------------------*/
+/*- wires and registers ------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 // input_buffer related
-bit										time_reset;						// reintialize input buffer
-wire										time_fft_sop;					// sop output signal
-wire										time_fft_eop;					// eop output signal
-wire										time_fft_valid;				// valid output signal
-wire 	[SINK_WIDTH-1:0]				time_fft_re;					// real data output bus			Q<SINK_WIDTH>.0
+wire												time_fft_sop;			// sop output signal
+wire												time_fft_eop;			// eop output signal
+wire												time_fft_valid;		// valid output signal
+wire signed		[I_WIDTH-1:0]				time_fft_re;			// real data output bus			Q<I_WIDTH>.0
 
 // fft_int related
-bit										fft_reset;						// reset fft
-wire										fft_trans_sop;					// sop output signal
-wire										fft_trans_eop;					// eop output signal
-wire										fft_trans_valid;				// valid output signal
-wire	[FFT_WIDTH-1:0]				fft_trans_re;					// real data output bus			Q<FFT_WIDTH>.0
-wire	[FFT_WIDTH-1:0]				fft_trans_im;					// imaginair data output bus	Q<FFT_WIDTH>.0
+wire												fft_trans_sop;			// sop output signal
+wire												fft_trans_eop;			// eop output signal
+wire												fft_trans_valid;		// valid output signal
+wire signed		[O_WIDTH-1:0]				fft_trans_re;			// real data output bus			Q<O_WIDTH>.0
+wire signed		[O_WIDTH-1:0]				fft_trans_im;			// imaginair data output bus	Q<O_WIDTH>.0
 
 // transformation related
-wire										trans_peak_sop;				// sop output signal
-wire										trans_peak_eop;				// eop output signal
-wire										trans_peak_valid;				// valid output signal
-wire	[FFT_WIDTH-1:0]				trans_peak_mag;				// magnitude data output bus	UQ<FFT_WIDTH>.0
-shortint									trans_peak_phase0;			// phase data output bus		Q3.13
-shortint									trans_peak_phase1;			// delayed phase output bus	Q3.13
-
-// peak_detect related
-bit										peak_reset;						// reset peak detection
-wire										peak_sop;						// sop output signal
-wire										peak_eop;						// eop output signal
-wire										peak_valid;						// valid output signal
-int										peak_freq;						// frequency output bus (kHz)	Q24.8
-int										peak_mag;						// magnitude output bus			Q24.8
-int										peak_phaseA;					// phase A output bus (deg)	Q24.8
-int										peak_phaseB;					// phase B output bus (deg)	Q24.8
+wire												trans_peak_sop;		// sop output signal
+wire												trans_peak_eop;		// eop output signal
+wire												trans_peak_valid;		// valid output signal
+wire unsigned	[O_WIDTH-1:0]				trans_peak_mag;		// magnitude data output bus	UQ<O_WIDTH>.0
+shortint											trans_peak_phase0;	// phase data output bus		Q3.13
+shortint											trans_peak_phase1;	// delayed phase output bus	Q3.13
 
 /*----------------------------------------------------------------------------*/
-/*- module synchronization and control ---------------------------------------*/
-/*----------------------------------------------------------------------------*/
-
-// TODO: update this section
-
-// load time buffer
-initial
-begin
-	@(posedge clk20);
-	time_reset = 1;
-	@(posedge clk20);
-	time_reset = 0;
-end
-
-// load fft
-initial
-begin
-	@(posedge clk);
-	fft_reset = 1;
-	@(posedge clk);
-	fft_reset = 0;
-end
-
-/*----------------------------------------------------------------------------*/
-/*- module instances ---------------------------------------------------------*/
+/*- modules ------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 // input buffer
 input_buffer #(
 	.BATCH_SIZE				(FFT_LENGTH),
 	.RUNS						(RUNS),
-	.DATA_WIDTH				(SINK_WIDTH)
+	.DATA_WIDTH				(I_WIDTH)
 ) i_buffer (
 	.sink_clk				(clk20),
 	.source_clk				(clk),
-	.reset					(time_reset),
-	.sink_data				(sink),
+	.reset					(reset),
+	.sink_start				(sink_start),
+	.sink_data				(sink_data),
 	.source_sop				(time_fft_sop),
 	.source_eop				(time_fft_eop),
 	.source_valid			(time_fft_valid),
@@ -134,12 +104,12 @@ input_buffer #(
 
 // fft operator
 fft_int #(
-	.POW						(FFT_DEPTH),
-	.DATA_WIDTH				(SINK_WIDTH),
-	.RES_WIDTH				(FFT_WIDTH)
+	.POW						(FFT),
+	.DATA_WIDTH				(I_WIDTH),
+	.RES_WIDTH				(O_WIDTH)
 ) fft (
 	.clk						(clk),
-	.aclr						(fft_reset),
+	.aclr						(reset),
 	.sink_sop				(time_fft_sop),
 	.sink_eop				(time_fft_eop),
 	.sink_valid				(time_fft_valid),
@@ -159,23 +129,26 @@ delay #(
 	.DELAY					(5)
 ) delay_5 (
 	.clk						(clk),
+	.reset					(reset),
 	.sink						({fft_trans_sop, fft_trans_eop, fft_trans_valid}),
 	.source					({trans_peak_sop, trans_peak_eop, trans_peak_valid})
 );
 
 hypot #(
-	.WIDTH					(FFT_WIDTH)
+	.WIDTH					(O_WIDTH)
 ) hypo (
 	.clk						(clk),
+	.reset					(reset),
 	.sink_x					(fft_trans_re),
 	.sink_y					(fft_trans_im),
 	.source					(trans_peak_mag)
 );
 
 atan2 #(
-	.WIDTH					(FFT_WIDTH)
+	.WIDTH					(O_WIDTH)
 ) atan (
 	.clk						(clk),
+	.reset					(reset),
 	.sink_y					(fft_trans_im),
 	.sink_x					(fft_trans_re),
 	.source					(trans_peak_phase0)
@@ -186,6 +159,7 @@ delay #(
 	.DELAY					(1)
 ) delay_1 (
 	.clk						(clk),
+	.reset					(reset),
 	.sink						(trans_peak_phase0),
 	.source					(trans_peak_phase1)
 );
@@ -193,22 +167,22 @@ delay #(
 // peak detection
 peak_detect #(
 	.SIZE						(FFT_LENGTH/2),
-	.WIDTH					(FFT_WIDTH)
+	.WIDTH					(O_WIDTH)
 ) p_detect (
 	.clk						(clk),
-	.reset					(peak_reset),
+	.reset					(reset),
 	.sink_sop				(trans_peak_sop),
 	.sink_eop				(trans_peak_eop),
 	.sink_valid				(trans_peak_valid),
 	.sink_mag				(trans_peak_mag),
 	.sink_phase				(trans_peak_phase1),
-	.source_sop				(peak_sop),
-	.source_eop				(peak_eop),
-	.source_valid			(peak_valid),
-	.source_freq			(peak_freq),
-	.source_mag				(peak_mag),
-	.source_phaseA			(peak_phaseA),
-	.source_phaseB			(peak_phaseB)
+	.source_sop				(source_sop),
+	.source_eop				(source_eop),
+	.source_valid			(source_valid),
+	.source_freq			(source_freq),
+	.source_mag				(source_mag),
+	.source_phaseA			(source_phaseA),
+	.source_phaseB			(source_phaseB)
 );
 
 endmodule

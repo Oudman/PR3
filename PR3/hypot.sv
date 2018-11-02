@@ -30,24 +30,40 @@ module hypot #(
 	parameter WIDTH														// input bus width
 )(
 	input		wire									clk,					// clock signal
+	input		wire									reset,				// synchronous reset
 	input		wire		signed	[WIDTH-1:0]	sink_x,				// sink, x							Q<WIDTH>.0
 	input		wire		signed	[WIDTH-1:0]	sink_y,				// sink, y							Q<WIDTH>.0
 	output	wire		unsigned	[WIDTH-1:0]	source				// source, hypot(x,y)			UQ<WIDTH>.0
 );
 
-// registers and such
+/*----------------------------------------------------------------------------*/
+/*- registers ----------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 bit unsigned	[2*WIDTH-2:0]				s2;						// x**2 + y**2						UQ<2*WIDTH-1>.0
 
-// the  code
+/*----------------------------------------------------------------------------*/
+/*- code ---------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 always_ff @(posedge clk)
 begin
-	s2					<= sink_x**2+ sink_y**2;
+	if (reset)
+	begin																		// synchronous reset
+		s2					<= 0;
+	end
+	else
+	begin																		// approximate hypot
+		s2					<= sink_x**2+ sink_y**2;
+	end
 end
 
+/*----------------------------------------------------------------------------*/
+/*- modules ------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 sqrt #(
 	.WIDTH					(2*WIDTH - 1)
 ) sqr (
 	.clk						(clk),
+	.reset					(reset),
 	.sink						(s2),
 	.source					(source)
 );
