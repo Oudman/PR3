@@ -26,30 +26,28 @@
 // -----------------------------------------------------------------------------
 
 module PR3 #(
-	parameter DATA_WIDTH = 14											// number of input bits per antenna
+	parameter WIDTH = 14,												// number of input bits per antenna
+	parameter RUNS = 1,													// number of runs
+	parameter FFT = 11													// fft width
 )(
-	input		wire							clk,							// 50.0MHz
-	input		wire							reset,						// synchronous reset
-	input		wire	[DATA_WIDTH-1:0]	data1,						//	antenna #1 data bus		(Q<DATA_WIDTH>.0)
-	input		wire	[DATA_WIDTH-1:0]	data2,						//	antenna #2 data bus		(Q<DATA_WIDTH>.0)
-	input		wire	[DATA_WIDTH-1:0]	data3							//	antenna #3 data bus		(Q<DATA_WIDTH>.0)
+	input		wire								clk20,					// 20.0MHz
+	input		wire								reset,					// synchronous reset
+	input		wire		[WIDTH-1:0]			data1,					//	antenna #1 data bus		(Q<WIDTH>.0)
+	input		wire		[WIDTH-1:0]			data2,					//	antenna #2 data bus		(Q<WIDTH>.0)
+	input		wire		[WIDTH-1:0]			data3						//	antenna #3 data bus		(Q<WIDTH>.0)
 );
 
 // wires
-wire clk20;
+wire clk;
 
-// pll module to generate a 20.48MHz clock signal
-pll pll (
-	.refclk					(clk),
-	.rst						(reset),
-	.outclk_0 				(clk20)
-);
+// pll module to generate the main clock signal
+// TODO
 
 // phase extraction on antenna #1
 phase_extract #(
-	.SINK_WIDTH				(DATA_WIDTH),
-	.FFT_DEPTH				(11),
-	.RUNS						(3)
+	.SINK_WIDTH				(WIDTH),
+	.FFT_DEPTH				(FFT),
+	.RUNS						(RUNS)
 ) pe1 (
 	.clk						(clk),
 	.clk20					(clk20),

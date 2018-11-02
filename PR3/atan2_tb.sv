@@ -22,14 +22,12 @@
 module atan2_tb();
 
 // Declare inputs as regs and outputs as wires
-real		phase = 0.0;
-real		step = 180.0;
-real		x, y;
-int		xfp, yfp;
-int		res;
-real		diff;
+shortint	cnt = 0;
+real		phase;
+shortint	x, y;
+shortint	res;
+real		diff, diffB;
 bit		clk = 1;
-real		pi = 3.14159;
 
 // clock generator(s)
 always #(50ns) clk++;
@@ -37,25 +35,28 @@ always #(50ns) clk++;
 // counter
 always @(posedge clk)
 begin
-	phase = phase + step;
-	if (phase >= 180.0)
-	begin
-		step = step / 2.0;
-		phase = -180.0 + step;
-	end
+	cnt++;
 end
 
-assign x = 16384.0 * $cos(phase * pi/180.0);
-assign y = 16384.0 * $sin(phase * pi/180.0);
-assign xfp = 256 * x;
-assign yfp = 256 * y;
-assign res = atan2(yfp, xfp);
-assign diff = (res / 256.0 - phase > 180.0) ? (res / 256.0 - phase - 360) : ((res / 256.0 - phase < -180.0) ? (res / 256.0 - phase + 360) : (res / 256.0 - phase));
+assign phase = cnt / 10430.37835;
+assign x = 16384.0 * $cos(phase);
+assign y = 16384.0 * $sin(phase);
+assign diff = res / 8192.0 - (phase - 0.0003835);
+assign diffB = (diff > 0.5) ? diff - 6.283185307 : diff;
 
 initial
 begin
 	#(5ms) $stop(2);
 end
+
+atan2 #(
+	.WIDTH					(16)
+) atan2 (
+	.clk						(clk),
+	.sink_x					(x),
+	.sink_y					(y),
+	.source					(res)
+);
 
 endmodule
 

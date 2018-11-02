@@ -9,6 +9,9 @@
 //  ~ input_buffer.sv
 //  ~ fft_int.sv
 //  ~ peak_detect.sv
+//  ~ delay.sv
+//  ~ hypot.sv
+//  ~ atan2.sv
 // -----------------------------------------------------------------------------
 // Type:		module
 // Purpose:	phase extraction from data signal
@@ -31,6 +34,9 @@
 
 `include "input_buffer.sv"
 `include "fft/fft_int.sv"
+`include "delay.sv"
+`include "hypot.sv"
+`include "atan2.sv"
 `include "peak_detect.sv"
 
 module phase_extract #(
@@ -59,11 +65,19 @@ wire 	[SINK_WIDTH-1:0]				time_fft_re;					// real data output bus			Q<SINK_WIDT
 
 // fft_int related
 bit										fft_reset;						// reset fft
-wire										fft_peak_sop;					// sop output signal
-wire										fft_peak_eop;					// eop output signal
-wire										fft_peak_valid;				// valid output signal
-wire	[FFT_WIDTH-1:0]				fft_peak_re;					// real data output bus			Q<FFT_WIDTH>.0
-wire	[FFT_WIDTH-1:0]				fft_peak_im;					// imaginair data output bus	Q<FFT_WIDTH>.0
+wire										fft_trans_sop;					// sop output signal
+wire										fft_trans_eop;					// eop output signal
+wire										fft_trans_valid;				// valid output signal
+wire	[FFT_WIDTH-1:0]				fft_trans_re;					// real data output bus			Q<FFT_WIDTH>.0
+wire	[FFT_WIDTH-1:0]				fft_trans_im;					// imaginair data output bus	Q<FFT_WIDTH>.0
+
+// transformation related
+wire										trans_peak_sop;				// sop output signal
+wire										trans_peak_eop;				// eop output signal
+wire										trans_peak_valid;				// valid output signal
+wire	[FFT_WIDTH-1:0]				trans_peak_mag;				// magnitude data output bus	UQ<FFT_WIDTH>.0
+shortint									trans_peak_phase0;			// phase data output bus		Q3.13
+shortint									trans_peak_phase1;			// delayed phase output bus	Q3.13
 
 // peak_detect related
 bit										peak_reset;						// reset peak detection
@@ -78,6 +92,9 @@ int										peak_phaseB;					// phase B output bus (deg)	Q24.8
 /*----------------------------------------------------------------------------*/
 /*- module synchronization and control ---------------------------------------*/
 /*----------------------------------------------------------------------------*/
+
+// TODO: update this section
+
 // load time buffer
 initial
 begin
@@ -104,7 +121,7 @@ input_buffer #(
 	.BATCH_SIZE				(FFT_LENGTH),
 	.RUNS						(RUNS),
 	.DATA_WIDTH				(SINK_WIDTH)
-) buff (
+) i_buffer (
 	.sink_clk				(clk20),
 	.source_clk				(clk),
 	.reset					(time_reset),
@@ -128,26 +145,63 @@ fft_int #(
 	.sink_valid				(time_fft_valid),
 	.sink_Re					(time_fft_re),
 	.sink_Im					(0),
-	.source_sop				(fft_peak_sop),
-	.source_eop				(fft_peak_eop),
-	.source_valid			(fft_peak_valid),
-	.source_Re				(fft_peak_re),
-	.source_Im				(fft_peak_im),
+	.source_sop				(fft_trans_sop),
+	.source_eop				(fft_trans_eop),
+	.source_valid			(fft_trans_valid),
+	.source_Re				(fft_trans_re),
+	.source_Im				(fft_trans_im),
 	.error					()
+);
+
+// carthesian to polar transformation
+delay #(
+	.WIDTH					(3),
+	.DELAY					(5)
+) delay_5 (
+	.clk						(clk),
+	.sink						({fft_trans_sop, fft_trans_eop, fft_trans_valid}),
+	.source					({trans_peak_sop, trans_peak_eop, trans_peak_valid})
+);
+
+hypot #(
+	.WIDTH					(FFT_WIDTH)
+) hypo (
+	.clk						(clk),
+	.sink_x					(fft_trans_re),
+	.sink_y					(fft_trans_im),
+	.source					(trans_peak_mag)
+);
+
+atan2 #(
+	.WIDTH					(FFT_WIDTH)
+) atan (
+	.clk						(clk),
+	.sink_y					(fft_trans_im),
+	.sink_x					(fft_trans_re),
+	.source					(trans_peak_phase0)
+);
+
+delay #(
+	.WIDTH					(16),
+	.DELAY					(1)
+) delay_1 (
+	.clk						(clk),
+	.sink						(trans_peak_phase0),
+	.source					(trans_peak_phase1)
 );
 
 // peak detection
 peak_detect #(
-	.BATCH_SIZE				(FFT_LENGTH/2),
-	.DATA_WIDTH				(FFT_WIDTH)
-) pd (
+	.SIZE						(FFT_LENGTH/2),
+	.WIDTH					(FFT_WIDTH)
+) p_detect (
 	.clk						(clk),
 	.reset					(peak_reset),
-	.sink_sop				(fft_peak_sop),
-	.sink_eop				(fft_peak_eop),
-	.sink_valid				(fft_peak_valid),
-	.sink_re					(fft_peak_re),
-	.sink_im					(fft_peak_im),
+	.sink_sop				(trans_peak_sop),
+	.sink_eop				(trans_peak_eop),
+	.sink_valid				(trans_peak_valid),
+	.sink_mag				(trans_peak_mag),
+	.sink_phase				(trans_peak_phase1),
 	.source_sop				(peak_sop),
 	.source_eop				(peak_eop),
 	.source_valid			(peak_valid),

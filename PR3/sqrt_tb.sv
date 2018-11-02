@@ -21,32 +21,46 @@
 
 module sqrt_tb();
 
+localparam LAT = 4;
+
 // Declare inputs as regs and outputs as wires
-int		s2 = 0;
-int		s_approx;
-real		s_exact;
-real		diff_abs;
-real		diff_rel;
-bit		clk = 1;
+bit 	[63:0]	s2 = 0;
+wire 	[32:0]	s_approx;
+real				s_exact;
+real				diff_abs;
+real				diff_rel;
+bit				clk = 1;
+int				correct = 0, wrong = 0;
 
 // clock generator(s)
-always #(25ns) clk++;
+always #(5ns) clk++;
 
 // counter
 always @(posedge clk)
 begin
-	s2 <= s2 + 1;
+	s2 <= s2 + 2**48;
+	if (-0.5 <= diff_abs && diff_abs <= 0.5)
+		correct++;
+	else
+		wrong++;
 end
 
-assign s_approx = sqrt(s2);
-assign s_exact = $sqrt(s2);
-assign diff_abs = s_approx - s_exact;
-assign diff_rel = diff_abs / s_exact;
+assign s_exact = (s2 > LAT) ? $sqrt(s2 - LAT * 2**48) : 0;
+assign diff_abs = (s2 > LAT) ? s_approx - s_exact : 0;
+assign diff_rel = (s2 > LAT) ? diff_abs / s_exact : 0;
 
 initial
 begin
-	#(5ms) $stop(2);
+	#(700us) $stop(2);
 end
+
+sqrt #(
+	.WIDTH					(64)
+) sqr (
+	.clk						(clk),
+	.sink						(s2),
+	.source					(s_approx)
+);
 
 endmodule
 
