@@ -6,8 +6,8 @@
 !readme.md
 
 # and these folders
-!PR3/
+!PR*
 
 # except these folders and categories
-PR3/db/*
+PR*/*db/*
 *.sv.bak
