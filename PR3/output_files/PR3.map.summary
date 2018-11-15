@@ -1,17 +1,17 @@
-Analysis & Synthesis Status : Successful - Fri Nov 02 22:40:46 2018
+Analysis & Synthesis Status : Successful - Fri Nov 09 15:00:09 2018
 Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 Revision Name : PR3
 Top-level Entity Name : PR3
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 0
-Total pins : 44
+Total registers : 3393
+Total pins : 60
 Total virtual pins : 0
-Total block memory bits : 0
-Total DSP Blocks : 0
+Total block memory bits : 1,942,160
+Total DSP Blocks : 103
 Total HSSI RX PCSs : 0
 Total HSSI PMA RX Deserializers : 0
 Total HSSI TX PCSs : 0
 Total HSSI PMA TX Serializers : 0
-Total PLLs : 0
+Total PLLs : 1
 Total DLLs : 0

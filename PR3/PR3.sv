@@ -37,7 +37,8 @@ module PR3 #(
 	input		wire									reset,				// synchronous reset
 	input		wire signed		[WIDTH-1:0]		data1,				//	antenna #1 data bus		Q<WIDTH>.0
 	input		wire signed		[WIDTH-1:0]		data2,				//	antenna #2 data bus		Q<WIDTH>.0
-	input		wire signed		[WIDTH-1:0]		data3					//	antenna #3 data bus		Q<WIDTH>.0
+	input		wire signed		[WIDTH-1:0]		data3,				//	antenna #3 data bus		Q<WIDTH>.0
+	output	shortint								phaseA				// phase A						Q3.13
 );
 
 // more parameters
@@ -91,7 +92,7 @@ phase_extract #(
 	.source_valid			(),
 	.source_freq			(),
 	.source_mag				(),
-	.source_phaseA			(),
+	.source_phaseA			(phaseA),
 	.source_phaseB			()
 );
 
