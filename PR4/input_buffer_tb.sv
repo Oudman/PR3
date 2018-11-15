@@ -47,8 +47,8 @@ const real			sin4_mag = 1024;
 const real			sin4_off = 0.75;
 
 // clock generator(s)
-always #(24414ps) sink_clk++;		// F = 20.48 MHz
-always #(20000ps) source_clk++;	// F = 25.00 MHz
+always #(12207ps) sink_clk++;		// F = 40.96 MHz
+always #(10000ps) source_clk++;	// F = 50.00 MHz
 
 // sine calculator
 function real sineat(real offset);
@@ -79,7 +79,7 @@ begin
 		start = 1;
 		@(negedge sink_clk)
 		start = 0;
-		#(300us-48828ps);
+		#(140us-24414ps);
 	end
 end
 

@@ -2,52 +2,84 @@
 Timing Analyzer Summary
 ------------------------------------------------------------
 
-Type  : Slow 1100mV 85C Model Setup 'clk20'
-Slack : 46.055
+Type  : Slow 1100mV 85C Model Setup 'clk40'
+Slack : 10.936
 TNS   : 0.000
 
-Type  : Slow 1100mV 85C Model Hold 'clk20'
-Slack : 0.301
+Type  : Slow 1100mV 85C Model Hold 'clk40'
+Slack : 0.214
 TNS   : 0.000
 
-Type  : Slow 1100mV 85C Model Minimum Pulse Width 'clk20'
-Slack : 23.848
+Type  : Slow 1100mV 85C Model Recovery 'clk40'
+Slack : 21.999
 TNS   : 0.000
 
-Type  : Slow 1100mV 0C Model Setup 'clk20'
-Slack : 46.137
+Type  : Slow 1100mV 85C Model Removal 'clk40'
+Slack : 1.535
 TNS   : 0.000
 
-Type  : Slow 1100mV 0C Model Hold 'clk20'
-Slack : 0.288
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'clk40'
+Slack : 11.358
 TNS   : 0.000
 
-Type  : Slow 1100mV 0C Model Minimum Pulse Width 'clk20'
-Slack : 23.892
+Type  : Slow 1100mV 0C Model Setup 'clk40'
+Slack : 10.762
 TNS   : 0.000
 
-Type  : Fast 1100mV 85C Model Setup 'clk20'
-Slack : 47.358
+Type  : Slow 1100mV 0C Model Hold 'clk40'
+Slack : 0.146
 TNS   : 0.000
 
-Type  : Fast 1100mV 85C Model Hold 'clk20'
-Slack : 0.170
+Type  : Slow 1100mV 0C Model Recovery 'clk40'
+Slack : 22.187
 TNS   : 0.000
 
-Type  : Fast 1100mV 85C Model Minimum Pulse Width 'clk20'
-Slack : 23.455
+Type  : Slow 1100mV 0C Model Removal 'clk40'
+Slack : 1.393
 TNS   : 0.000
 
-Type  : Fast 1100mV 0C Model Setup 'clk20'
-Slack : 47.692
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'clk40'
+Slack : 11.304
 TNS   : 0.000
 
-Type  : Fast 1100mV 0C Model Hold 'clk20'
-Slack : 0.158
+Type  : Fast 1100mV 85C Model Setup 'clk40'
+Slack : 16.433
 TNS   : 0.000
 
-Type  : Fast 1100mV 0C Model Minimum Pulse Width 'clk20'
-Slack : 23.410
+Type  : Fast 1100mV 85C Model Hold 'clk40'
+Slack : 0.168
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Recovery 'clk40'
+Slack : 22.977
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Removal 'clk40'
+Slack : 0.997
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'clk40'
+Slack : 11.262
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Setup 'clk40'
+Slack : 17.057
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Hold 'clk40'
+Slack : 0.119
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Recovery 'clk40'
+Slack : 23.242
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Removal 'clk40'
+Slack : 0.842
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'clk40'
+Slack : 11.254
 TNS   : 0.000
 
 ------------------------------------------------------------

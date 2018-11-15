@@ -32,7 +32,7 @@ module PR3 #(
 	parameter FFT = 11,													// fft width
 	parameter FREQ = 100													// number of runs per second
 )(
-	input		wire									clk20,				// 20.0MHz
+	input		wire									clk40,				// 40.0MHz
 	input		wire									reset,				// synchronous reset
 	input		wire signed		[WIDTH-1:0]		sink[0:NSINK-1],	//	antenna data buses			Q<WIDTH>.0
 	output	bit									source_valid,		// output is valid
@@ -44,7 +44,7 @@ module PR3 #(
 );
 
 // more parameters
-localparam TICKS = 20000000 / FREQ;									// number of clk20 ticks per run
+localparam TICKS = 40000000 / FREQ;									// number of clk40 ticks per run
 localparam MWIDTH = WIDTH + FFT;
 localparam CWIDTH = $clog2(TICKS);
 
@@ -75,7 +75,7 @@ wire signed		[MWIDTH-1:0]	fft_trans_im;						// imaginair data output bus	Q<O_WI
 /*- code ---------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 // run control
-always @(posedge clk20)
+always @(posedge clk40)
 begin
 	cnt				<= (reset || cnt == TICKS-1'b1) ? {CWIDTH{1'b0}} : cnt + 1'b1;
 	start				<= (reset || cnt != {CWIDTH{1'b0}}) ? 1'b0 : 1'b1;
@@ -85,7 +85,7 @@ end
 /*- modules ------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 // pll module to generate the main clock signal
-assign clk = clk20; // TODO
+assign clk = clk40; // TODO
 
 // input buffer
 input_buffer #(
@@ -93,7 +93,7 @@ input_buffer #(
 	.WIDTH					(WIDTH),
 	.LENGTH					(2**FFT)
 ) ib (
-	.sink_clk				(clk20),
+	.sink_clk				(clk40),
 	.source_clk				(clk),
 	.reset					(reset),
 	.sink_start				(start),
@@ -105,7 +105,6 @@ input_buffer #(
 );
 
 // fft operator
-/*
 fft_int #(
 	.POW						(FFT),
 	.DATA_WIDTH				(WIDTH),
@@ -118,14 +117,13 @@ fft_int #(
 	.sink_eop				(time_fft_eop),
 	.sink_Re					(time_fft_re),
 	.sink_Im					({WIDTH{1'b0}}),
+	.source_valid			(fft_trans_valid),
 	.source_sop				(fft_trans_sop),
 	.source_eop				(fft_trans_eop),
-	.source_valid			(fft_trans_valid),
 	.source_Re				(fft_trans_re),
 	.source_Im				(fft_trans_im),
 	.error					()
 );
-*/
 
 // carthesian to polar translation
 // TODO
@@ -133,12 +131,10 @@ fft_int #(
 // peak detection
 // TODO
 
-assign source_valid = time_fft_valid;
-assign source_sop = time_fft_sop;
-assign source_eop = time_fft_eop;
-assign source_freq = time_fft_re;
-//assign source_phaseA = fft_trans_re[15:0];
-//assign source_phaseB = fft_trans_im[15:0];
+assign source_valid = fft_trans_valid;
+assign source_sop = fft_trans_sop;
+assign source_eop = fft_trans_eop;
+assign source_phaseA = fft_trans_im;
 
 endmodule
 
