@@ -183,15 +183,23 @@ end
 genvar i;
 generate for (i = 0; i < NSINK; i++)
 	begin :gen
-		ram bram (
-			.wrclock					(sink_clk),
-			.rdclock					(source_clk),
-			.wren						(ram_wren),
-			.wraddress				(ram_wraddr),
-			.data						(sink_data[i]),
-			.rdaddress				(ram_rdaddr),
-			.q							(ram_q[i])
-		);
+		altsyncram #(
+			.operation_mode		("DUAL_PORT"),
+			.address_reg_b			("CLOCK1"),
+			.outdata_reg_b			("CLOCK1"),
+			.widthad_a				(AWIDTH),
+			.widthad_b				(AWIDTH),
+			.width_a					(WIDTH),
+			.width_b					(WIDTH)
+		) blockram (
+			.address_a				(ram_wraddr),
+			.address_b				(ram_rdaddr),
+			.clock0					(sink_clk),
+			.clock1					(source_clk),
+			.data_a					(sink_data[i]),
+			.wren_a					(ram_wren),
+			.q_b						(ram_q[i])
+		);	
 	end
 endgenerate
 

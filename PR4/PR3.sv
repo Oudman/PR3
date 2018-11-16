@@ -7,7 +7,8 @@
 // -----------------------------------------------------------------------------
 // Dependencies:
 //  ~ input_buffer.sv
-//  ~ TODO
+//  ~ fft_int.sv
+//  ~ hypot.sv
 // -----------------------------------------------------------------------------
 // Type:		module
 // Purpose:	phase extraction from three data signals
@@ -25,6 +26,8 @@
 `define PR3_SV
 
 `include "input_buffer.sv"
+`include "fft_int.sv"
+`include "hypot.sv"
 
 module PR3 #(
 	parameter NSINK = 3,													// number of antennas
@@ -32,7 +35,7 @@ module PR3 #(
 	parameter FFT = 11,													// fft width
 	parameter FREQ = 100													// number of runs per second
 )(
-	input		wire									clk40,				// 40.0MHz
+	input		wire									clk40,				// 40.0MHz reference clock
 	input		wire									reset,				// synchronous reset
 	input		wire signed		[WIDTH-1:0]		sink[0:NSINK-1],	//	antenna data buses			Q<WIDTH>.0
 	output	bit									source_valid,		// output is valid
@@ -47,6 +50,7 @@ module PR3 #(
 localparam TICKS = 40000000 / FREQ;									// number of clk40 ticks per run
 localparam MWIDTH = WIDTH + FFT;
 localparam CWIDTH = $clog2(TICKS);
+localparam TR_DELAY = 25;												// latency of carthesian=>polar transformation
 
 /*----------------------------------------------------------------------------*/
 /*- wires and registers ------------------------------------------------------*/
@@ -56,7 +60,8 @@ bit unsigned	[CWIDTH-1:0]	cnt;									// counter							UQ<lb(TICKS).0>
 bit									start;								// start new run
 
 // pll related
-wire									clk;									// main clock
+wire									clk20;								// 20.0MHz input clock
+wire									clk50;								// 50.0MHz main clock
 
 // input buffer related
 wire									time_fft_valid;					// output is valid
@@ -68,8 +73,15 @@ wire signed		[WIDTH-1:0]		time_fft_re;						// output data bus				Q<WIDTH>.0
 wire									fft_trans_valid;					// output is valid
 wire									fft_trans_sop;						// first output entry
 wire									fft_trans_eop;						// last output entry
-wire signed		[MWIDTH-1:0]	fft_trans_re;						// real data output bus			Q<O_WIDTH>.0
-wire signed		[MWIDTH-1:0]	fft_trans_im;						// imaginair data output bus	Q<O_WIDTH>.0
+wire signed		[MWIDTH-1:0]	fft_trans_re;						// real data output bus			Q<MWIDTH>.0
+wire signed		[MWIDTH-1:0]	fft_trans_im;						// imaginair data output bus	Q<MWIDTH>.0
+
+// transformation related
+wire									trans_peak_sop;					// sop output signal
+wire									trans_peak_eop;					// eop output signal
+wire									trans_peak_valid;					// valid output signal
+wire unsigned	[MWIDTH-1:0]	trans_peak_mag;					// magnitude data output bus	UQ<MWIDTH>.0
+shortint								trans_peak_phase;					// phase data output bus		Q3.13
 
 /*----------------------------------------------------------------------------*/
 /*- code ---------------------------------------------------------------------*/
@@ -85,7 +97,18 @@ end
 /*- modules ------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 // pll module to generate the main clock signal
-assign clk = clk40; // TODO
+altera_pll #(
+	.reference_clock_frequency	("40.0 MHz"),
+	.number_of_clocks		(2),
+	.output_clock_frequency0	("20.000000 MHz"),
+	.duty_cycle0			(50),
+	.output_clock_frequency1	("50.000000 MHz"),
+	.duty_cycle1			(50)
+) pll (
+	.rst						(reset),
+	.outclk					({clk50, clk20}),
+	.refclk					(clk40)
+);
 
 // input buffer
 input_buffer #(
@@ -93,8 +116,8 @@ input_buffer #(
 	.WIDTH					(WIDTH),
 	.LENGTH					(2**FFT)
 ) ib (
-	.sink_clk				(clk40),
-	.source_clk				(clk),
+	.sink_clk				(clk20),
+	.source_clk				(clk50),
 	.reset					(reset),
 	.sink_start				(start),
 	.sink_data				(sink),
@@ -110,7 +133,7 @@ fft_int #(
 	.DATA_WIDTH				(WIDTH),
 	.RES_WIDTH				(MWIDTH)
 ) fft (
-	.clk						(clk),
+	.clk						(clk50),
 	.aclr						(reset),
 	.sink_valid				(time_fft_valid),
 	.sink_sop				(time_fft_sop),
@@ -126,7 +149,16 @@ fft_int #(
 );
 
 // carthesian to polar translation
-// TODO
+hypot #(
+	.WIDTH					(MWIDTH),
+	.DELAY					(TR_DELAY)
+) hypo (
+	.clk						(clk50),
+	.reset					(reset),
+	.sink_x					(fft_trans_re),
+	.sink_y					(fft_trans_im),
+	.source					(trans_peak_mag)
+);
 
 // peak detection
 // TODO
@@ -134,7 +166,7 @@ fft_int #(
 assign source_valid = fft_trans_valid;
 assign source_sop = fft_trans_sop;
 assign source_eop = fft_trans_eop;
-assign source_phaseA = fft_trans_im;
+assign source_phaseA = trans_peak_mag;
 
 endmodule
 
