@@ -23,6 +23,7 @@ module atan2_tb();
 
 // Declare inputs as regs and outputs as wires
 shortint	cnt = 0;
+reg		reset;
 real		phase;
 shortint	x, y;
 shortint	res;
@@ -31,6 +32,13 @@ bit		clk = 1;
 
 // clock generator(s)
 always #(50ns) clk++;
+
+initial
+begin
+	reset = 1;
+	#(200ns);
+	reset = 0;
+end
 
 // counter
 always @(posedge clk)
@@ -54,6 +62,7 @@ atan2 #(
 	.DELAY					(25)
 ) atan2 (
 	.clk						(clk),
+	.reset					(reset),
 	.sink_x					(x),
 	.sink_y					(y),
 	.source					(res)
