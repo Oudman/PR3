@@ -65,7 +65,7 @@ bit									start;								// start new run
 
 // pll related
 wire									clk20;								// 20.0MHz input clock
-wire									clk50;								// 50.0MHz main clock
+wire									clk;									// main clock
 
 // input buffer related
 wire									time_fft_valid;					// output is valid
@@ -106,11 +106,11 @@ altera_pll #(
 	.number_of_clocks		(2),
 	.output_clock_frequency0	("20.000000 MHz"),
 	.duty_cycle0			(50),
-	.output_clock_frequency1	("50.000000 MHz"),
+	.output_clock_frequency1	("100.000000 MHz"),
 	.duty_cycle1			(50)
 ) pll (
 	.rst						(reset),
-	.outclk					({clk50, clk20}),
+	.outclk					({clk, clk20}),
 	.refclk					(clk40)
 );
 
@@ -121,7 +121,7 @@ input_buffer #(
 	.LENGTH					(2**FFT)
 ) ib (
 	.sink_clk				(clk20),
-	.source_clk				(clk50),
+	.source_clk				(clk),
 	.reset					(reset),
 	.sink_start				(start),
 	.sink_data				(sink),
@@ -137,7 +137,7 @@ fft_int #(
 	.DATA_WIDTH				(WIDTH),
 	.RES_WIDTH				(MWIDTH)
 ) fft (
-	.clk						(clk50),
+	.clk						(clk),
 	.aclr						(reset),
 	.sink_valid				(time_fft_valid),
 	.sink_sop				(time_fft_sop),
@@ -157,7 +157,7 @@ hypot #(
 	.WIDTH					(MWIDTH),
 	.DELAY					(TR_DELAY)
 ) hypo (
-	.clk						(clk50),
+	.clk						(clk),
 	.reset					(reset),
 	.sink_x					(fft_trans_re),
 	.sink_y					(fft_trans_im),
@@ -168,7 +168,7 @@ atan2 #(
 	.WIDTH					(MWIDTH),
 	.DELAY					(TR_DELAY)
 ) atan2 (
-	.clk						(clk50),
+	.clk						(clk),
 	.sink_x					(fft_trans_re),
 	.sink_y					(fft_trans_im),
 	.source					(trans_peak_phase)
@@ -178,7 +178,7 @@ delay #(
 	.WIDTH					(3),
 	.DELAY					(TR_DELAY)
 ) delay (
-	.clk						(clk50),
+	.clk						(clk),
 	.reset					(reset),
 	.sink						({fft_trans_valid, fft_trans_sop, fft_trans_eop}),
 	.source					({trans_peak_valid, trans_peak_sop, trans_peak_eop})

@@ -229,7 +229,7 @@ set_global_assignment -name ALLOW_ANY_RAM_SIZE_FOR_RECOGNITION OFF
 set_global_assignment -name ALLOW_ANY_ROM_SIZE_FOR_RECOGNITION OFF
 set_global_assignment -name ALLOW_ANY_SHIFT_REGISTER_SIZE_FOR_RECOGNITION OFF
 set_global_assignment -name SYNTH_MESSAGE_LEVEL HIGH
-set_global_assignment -name OPTIMIZATION_MODE BALANCED
+set_global_assignment -name OPTIMIZATION_MODE "AGGRESSIVE PERFORMANCE"
 set_global_assignment -name SYSTEMVERILOG_FILE PR3.sv
 set_global_assignment -name SDC_FILE PR3.sdc
 set_global_assignment -name SYSTEMVERILOG_FILE input_buffer.sv
