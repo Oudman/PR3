@@ -185,12 +185,11 @@ generate for (i = 0; i < NSINK; i++)
 	begin :gen
 		altsyncram #(
 			.operation_mode		("DUAL_PORT"),
-			.address_reg_b			("CLOCK1"),
-			.outdata_reg_b			("CLOCK1"),
-			.widthad_a				(AWIDTH),
-			.widthad_b				(AWIDTH),
 			.width_a					(WIDTH),
-			.width_b					(WIDTH)
+			.widthad_a				(AWIDTH),
+			.width_b					(WIDTH),
+			.widthad_b				(AWIDTH),
+			.outdata_reg_b			("CLOCK1")
 		) blockram (
 			.address_a				(ram_wraddr),
 			.address_b				(ram_rdaddr),

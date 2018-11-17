@@ -1,5 +1,5 @@
 Flow report for PR3
-Fri Nov 16 14:21:15 2018
+Sat Nov 17 01:04:57 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -40,18 +40,18 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Flow Summary                                                                  ;
 +---------------------------------+---------------------------------------------+
-; Flow Status                     ; Successful - Fri Nov 16 14:20:14 2018       ;
+; Flow Status                     ; Successful - Sat Nov 17 01:03:51 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
 ; Family                          ; Cyclone V                                   ;
 ; Device                          ; 5CSEMA4U23C6                                ;
 ; Timing Models                   ; Final                                       ;
-; Logic utilization (in ALMs)     ; 2,244 / 15,880 ( 14 % )                     ;
-; Total registers                 ; 3425                                        ;
+; Logic utilization (in ALMs)     ; 3,064 / 15,880 ( 19 % )                     ;
+; Total registers                 ; 4961                                        ;
 ; Total pins                      ; 103 / 314 ( 33 % )                          ;
 ; Total virtual pins              ; 0                                           ;
-; Total block memory bits         ; 1,999,476 / 2,764,800 ( 72 % )              ;
+; Total block memory bits         ; 2,000,296 / 2,764,800 ( 72 % )              ;
 ; Total DSP Blocks                ; 84 / 84 ( 100 % )                           ;
 ; Total HSSI RX PCSs              ; 0                                           ;
 ; Total HSSI PMA RX Deserializers ; 0                                           ;
@@ -67,7 +67,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/16/2018 14:15:41 ;
+; Start date & time ; 11/17/2018 00:56:35 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; PR3                 ;
 +-------------------+---------------------+
@@ -78,7 +78,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 40368363815659.154237414012628         ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 40368363815659.154241259408072         ; --            ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Systemverilog Hdl                      ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim (SystemVerilog)               ; <None>        ; --          ; --             ;
 ; EDA_TIME_SCALE                      ; 1 ps                                   ; --            ; --          ; eda_simulation ;
@@ -99,10 +99,10 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:49     ; 1.0                     ; 5146 MB             ; 00:01:08                           ;
-; Fitter               ; 00:03:39     ; 1.1                     ; 6274 MB             ; 00:07:05                           ;
-; Timing Analyzer      ; 00:00:50     ; 1.5                     ; 5287 MB             ; 00:01:08                           ;
-; Total                ; 00:05:18     ; --                      ; --                  ; 00:09:21                           ;
+; Analysis & Synthesis ; 00:01:59     ; 1.0                     ; 5186 MB             ; 00:01:53                           ;
+; Fitter               ; 00:05:10     ; 1.1                     ; 6272 MB             ; 00:08:17                           ;
+; Timing Analyzer      ; 00:00:55     ; 1.6                     ; 5313 MB             ; 00:01:14                           ;
+; Total                ; 00:08:04     ; --                      ; --                  ; 00:11:24                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

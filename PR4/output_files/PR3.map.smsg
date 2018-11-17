@@ -1,1 +1,2 @@
-Info (10281): Verilog HDL Declaration information at PR3.sv(35): object "FFT" differs only in case from object "fft" in the same scope File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 35
+Info (10281): Verilog HDL Declaration information at atan2.sv(35): object "DELAY" differs only in case from object "delay" in the same scope File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 35
+Info (10281): Verilog HDL Declaration information at PR3.sv(39): object "FFT" differs only in case from object "fft" in the same scope File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 39

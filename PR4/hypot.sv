@@ -10,7 +10,6 @@
 // -----------------------------------------------------------------------------
 // Type:		module
 // Purpose:	Approximate the Euclidean length of a vector.
-// Latency:	DELAY clockticks
 // -----------------------------------------------------------------------------
 // In order to distinguish signed, unsigned, integer and fractional represen-
 // tation, the Q number format is used. The following definition is used:

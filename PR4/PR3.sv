@@ -9,6 +9,8 @@
 //  ~ input_buffer.sv
 //  ~ fft_int.sv
 //  ~ hypot.sv
+//  ~ atan2.sv
+//  ~ delay.sv
 // -----------------------------------------------------------------------------
 // Type:		module
 // Purpose:	phase extraction from three data signals
@@ -28,6 +30,8 @@
 `include "input_buffer.sv"
 `include "fft_int.sv"
 `include "hypot.sv"
+`include "atan2.sv"
+`include "delay.sv"
 
 module PR3 #(
 	parameter NSINK = 3,													// number of antennas
@@ -48,9 +52,9 @@ module PR3 #(
 
 // more parameters
 localparam TICKS = 40000000 / FREQ;									// number of clk40 ticks per run
-localparam MWIDTH = WIDTH + FFT;
-localparam CWIDTH = $clog2(TICKS);
-localparam TR_DELAY = 25;												// latency of carthesian=>polar transformation
+localparam MWIDTH = WIDTH + FFT;										// number of bits used for intermediate results
+localparam CWIDTH = $clog2(TICKS);									// number of counter bits
+localparam TR_DELAY = 2 * MWIDTH + 2;								// latency of carthesian to polar transformation
 
 /*----------------------------------------------------------------------------*/
 /*- wires and registers ------------------------------------------------------*/
@@ -77,9 +81,9 @@ wire signed		[MWIDTH-1:0]	fft_trans_re;						// real data output bus			Q<MWIDTH>
 wire signed		[MWIDTH-1:0]	fft_trans_im;						// imaginair data output bus	Q<MWIDTH>.0
 
 // transformation related
-wire									trans_peak_sop;					// sop output signal
-wire									trans_peak_eop;					// eop output signal
-wire									trans_peak_valid;					// valid output signal
+wire									trans_peak_valid;					// output is valid
+wire									trans_peak_sop;					// first output entry
+wire									trans_peak_eop;					// last outptu entry
 wire unsigned	[MWIDTH-1:0]	trans_peak_mag;					// magnitude data output bus	UQ<MWIDTH>.0
 shortint								trans_peak_phase;					// phase data output bus		Q3.13
 
@@ -96,9 +100,9 @@ end
 /*----------------------------------------------------------------------------*/
 /*- modules ------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
-// pll module to generate the main clock signal
+// pll for the different clock signals
 altera_pll #(
-	.reference_clock_frequency	("40.0 MHz"),
+	.reference_clock_frequency	("40.000000 MHz"),
 	.number_of_clocks		(2),
 	.output_clock_frequency0	("20.000000 MHz"),
 	.duty_cycle0			(50),
@@ -160,13 +164,33 @@ hypot #(
 	.source					(trans_peak_mag)
 );
 
+atan2 #(
+	.WIDTH					(MWIDTH),
+	.DELAY					(TR_DELAY)
+) atan2 (
+	.clk						(clk50),
+	.sink_x					(fft_trans_re),
+	.sink_y					(fft_trans_im),
+	.source					(trans_peak_phase)
+);
+
+delay #(
+	.WIDTH					(3),
+	.DELAY					(TR_DELAY)
+) delay (
+	.clk						(clk50),
+	.reset					(reset),
+	.sink						({fft_trans_valid, fft_trans_sop, fft_trans_eop}),
+	.source					({trans_peak_valid, trans_peak_sop, trans_peak_eop})
+);
+
 // peak detection
 // TODO
 
-assign source_valid = fft_trans_valid;
-assign source_sop = fft_trans_sop;
-assign source_eop = fft_trans_eop;
-assign source_phaseA = trans_peak_mag;
+assign source_valid = trans_peak_valid;
+assign source_sop = trans_peak_sop;
+assign source_eop = trans_peak_eop;
+assign source_phaseA = trans_peak_phase;
 
 endmodule
 
