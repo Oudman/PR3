@@ -81,8 +81,8 @@ begin
 		add[2]			<= 1'bx;
 		add[3]			<= 1'bx;
 		diff				<= 16'hxxxx;
-		zp					<= {WIDTH-5{1'b0}};
-		frac				<= {WIDTH+11{1'b0}};
+		zp					<= {WIDTH-6{1'b0}};
+		frac				<= {WIDTH+10{1'b0}};
 		source			<= 16'h0000;
 	end
 	else																		// approximate atan2

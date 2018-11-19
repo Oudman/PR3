@@ -29,9 +29,9 @@ module hypot #(
 )(
 	input		wire									clk,					// clock signal
 	input		wire									reset,				// reset
-	input		wire		signed	[WIDTH-1:0]	sink_x,				// sink, x							Q<WIDTH>.0
-	input		wire		signed	[WIDTH-1:0]	sink_y,				// sink, y							Q<WIDTH>.0
-	output	wire		unsigned	[WIDTH-1:0]	source				// source, hypot(x,y)			UQ<WIDTH>.0
+	input		wire signed		[WIDTH-1:0]		sink_x,				// sink, x							Q<WIDTH>.0
+	input		wire signed		[WIDTH-1:0]		sink_y,				// sink, y							Q<WIDTH>.0
+	output	wire unsigned	[WIDTH-1:0]		source				// source, hypot(x,y)			UQ<WIDTH>.0
 );
 
 localparam MWIDTH = 2*WIDTH-1;
@@ -39,7 +39,7 @@ localparam MWIDTH = 2*WIDTH-1;
 /*----------------------------------------------------------------------------*/
 /*- registers ----------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
-bit unsigned	[MWIDTH-1:0]				s2;						// x**2 + y**2						UQ<2*WIDTH-1>.0
+reg unsigned	[MWIDTH-1:0]	s2;									// x**2 + y**2						UQ<2*WIDTH-1>.0
 
 /*----------------------------------------------------------------------------*/
 /*- code ---------------------------------------------------------------------*/

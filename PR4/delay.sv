@@ -22,8 +22,8 @@ module delay #(
 )(
 	input		wire									clk,					// clock signal
 	input		wire									reset,				// synchronous reset
-	input		wire			[WIDTH-1:0]			sink,					// sink
-	output	bit			[WIDTH-1:0]			source				// source
+	input		wire				[WIDTH-1:0]		sink,					// sink
+	output	reg				[WIDTH-1:0]		source				// source
 );
 
 generate
@@ -47,7 +47,7 @@ end
 else
 begin :genX
 	// registers and such
-	bit	[WIDTH-1:0]					buff[0:DELAY-2];				// shift register
+	reg				[WIDTH-1:0]		buff[0:DELAY-2];				// shift register
 
 	// the (pipelined) code
 	always_ff @(posedge clk)

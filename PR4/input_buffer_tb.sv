@@ -27,27 +27,27 @@ localparam WIDTH = 14;
 localparam LENGTH = 2048;
 
 // Declare inputs as regs and outputs as wires
-bit					sink_clk = 0, source_clk = 0;
-bit					reset = 0, start = 0;
-reg signed [WIDTH-1:0]	dataIn[0:NSINK-1];
-wire					source_sop, source_eop, source_valid;
-wire [WIDTH-1:0]	dataOut;
-const real			pi = 3.1416;
-const real			sin1_freq = 2.0E6;
-const real			sin1_mag = 1024;
-const real			sin1_off = 0.00;
-const real			sin2_freq = 4.0E6;
-const real			sin2_mag = 1024;
-const real			sin2_off = 0.25;
-const real			sin3_freq = 6.0E6;
-const real			sin3_mag = 1024;
-const real			sin3_off = 0.50;
-const real			sin4_freq = 8.0E6;
-const real			sin4_mag = 1024;
-const real			sin4_off = 0.75;
+reg									sink_clk = 0, source_clk = 0;
+reg									reset = 0, start = 0;
+reg signed		[WIDTH-1:0]		dataIn[0:NSINK-1];
+wire									source_sop, source_eop, source_valid;
+wire signed		[WIDTH-1:0]		dataOut;
+const real							pi = 3.1416;
+const real							sin1_freq = 2.0E6;
+const real							sin1_mag = 1024;
+const real							sin1_off = 0.00;
+const real							sin2_freq = 4.0E6;
+const real							sin2_mag = 1024;
+const real							sin2_off = 0.25;
+const real							sin3_freq = 6.0E6;
+const real							sin3_mag = 1024;
+const real							sin3_off = 0.50;
+const real							sin4_freq = 8.0E6;
+const real							sin4_mag = 1024;
+const real							sin4_off = 0.75;
 
 // clock generator(s)
-always #(12207ps) sink_clk++;		// F = 40.96 MHz
+always #(24414ps) sink_clk++;		// F = 20.48 MHz
 always #(10000ps) source_clk++;	// F = 50.00 MHz
 
 // sine calculator
@@ -79,7 +79,7 @@ begin
 		start = 1;
 		@(negedge sink_clk)
 		start = 0;
-		#(140us-24414ps);
+		#(200us-48828ps);
 	end
 end
 

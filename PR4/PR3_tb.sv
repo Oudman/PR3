@@ -28,8 +28,8 @@ localparam FFT = 11;
 localparam FREQ = 5000;
 
 // Declare inputs as regs and outputs as wires
-bit									clk = 0;
-bit									reset = 0;
+reg									clk = 0;
+reg									reset = 0;
 reg signed		[WIDTH-1:0]		dataIn[0:NSINK-1];
 wire									source_valid, source_sop, source_eop;
 wire unsigned	[23:0]			source_freq;
@@ -72,7 +72,7 @@ end
 initial
 begin
 	reset = 1;
-	#(50ns);
+	#(200ns);
 	reset = 0;
 end
 

@@ -11,6 +11,7 @@
 //  ~ hypot.sv
 //  ~ atan2.sv
 //  ~ delay.sv
+//  ~ peak_detect.sv
 // -----------------------------------------------------------------------------
 // Type:		module
 // Purpose:	phase extraction from three data signals
@@ -32,6 +33,7 @@
 `include "hypot.sv"
 `include "atan2.sv"
 `include "delay.sv"
+`include "peak_detect.sv"
 
 module PR3 #(
 	parameter NSINK = 3,													// number of antennas
@@ -42,12 +44,12 @@ module PR3 #(
 	input		wire									clk40,				// 40.0MHz reference clock
 	input		wire									reset,				// synchronous reset
 	input		wire signed		[WIDTH-1:0]		sink[0:NSINK-1],	//	antenna data buses			Q<WIDTH>.0
-	output	bit									source_valid,		// output is valid
-	output	bit									source_sop,			// first output entry
-	output	bit									source_eop,			// last output entry
-	output	bit unsigned	[23:0]			source_freq,		// frequency						UQ24.0
-	output	bit signed		[15:0]			source_phaseA,		// phase A							Q3.13
-	output	bit signed		[15:0]			source_phaseB		// phase B							Q3.13
+	output	reg									source_valid,		// output is valid
+	output	reg									source_sop,			// first output entry
+	output	reg									source_eop,			// last output entry
+	output	reg unsigned	[23:0]			source_freq,		// frequency						UQ24.0
+	output	reg signed		[15:0]			source_phaseA,		// phase A							Q3.13
+	output	reg signed		[15:0]			source_phaseB		// phase B							Q3.13
 );
 
 // more parameters
@@ -60,11 +62,11 @@ localparam TR_DELAY = 2 * MWIDTH + 2;								// latency of carthesian to polar t
 /*- wires and registers ------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 // control related
-bit unsigned	[CWIDTH-1:0]	cnt;									// counter							UQ<lb(TICKS).0>
-bit									start;								// start new run
+reg unsigned	[CWIDTH-1:0]	cnt;									// counter							UQ<lb(TICKS).0>
+reg									start;								// start new run
 
 // pll related
-wire									clk20;								// 20.0MHz input clock
+wire									clk20;								// 20.48MHz input clock
 wire									clk;									// main clock
 
 // input buffer related
@@ -85,7 +87,7 @@ wire									trans_peak_valid;					// output is valid
 wire									trans_peak_sop;					// first output entry
 wire									trans_peak_eop;					// last outptu entry
 wire unsigned	[MWIDTH-1:0]	trans_peak_mag;					// magnitude data output bus	UQ<MWIDTH>.0
-shortint								trans_peak_phase;					// phase data output bus		Q3.13
+wire signed		[15:0]			trans_peak_phase;					// phase data output bus		Q3.13
 
 /*----------------------------------------------------------------------------*/
 /*- code ---------------------------------------------------------------------*/
@@ -109,7 +111,7 @@ altera_pll #(
 	.output_clock_frequency1	("100.000000 MHz"),
 	.duty_cycle1			(50)
 ) pll (
-	.rst						(reset),
+	.rst						(),
 	.outclk					({clk, clk20}),
 	.refclk					(clk40)
 );
@@ -185,12 +187,25 @@ delay #(
 );
 
 // peak detection
-// TODO
-
-assign source_valid = trans_peak_valid;
-assign source_sop = trans_peak_sop;
-assign source_eop = trans_peak_eop;
-assign source_phaseA = trans_peak_phase;
+peak_detect #(
+	.WIDTH					(MWIDTH),
+	.BIN						(10000),
+	.NPEAKS					(4),
+	.PEAKSEP					('{100, 300, 500, 700, 900})
+) pd (
+	.clk						(clk),
+	.reset					(reset),
+	.sink_valid				(trans_peak_valid),
+	.sink_sop				(trans_peak_sop),
+	.sink_eop				(trans_peak_eop),
+	.sink_mag				(trans_peak_mag),
+	.sink_phase				(trans_peak_phase),
+	.source_valid			(source_valid),
+	.source_sop				(source_sop),
+	.source_eop				(source_eop),
+	.source_phaseA			(source_phaseA),
+	.source_phaseB			(source_phaseB)
+);
 
 endmodule
 

@@ -22,13 +22,13 @@
 module atan2_tb();
 
 // Declare inputs as regs and outputs as wires
-shortint	cnt = 0;
-reg		reset;
-real		phase;
-shortint	x, y;
-shortint	res;
-real		diff, diffB;
-bit		clk = 1;
+reg unsigned	[15:0]			cnt = 0;
+reg									reset;
+real									phase;
+wire signed		[15:0]			x, y;
+wire signed		[15:0]			res;
+real									diff, diffB;
+reg									clk = 1;
 
 // clock generator(s)
 always #(50ns) clk++;
