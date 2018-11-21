@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PR3
-Wed Nov 21 17:50:40 2018
+Wed Nov 21 20:45:56 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -364,7 +364,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Wed Nov 21 17:50:40 2018       ;
+; Analysis & Synthesis Status     ; Successful - Wed Nov 21 20:45:56 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
@@ -7040,7 +7040,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:03     ;
 +----------------+--------------+
 
 
@@ -7050,7 +7050,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Wed Nov 21 17:49:55 2018
+    Info: Processing started: Wed Nov 21 20:45:16 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PR3 -c PR3
 Info (16303): Aggressive Performance optimization mode selected -- timing performance will be prioritized at the potential cost of increased logic area and compilation time
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -7092,7 +7092,9 @@ Info (12021): Found 0 design units, including 0 entities, in source file input_b
 Info (12021): Found 1 design units, including 1 entities, in source file atan2_tb.sv
     Info (12023): Found entity 1: atan2_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2_tb.sv Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file cos.sv
-    Info (12023): Found entity 1: cos File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/cos.sv Line: 26
+    Info (12023): Found entity 1: cos File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/cos.sv Line: 27
+Info (12021): Found 1 design units, including 1 entities, in source file cos_tb.sv
+    Info (12023): Found entity 1: cos_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/cos_tb.sv Line: 24
 Info (12127): Elaborating entity "PR3" for the top level hierarchy
 Warning (10034): Output port "source_freq" at PR3.sv(51) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
 Info (12128): Elaborating entity "altera_pll" for hierarchy "altera_pll:pll" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 118
@@ -7779,10 +7781,10 @@ Info (21057): Implemented 990 device resources after synthesis - the final resou
     Info (21064): Implemented 99 RAM segments
     Info (21065): Implemented 2 PLLs
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 258 warnings
-    Info: Peak virtual memory: 5108 megabytes
-    Info: Processing ended: Wed Nov 21 17:50:40 2018
-    Info: Elapsed time: 00:00:45
-    Info: Total CPU time (on all processors): 00:00:58
+    Info: Peak virtual memory: 5103 megabytes
+    Info: Processing ended: Wed Nov 21 20:45:56 2018
+    Info: Elapsed time: 00:00:40
+    Info: Total CPU time (on all processors): 00:01:01
 
 
 +------------------------------------------+
