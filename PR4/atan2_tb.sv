@@ -7,6 +7,7 @@
 // -----------------------------------------------------------------------------
 // Dependencies:
 //  ~ atan2.sv
+//  ~ delay.sv
 // -----------------------------------------------------------------------------
 // Type:		testbench
 // Purpose:	testing of atan2.sv
@@ -16,18 +17,20 @@
 `define ATAN2_TB_SV
 
 `include "atan2.sv"
+`include "delay.sv"
 
 `timescale 1ns/100ps
 
 module atan2_tb();
 
 // Declare inputs as regs and outputs as wires
-reg unsigned	[15:0]			cnt = 0;
+reg signed		[15:0]			cnt = 0;
 reg									reset;
 real									phase;
 wire signed		[15:0]			x, y;
+wire signed		[15:0]			corrp, corr;
 wire signed		[15:0]			res;
-real									diff, diffB;
+real									diff;
 reg									clk = 1;
 
 // clock generator(s)
@@ -41,16 +44,16 @@ begin
 end
 
 // counter
-always @(posedge clk)
+always @(negedge clk)
 begin
 	cnt <= cnt + 17;
 end
 
 assign phase = cnt / 10430.37835;
-assign x = 16384.0 * $cos(phase);
-assign y = 16384.0 * $sin(phase);
-assign diff = res / 8192.0 - (phase - 17*0.0023968);
-assign diffB = (diff > 0.5) ? diff - 6.283185307 : diff;
+assign x = 2.0**14 * $cos(phase);
+assign y = 2.0**14 * $sin(phase);
+assign corrp = 2.0**15 * $atan2(y, x) / 3.141592654;
+assign diff = res - corr;
 
 initial
 begin
@@ -66,6 +69,16 @@ atan2 #(
 	.sink_x					(x),
 	.sink_y					(y),
 	.source					(res)
+);
+
+delay #(
+	.WIDTH					(16),
+	.DELAY					(25)
+) delay (
+	.clk						(clk),
+	.reset					(reset),
+	.sink						(corrp),
+	.source					(corr)
 );
 
 endmodule

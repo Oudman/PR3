@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PR3
-Mon Nov 19 22:16:10 2018
+Wed Nov 21 17:50:40 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -364,7 +364,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Mon Nov 19 22:16:09 2018       ;
+; Analysis & Synthesis Status     ; Successful - Wed Nov 21 17:50:40 2018       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; PR3                                         ;
 ; Top-level Entity Name           ; PR3                                         ;
@@ -7040,7 +7040,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:03     ;
+; Top            ; 00:00:02     ;
 +----------------+--------------+
 
 
@@ -7050,7 +7050,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Mon Nov 19 22:15:29 2018
+    Info: Processing started: Wed Nov 21 17:49:55 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PR3 -c PR3
 Info (16303): Aggressive Performance optimization mode selected -- timing performance will be prioritized at the potential cost of increased logic area and compilation time
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -7069,9 +7069,9 @@ Info (12021): Found 16 design units, including 16 entities, in source file pr3.s
     Info (12023): Found entity 11: cascade_n File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/cascade_n.sv Line: 7
     Info (12023): Found entity 12: fft_int File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/fft_int.sv Line: 7
     Info (12023): Found entity 13: hypot File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/hypot.sv Line: 26
-    Info (12023): Found entity 14: atan2 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 31
+    Info (12023): Found entity 14: atan2 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 30
     Info (12023): Found entity 15: peak_detect File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/peak_detect.sv Line: 26
-    Info (12023): Found entity 16: PR3 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 38
+    Info (12023): Found entity 16: PR3 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 39
 Info (12021): Found 0 design units, including 0 entities, in source file input_buffer.sv
 Info (12021): Found 0 design units, including 0 entities, in source file fft_int.sv
 Info (12021): Found 0 design units, including 0 entities, in source file hypot.sv
@@ -7090,20 +7090,22 @@ Info (12021): Found 1 design units, including 1 entities, in source file pr3_tb.
     Info (12023): Found entity 1: PR3_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3_tb.sv Line: 22
 Info (12021): Found 0 design units, including 0 entities, in source file input_buffer_tb.sv
 Info (12021): Found 1 design units, including 1 entities, in source file atan2_tb.sv
-    Info (12023): Found entity 1: atan2_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2_tb.sv Line: 22
+    Info (12023): Found entity 1: atan2_tb File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2_tb.sv Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file cos.sv
+    Info (12023): Found entity 1: cos File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/cos.sv Line: 26
 Info (12127): Elaborating entity "PR3" for the top level hierarchy
-Warning (10034): Output port "source_freq" at PR3.sv(50) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-Info (12128): Elaborating entity "altera_pll" for hierarchy "altera_pll:pll" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 117
+Warning (10034): Output port "source_freq" at PR3.sv(51) has no driver File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+Info (12128): Elaborating entity "altera_pll" for hierarchy "altera_pll:pll" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 118
 Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "wire_to_nowhere_64" into its bus
-Info (12130): Elaborated megafunction instantiation "altera_pll:pll" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 117
-Info (12133): Instantiated megafunction "altera_pll:pll" with the following parameter: File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 117
+Info (12130): Elaborated megafunction instantiation "altera_pll:pll" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 118
+Info (12133): Instantiated megafunction "altera_pll:pll" with the following parameter: File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 118
     Info (12134): Parameter "reference_clock_frequency" = "40.000000 MHz"
     Info (12134): Parameter "number_of_clocks" = "2"
     Info (12134): Parameter "output_clock_frequency0" = "20.000000 MHz"
     Info (12134): Parameter "duty_cycle0" = "50"
     Info (12134): Parameter "output_clock_frequency1" = "100.000000 MHz"
     Info (12134): Parameter "duty_cycle1" = "50"
-Info (12128): Elaborating entity "input_buffer" for hierarchy "input_buffer:ib" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 134
+Info (12128): Elaborating entity "input_buffer" for hierarchy "input_buffer:ib" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 135
 Info (12128): Elaborating entity "altsyncram" for hierarchy "input_buffer:ib|altsyncram:gen[0].blockram" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/input_buffer.sv Line: 201
 Info (12130): Elaborated megafunction instantiation "input_buffer:ib|altsyncram:gen[0].blockram" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/input_buffer.sv Line: 201
 Info (12133): Instantiated megafunction "input_buffer:ib|altsyncram:gen[0].blockram" with the following parameter: File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/input_buffer.sv Line: 201
@@ -7117,7 +7119,7 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/alts
     Info (12023): Found entity 1: altsyncram_gt31 File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/db/altsyncram_gt31.tdf Line: 27
 Info (12128): Elaborating entity "altsyncram_gt31" for hierarchy "input_buffer:ib|altsyncram:gen[0].blockram|altsyncram_gt31:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
 Info (12128): Elaborating entity "delay" for hierarchy "input_buffer:ib|delay:delay" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/input_buffer.sv Line: 214
-Info (12128): Elaborating entity "fft_int" for hierarchy "fft_int:fft" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 155
+Info (12128): Elaborating entity "fft_int" for hierarchy "fft_int:fft" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 156
 Info (12128): Elaborating entity "cascade_0" for hierarchy "fft_int:fft|cascade_0:c0" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/fft_int.sv Line: 40
 Info (12128): Elaborating entity "bitrev" for hierarchy "fft_int:fft|cascade_0:c0|bitrev:bitrev_inst" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/cascade_0.sv Line: 36
 Info (12128): Elaborating entity "cascade_n" for hierarchy "fft_int:fft|cascade_n:gen[1].cn" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/fft_int.sv Line: 54
@@ -7221,7 +7223,7 @@ Warning (10030): Net "W_Im_table.data_a" at W_int32.sv(697) has no driver or ini
 Warning (10030): Net "W_Im_table.waddr_a" at W_int32.sv(697) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/W_int32.sv Line: 697
 Warning (10030): Net "W_Re_table.we_a" at W_int32.sv(566) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/W_int32.sv Line: 566
 Warning (10030): Net "W_Im_table.we_a" at W_int32.sv(697) has no driver or initial value, using a default initial value '0' File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/W_int32.sv Line: 697
-Info (12128): Elaborating entity "hypot" for hierarchy "hypot:hypo" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 167
+Info (12128): Elaborating entity "hypot" for hierarchy "hypot:hypo" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 168
 Info (12128): Elaborating entity "altsqrt" for hierarchy "hypot:hypo|altsqrt:sqrt" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/hypot.sv Line: 75
 Info (12130): Elaborated megafunction instantiation "hypot:hypo|altsqrt:sqrt" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/hypot.sv Line: 75
 Info (12133): Instantiated megafunction "hypot:hypo|altsqrt:sqrt" with the following parameter: File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/hypot.sv Line: 75
@@ -7460,28 +7462,28 @@ Info (12128): Elaborating entity "dffpipe" for hierarchy "hypot:hypo|altsqrt:sqr
 Info (12131): Elaborated megafunction instantiation "hypot:hypo|altsqrt:sqrt|dffpipe:q_final_dff", which is child of megafunction instantiation "hypot:hypo|altsqrt:sqrt" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsqrt.tdf Line: 119
 Info (12128): Elaborating entity "dffpipe" for hierarchy "hypot:hypo|altsqrt:sqrt|dffpipe:r_final_dff" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsqrt.tdf Line: 123
 Info (12131): Elaborated megafunction instantiation "hypot:hypo|altsqrt:sqrt|dffpipe:r_final_dff", which is child of megafunction instantiation "hypot:hypo|altsqrt:sqrt" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsqrt.tdf Line: 123
-Info (12128): Elaborating entity "atan2" for hierarchy "atan2:atan2" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 177
-Warning (10230): Verilog HDL assignment warning at atan2.sv(119): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 119
-Warning (10230): Verilog HDL assignment warning at atan2.sv(120): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 120
-Warning (10230): Verilog HDL assignment warning at atan2.sv(126): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 126
-Warning (10230): Verilog HDL assignment warning at atan2.sv(127): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 127
-Warning (10230): Verilog HDL assignment warning at atan2.sv(133): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 133
-Warning (10230): Verilog HDL assignment warning at atan2.sv(134): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 134
-Warning (10230): Verilog HDL assignment warning at atan2.sv(140): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 140
-Warning (10230): Verilog HDL assignment warning at atan2.sv(141): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 141
-Warning (10230): Verilog HDL assignment warning at atan2.sv(147): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 147
-Warning (10230): Verilog HDL assignment warning at atan2.sv(148): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 148
-Warning (10230): Verilog HDL assignment warning at atan2.sv(154): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 154
-Warning (10230): Verilog HDL assignment warning at atan2.sv(155): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 155
-Warning (10230): Verilog HDL assignment warning at atan2.sv(161): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 161
-Warning (10230): Verilog HDL assignment warning at atan2.sv(162): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 162
-Warning (10230): Verilog HDL assignment warning at atan2.sv(168): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 168
-Warning (10230): Verilog HDL assignment warning at atan2.sv(169): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 169
-Warning (10027): Verilog HDL or VHDL warning at the atan2.sv(173): index expression is not wide enough to address all of the elements in the array File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 173
-Warning (10027): Verilog HDL or VHDL warning at the atan2.sv(175): index expression is not wide enough to address all of the elements in the array File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 175
-Info (12128): Elaborating entity "lpm_divide" for hierarchy "atan2:atan2|lpm_divide:div" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 207
-Info (12130): Elaborated megafunction instantiation "atan2:atan2|lpm_divide:div" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 207
-Info (12133): Instantiated megafunction "atan2:atan2|lpm_divide:div" with the following parameter: File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 207
+Info (12128): Elaborating entity "atan2" for hierarchy "atan2:atan2" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 178
+Warning (10230): Verilog HDL assignment warning at atan2.sv(124): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 124
+Warning (10230): Verilog HDL assignment warning at atan2.sv(125): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 125
+Warning (10230): Verilog HDL assignment warning at atan2.sv(131): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 131
+Warning (10230): Verilog HDL assignment warning at atan2.sv(132): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 132
+Warning (10230): Verilog HDL assignment warning at atan2.sv(138): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 138
+Warning (10230): Verilog HDL assignment warning at atan2.sv(139): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 139
+Warning (10230): Verilog HDL assignment warning at atan2.sv(145): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 145
+Warning (10230): Verilog HDL assignment warning at atan2.sv(146): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 146
+Warning (10230): Verilog HDL assignment warning at atan2.sv(152): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 152
+Warning (10230): Verilog HDL assignment warning at atan2.sv(153): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 153
+Warning (10230): Verilog HDL assignment warning at atan2.sv(159): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 159
+Warning (10230): Verilog HDL assignment warning at atan2.sv(160): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 160
+Warning (10230): Verilog HDL assignment warning at atan2.sv(166): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 166
+Warning (10230): Verilog HDL assignment warning at atan2.sv(167): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 167
+Warning (10230): Verilog HDL assignment warning at atan2.sv(173): truncated value with size 49 to match size of target (48) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 173
+Warning (10230): Verilog HDL assignment warning at atan2.sv(174): truncated value with size 25 to match size of target (24) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 174
+Warning (10027): Verilog HDL or VHDL warning at the atan2.sv(178): index expression is not wide enough to address all of the elements in the array File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 178
+Warning (10027): Verilog HDL or VHDL warning at the atan2.sv(180): index expression is not wide enough to address all of the elements in the array File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 180
+Info (12128): Elaborating entity "lpm_divide" for hierarchy "atan2:atan2|lpm_divide:div" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 212
+Info (12130): Elaborated megafunction instantiation "atan2:atan2|lpm_divide:div" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 212
+Info (12133): Instantiated megafunction "atan2:atan2|lpm_divide:div" with the following parameter: File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 212
     Info (12134): Parameter "lpm_pipeline" = "48"
     Info (12134): Parameter "lpm_widthn" = "48"
     Info (12134): Parameter "lpm_widthd" = "24"
@@ -7496,9 +7498,9 @@ Info (12128): Elaborating entity "sign_div_unsign_roi" for hierarchy "atan2:atan
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_i4g.tdf
     Info (12023): Found entity 1: alt_u_div_i4g File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/db/alt_u_div_i4g.tdf Line: 129
 Info (12128): Elaborating entity "alt_u_div_i4g" for hierarchy "atan2:atan2|lpm_divide:div|lpm_divide_qop:auto_generated|sign_div_unsign_roi:divider|alt_u_div_i4g:divider" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/db/sign_div_unsign_roi.tdf Line: 34
-Info (12128): Elaborating entity "delay" for hierarchy "atan2:atan2|delay:delay" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 218
-Info (12128): Elaborating entity "delay" for hierarchy "delay:delay" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 187
-Info (12128): Elaborating entity "peak_detect" for hierarchy "peak_detect:pd" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 208
+Info (12128): Elaborating entity "delay" for hierarchy "atan2:atan2|delay:delay" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/atan2.sv Line: 223
+Info (12128): Elaborating entity "delay" for hierarchy "delay:delay" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 188
+Info (12128): Elaborating entity "peak_detect" for hierarchy "peak_detect:pd" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 209
 Warning (10230): Verilog HDL assignment warning at peak_detect.sv(115): truncated value with size 16 to match size of target (1) File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/peak_detect.sv Line: 115
 Warning (14130): Reduced register "peak_detect:pd|source_sop~reg0" with stuck data_in port to stuck value GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/peak_detect.sv Line: 40
 Warning (14130): Reduced register "peak_detect:pd|source_eop~reg0" with stuck data_in port to stuck value GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/peak_detect.sv Line: 41
@@ -7695,30 +7697,30 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr
     Info (12023): Found entity 1: cmpr_a9c File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/db/cmpr_a9c.tdf Line: 22
 Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "source_freq[0]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[1]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[2]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[3]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[4]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[5]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[6]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[7]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[8]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[9]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[10]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[11]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[12]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[13]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[14]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[15]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[16]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[17]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[18]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[19]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[20]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[21]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[22]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
-    Warning (13410): Pin "source_freq[23]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 50
+    Warning (13410): Pin "source_freq[0]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[1]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[2]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[3]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[4]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[5]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[6]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[7]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[8]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[9]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[10]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[11]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[12]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[13]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[14]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[15]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[16]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[17]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[18]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[19]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[20]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[21]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[22]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
+    Warning (13410): Pin "source_freq[23]" is stuck at GND File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 51
 Info (17049): 1 registers lost all their fanouts during netlist optimizations.
 Info (144001): Generated suppressed messages file C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/output_files/PR3.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
@@ -7728,48 +7730,48 @@ Warning: RST port on the PLL is not properly connected on instance altera_pll:pl
 Warning: RST port on the PLL is not properly connected on instance altera_pll:pll|general[0].gpll. The reset port on the PLL should be connected. If the PLL loses lock for any reason, you might need to manually reset the PLL in order to re-establish lock to the reference clock. File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altera_pll.v Line: 748
     Info: Must be connected
 Warning (21074): Design contains 42 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "sink[2][0]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[2][1]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[2][2]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[2][3]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[2][4]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[2][5]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[2][6]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[2][7]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[2][8]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[2][9]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[2][10]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[2][11]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[2][12]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[2][13]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][0]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][1]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][2]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][3]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][4]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][5]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][6]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][7]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][8]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][9]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][10]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][11]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][12]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[1][13]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][0]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][1]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][2]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][3]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][4]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][5]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][6]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][7]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][8]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][9]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][10]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][11]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][12]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
-    Warning (15610): No output dependent on input pin "sink[0][13]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 46
+    Warning (15610): No output dependent on input pin "sink[2][0]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[2][1]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[2][2]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[2][3]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[2][4]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[2][5]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[2][6]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[2][7]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[2][8]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[2][9]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[2][10]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[2][11]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[2][12]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[2][13]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][0]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][1]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][2]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][3]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][4]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][5]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][6]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][7]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][8]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][9]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][10]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][11]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][12]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[1][13]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][0]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][1]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][2]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][3]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][4]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][5]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][6]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][7]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][8]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][9]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][10]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][11]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][12]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
+    Warning (15610): No output dependent on input pin "sink[0][13]" File: C:/Users/foudm/Dropbox/TUe/5 - internship/PR4/PR3.sv Line: 47
 Info (21057): Implemented 990 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 44 input pins
     Info (21059): Implemented 59 output pins
@@ -7777,10 +7779,10 @@ Info (21057): Implemented 990 device resources after synthesis - the final resou
     Info (21064): Implemented 99 RAM segments
     Info (21065): Implemented 2 PLLs
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 258 warnings
-    Info: Peak virtual memory: 5105 megabytes
-    Info: Processing ended: Mon Nov 19 22:16:10 2018
-    Info: Elapsed time: 00:00:41
-    Info: Total CPU time (on all processors): 00:00:59
+    Info: Peak virtual memory: 5108 megabytes
+    Info: Processing ended: Wed Nov 21 17:50:40 2018
+    Info: Elapsed time: 00:00:45
+    Info: Total CPU time (on all processors): 00:00:58
 
 
 +------------------------------------------+

@@ -35,12 +35,12 @@ module peak_detect #(
 	input		wire									sink_sop,			// first input entry
 	input		wire									sink_eop,			// last input entry
 	input		wire unsigned	[WIDTH-1:0]		sink_mag,			//	real input bus					UQ<WIDTH>.0
-	input		wire signed		[15:0]			sink_phase,			//	imaginair input bus			Q3.13
+	input		wire signed		[15:0]			sink_phase,			//	imaginair input bus			Q1.15
 	output	reg									source_valid,		// output is valid
 	output	reg									source_sop,			// first output entry
 	output	reg									source_eop,			// last output entry
-	output	reg signed		[15:0]			source_phaseA,		// phase A output bus			Q3.13
-	output	reg signed		[15:0]			source_phaseB		// phase B output bus			Q3.13
+	output	reg signed		[15:0]			source_phaseA,		// phase A output bus			Q1.15
+	output	reg signed		[15:0]			source_phaseB		// phase B output bus			Q1.15
 );
 
 // more parameters
@@ -52,7 +52,7 @@ localparam AWIDTH = $clog2(PEAKSEP[NPEAKS]);						// address width
 typedef struct {
 	reg signed		[AWIDTH:0]		bin;								// central bin number			Q<AWIDTH+1>.0
 	reg unsigned	[WIDTH-1:0]		mag[0:2];						// magnitude						UQ<WIDTH>.0
-	reg signed		[15:0]			phs[0:2];						// phase								Q3.13
+	reg signed		[15:0]			phs[0:2];						// phase								Q1.15
 } chunk;
 
 chunk									buffer;								// input buffer

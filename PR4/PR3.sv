@@ -14,7 +14,8 @@
 //  ~ peak_detect.sv
 // -----------------------------------------------------------------------------
 // Type:		module
-// Purpose:	phase extraction from three data signals
+// Purpose:	Phase extraction from three data signals. Frequency output is in
+// 			Hertz and phase output in pi radians.
 // -----------------------------------------------------------------------------
 // In order to distinguish signed, unsigned, integer and fractional represen-
 // tation, the Q number format is used. The following definition is used:
@@ -48,8 +49,8 @@ module PR3 #(
 	output	reg									source_sop,			// first output entry
 	output	reg									source_eop,			// last output entry
 	output	reg unsigned	[23:0]			source_freq,		// frequency						UQ24.0
-	output	reg signed		[15:0]			source_phaseA,		// phase A							Q3.13
-	output	reg signed		[15:0]			source_phaseB		// phase B							Q3.13
+	output	reg signed		[15:0]			source_phaseA,		// phase A							Q1.15
+	output	reg signed		[15:0]			source_phaseB		// phase B							Q1.15
 );
 
 // more parameters
@@ -87,7 +88,7 @@ wire									trans_peak_valid;					// output is valid
 wire									trans_peak_sop;					// first output entry
 wire									trans_peak_eop;					// last outptu entry
 wire unsigned	[MWIDTH-1:0]	trans_peak_mag;					// magnitude data output bus	UQ<MWIDTH>.0
-wire signed		[15:0]			trans_peak_phase;					// phase data output bus		Q3.13
+wire signed		[15:0]			trans_peak_phase;					// phase data output bus		Q1.15
 
 /*----------------------------------------------------------------------------*/
 /*- code ---------------------------------------------------------------------*/
