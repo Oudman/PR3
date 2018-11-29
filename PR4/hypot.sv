@@ -52,7 +52,7 @@ begin
 	end
 	else
 	begin																		// stage I
-		s2					<= sink_x**2+ sink_y**2;
+		s2					<= sink_x**2 + sink_y**2;
 	end
 end
 
