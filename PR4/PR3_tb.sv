@@ -35,16 +35,16 @@ wire									source_valid, source_sop, source_eop;
 wire unsigned	[23:0]			source_freq;
 wire signed		[15:0]			source_phaseA, source_phaseB;
 const real							pi = 3.1416;
-const real							sin1_freq = 2.01E6;
+const real							sin1_freq = 2.002E6;
 const real							sin1_mag = 1024;
 const real							sin1_off = 0.00;
-const real							sin2_freq = 4.01E6;
+const real							sin2_freq = 4.003E6;
 const real							sin2_mag = 1024;
 const real							sin2_off = 0.25;
-const real							sin3_freq = 6.01E6;
+const real							sin3_freq = 6.005E6;
 const real							sin3_mag = 1024;
 const real							sin3_off = 0.50;
-const real							sin4_freq = 8.01E6;
+const real							sin4_freq = 8.007E6;
 const real							sin4_mag = 1024;
 const real							sin4_off = 0.75;
 
@@ -57,8 +57,8 @@ function real sineat(real offset);
 	automatic real sin2 = sin2_mag * $sin(sin2_off + 2 * pi * sin2_freq * ($time / 1E9 + offset));
 	automatic real sin3 = sin3_mag * $sin(sin3_off + 2 * pi * sin3_freq * ($time / 1E9 + offset));
 	automatic real sin4 = sin4_mag * $sin(sin4_off + 2 * pi * sin4_freq * ($time / 1E9 + offset));
-	automatic real noise = $random / 2**(32-4);
-	sineat = sin1 + sin2 + sin3 + sin4 + noise;
+	//automatic real noise = $random / 2**(32-4);
+	sineat = sin1 + sin2 + sin3 + sin4;// + noise;
 endfunction
 
 // sine approx generator

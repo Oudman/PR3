@@ -44,6 +44,7 @@ module peak_detect #(
 	output	reg									source_valid,		// output is valid
 	output	reg									source_sop,			// first output entry
 	output	reg									source_eop,			// last output entry
+	output	reg unsigned	[23:0]			source_freq,		// frequency						UQ24.0
 	output	reg signed		[15:0]			source_phaseA,		// phase A output bus			Q1.15
 	output	reg signed		[15:0]			source_phaseB		// phase B output bus			Q1.15
 );
@@ -71,9 +72,9 @@ chunk									buffer;								// input buffer
 
 // source related
 reg									source_done;						// output has been processed
-reg									wip[0:7];							// execute pipeline step
-reg									mp[0:7];								// switch between m and p
-reg unsigned	[PWIDTH-1:0]	pk[0:7];								// peak on which to calculate	UQ<PWIDTH>.0
+reg									wip[0:9];							// execute pipeline step
+reg									mp[0:9];								// switch between m and p
+reg unsigned	[PWIDTH-1:0]	pk[0:9];								// peak on which to calculate	UQ<PWIDTH>.0
 reg signed		[15:0]			cosin;								// cosine input					Q1.15
 wire signed		[15:0]			cosout;								// cosine output					Q1.15
 reg signed		[WIDTH+15:0]	stcos;								// 									Q<WIDTH+1>.15
@@ -82,10 +83,12 @@ reg signed		[WIDTH-1:0]		denom;								// division denominator			Q<WIDTH>.0
 wire signed		[2*WIDTH-1:0]	z;										// division quotient				Q<WIDTH>.<WIDTH>
 reg signed		[15:0]			dm;									// delta m							Q1.15
 reg signed		[15:0]			dp;									// delta p							Q1.15
-reg signed		[15:0]			delta[5:6];							// delta								Q1.15
+reg signed		[15:0]			delta[7:8];							// delta								Q1.15
 reg signed		[15:0]			diff;									// phase difference				Q1.15
 reg signed		[32:0]			addA;									// 									Q3.30
 reg signed		[32:0]			addB;									// 									Q3.30
+reg unsigned	[23:0]			fbin;									//	frequency in bins				UQ<BWIDTH>.<24-BWIDTH>
+reg unsigned	[47-BWIDTH:0]	fbin_;								//	frequency in bins				UQ24.<24-BWIDTH>
 
 /*----------------------------------------------------------------------------*/
 /*- code ---------------------------------------------------------------------*/
@@ -95,7 +98,7 @@ always_ff @(posedge clk)
 begin
 	if (reset || sink_eop)												// reset all
 	begin
-		buffer.bin		<= -({BWIDTH+1{1'b0}} + 2'd2);
+		buffer.bin		<= {BWIDTH+1{1'b0}} - 2'd2;
 		buffer.mag		<= '{default:{WIDTH{1'b0}}};
 		buffer.phs		<= '{default:{16'h0000}};
 		for (byte i = 0; i < NPEAKS; i++)
@@ -148,27 +151,33 @@ begin
 		source_valid	<= 1'b0;
 		source_sop		<= 1'b0;
 		source_eop		<= 1'b0;
+		source_freq		<= 24'hxxxxxx;
 		source_phaseA	<= 16'hxxxx;
 		source_phaseB	<= 16'hxxxx;
 		wip[0]			<= 1'b1;
-		wip[2]			<= 1'b0;
-		wip[4:7]			<= '{default:{1'b0}};
-		mp[0]				<= 1'b0;
-		mp[2]				<= 1'bx;
-		mp[4:7]			<= '{default:{1'bx}};
+		wip[1]			<= 1'b0;
+		wip[3:4]			<= '{default:{1'b0}};
+		wip[6:9]			<= '{default:{1'b0}};
+		mp[0]				<= 1'b1;
+		mp[1]				<= 1'bx;
+		mp[3:4]			<= '{default:{1'bx}};
+		mp[6:9]			<= '{default:{1'bx}};
 		pk[0]				<= {PWIDTH{1'b0}};
-		pk[2]				<= {PWIDTH{1'bx}};
-		pk[4:7]			<= '{default:{PWIDTH{1'bx}}};
+		pk[1]				<= {PWIDTH{1'bx}};
+		pk[3:4]			<= '{default:{PWIDTH{1'bx}}};
+		pk[6:9]			<= '{default:{PWIDTH{1'bx}}};
 		cosin				<= 16'hxxxx;
 		stcos				<= {WIDTH+16{1'bx}};
 		numer				<= {2*WIDTH{1'bx}};
 		denom				<= {WIDTH{1'bx}};
 		dm					<= 16'hxxxx;
 		dp					<= 16'hxxxx;
-		delta[5:6]		<= '{default:16'hxxxx};
+		delta[7:8]		<= '{default:16'hxxxx};
 		diff				<= 16'hxxxx;
 		addA				<= {33{1'bx}};
 		addB				<= {33{1'bx}};
+		fbin				<= 24'hxxxxxx;
+		fbin_				<= {48-BWIDTH{1'bx}};
 	end
 	else if (sink_done && !source_done)								// continue with output
 	begin
@@ -178,67 +187,79 @@ begin
 				if (mp[0])													// cos(a-b)
 				begin
 					cosin				<= peaks[pk[0]].phs[0] - peaks[pk[0]].phs[1];
-					pk[0]				<= pk[0];
 					wip[0]			<= 1'b1;
+					mp[0]				<= 1'b0;
+					pk[0]				<= pk[0];
 				end
-				else															// cos(b-c)
+				else															// cos(c-b)
 				begin
 					cosin				<= peaks[pk[0]].phs[2] - peaks[pk[0]].phs[1];
-					pk[0]				<= pk[0] + 1'b1;
 					wip[0]			<= (pk[0] == NPEAKS-1) ? 1'b0 : 1'b1;
+					mp[0]				<= (pk[0] < NPEAKS-1) ? 1'b1 : 1'bx;
+					pk[0]				<= pk[0] + 1'b1;
 				end
-				mp[0]				<= ~mp[0];
+				mp[1]				<= mp[0];
+				pk[1]				<= pk[0];
 			end
 			else																// do not execute this pipeline step
 			begin
+				cosin				<= 16'hxxxx;
 				wip[0]			<= 1'b0;
 				mp[0]				<= 1'bx;
 				pk[0]				<= {PWIDTH{1'bx}};
+				mp[1]				<= 1'bx;
+				pk[1]				<= {PWIDTH{1'bx}};
 			end
+			wip[1]			<= wip[0];
 		end
-		begin																	// stages II - IV
+		begin																	// stages II - V
 			// handled by cos and delay1
-		end
-		begin																	// stage V
-			if (wip[1])														// execute this pipeline step
-			begin
-				if (mp[1])													// r*cos(a-c)
-					stcos				<= peaks[pk[1]].mag[0] * cosout;
-				else															// t*cos(b-c)
-					stcos				<= peaks[pk[1]].mag[2] * cosout;
-				mp[2]				<= mp[1];
-				pk[2]				<= pk[1];
-			end
-			else																// do not execute this pipeline step
-			begin
-				stcos				<= {WIDTH+16{1'bx}};
-				mp[2]				<= 1'bx;
-				pk[2]				<= {PWIDTH{1'bx}};
-			end
-			wip[2]			<= wip[1];
 		end
 		begin																	// stage VI
 			if (wip[2])														// execute this pipeline step
 			begin
-				numer				<= stcos[WIDTH+14:WIDTH-1] << WIDTH;
-				if (mp[2])													// s - r*cos(a-c)
-					denom				<= peaks[pk[2]].mag[1] - stcos[WIDTH+14:WIDTH-1];
+				if (mp[2])													// r*cos(a-c)
+					stcos				<= $signed({1'b0, peaks[pk[2]].mag[0]}) * cosout;
+				else															// t*cos(b-c)
+					stcos				<= $signed({1'b0, peaks[pk[2]].mag[2]}) * cosout;
+				mp[3]				<= mp[2];
+				pk[3]				<= pk[2];
+			end
+			else																// do not execute this pipeline step
+			begin
+				stcos				<= {WIDTH+16{1'bx}};
+				mp[3]				<= 1'bx;
+				pk[3]				<= {PWIDTH{1'bx}};
+			end
+			wip[3]			<= wip[2];
+		end
+		begin																	// stage VII
+			if (wip[3])														// execute this pipeline step
+			begin
+				numer				<= stcos[WIDTH+14:15] << WIDTH;
+				if (mp[3])													// s - r*cos(a-c)
+					denom				<= peaks[pk[3]].mag[1] - stcos[WIDTH+14:15];
 				else															// t*cos(b-c) - s
-					denom				<= stcos[WIDTH+14:WIDTH-1] - peaks[pk[2]].mag[1];
+					denom				<= stcos[WIDTH+14:15] - peaks[pk[3]].mag[1];
+				mp[4]				<= mp[3];
+				pk[4]				<= pk[3];
 			end
 			else																// do not execute this pipeline step
 			begin
 				numer				<= {2*WIDTH{1'bx}};
 				denom				<= {WIDTH{1'bx}};
+				mp[4]				<= 1'bx;
+				pk[4]				<= {PWIDTH{1'bx}};
 			end
+			wip[4]			<= wip[3];
 		end
-		begin																	// stages VII - <2*WIDTH+5>
+		begin																	// stages VIII - <2*WIDTH+8>
 			// handled by div and delay2
 		end
-		begin																	// stage <2*WIDTH+6>
-			if (wip[3])														// execute this pipeline step
+		begin																	// stage <2*WIDTH+9>
+			if (wip[5])														// execute this pipeline step
 			begin
-				if (mp[3])													// calculate dm
+				if (mp[5])													// calculate dm
 				begin
 					dm					<= z[WIDTH:WIDTH-15];
 					dp					<= 16'hxxxx;
@@ -248,106 +269,116 @@ begin
 					dm					<= dm;
 					dp					<= z[WIDTH:WIDTH-15];
 				end
-				mp[4]				<= mp[3];
-				pk[4]				<= pk[3];
-			end
-			else																// do not execute this pipeline step
-			begin
-				dm					<= 16'hxxxx;
-				dp					<= 16'hxxxx;
-				mp[4]				<= 1'bx;
-				pk[4]				<= {PWIDTH{1'bx}};
-			end
-			wip[4]			<= wip[3];
-		end
-		begin																	// stage <2*WIDTH+7>
-			if (wip[4])														// execute this pipeline step
-			begin
-				if (mp[4])													// wait for dp
-					delta[5]			<= 16'hxxxx;
-				else															// both dp and dm are available
-				begin
-					if (dp > 0 && dm > 0)
-						delta[5]			<= dp;
-					else
-						delta[5]			<= dm;
-				end
-				mp[5]				<= mp[4];
-				pk[5]				<= pk[4];
-			end
-			else																// do not execute this pipeline step
-			begin
-				delta[5]			<= 16'hxxxx;
-				mp[5]				<= 1'bx;
-				pk[5]				<= {PWIDTH{1'bx}};
-			end
-			wip[5]			<= wip[4];
-		end
-		begin																	// stage <2*WIDTH+8>
-			if (wip[5])														// execute this pipeline step
-			begin
-				if (mp[5])													// wait for delta
-					diff				<= 16'hxxxx;
-				else															// delta is available
-				begin
-					if (delta[5] < 0)										// interpolate between first and middle bin
-						diff				<= peaks[pk[5]].phs[0] - peaks[pk[5]].phs[1];
-					else														// interpolate between middle and last bin
-						diff				<= peaks[pk[5]].phs[2] - peaks[pk[5]].phs[1];
-				end
-				delta[6]			<= delta[5];
 				mp[6]				<= mp[5];
 				pk[6]				<= pk[5];
 			end
 			else																// do not execute this pipeline step
 			begin
-				diff				<= 16'hxxxx;
-				delta[6]			<= 16'hxxxx;
+				dm					<= 16'hxxxx;
+				dp					<= 16'hxxxx;
 				mp[6]				<= 1'bx;
 				pk[6]				<= {PWIDTH{1'bx}};
 			end
 			wip[6]			<= wip[5];
 		end
-		begin																	// stage <2*WIDTH+9>
+		begin																	// stage <2*WIDTH+10>
 			if (wip[6])														// execute this pipeline step
 			begin
-				if (mp[6])													// wait for diff
+				if (mp[6])													// wait for dp
+					delta[7]			<= 16'hxxxx;
+				else															// both dp and dm are available
 				begin
-					addA				<= {33{1'bx}};
-					addB				<= {33{1'bx}};
-				end
-				else															// perform interpolation addition
-				begin
-					addA				<= {diff[15], diff[15:0]} * delta[6];
-					addB				<= {~diff[15], diff[15:0]} * delta[6];
+					if (dp > 0 && dm > 0)
+						delta[7]			<= dp;
+					else
+						delta[7]			<= dm;
 				end
 				mp[7]				<= mp[6];
 				pk[7]				<= pk[6];
 			end
 			else																// do not execute this pipeline step
 			begin
-				addA				<= {33{1'bx}};
-				addB				<= {33{1'bx}};
+				delta[7]			<= 16'hxxxx;
 				mp[7]				<= 1'bx;
 				pk[7]				<= {PWIDTH{1'bx}};
 			end
 			wip[7]			<= wip[6];
 		end
-		begin																	// stage <2*WIDTH+10>
-			if (wip[6] && !mp[7])										// execute this pipeline step
+		begin																	// stage <2*WIDTH+11>
+			if (wip[7])														// execute this pipeline step
+			begin
+				if (mp[7])													// wait for delta
+				begin
+					diff				<= 16'hxxxx;
+					fbin				<= 24'hxxxxxx;
+				end
+				else															// delta is available
+				begin
+					if (delta[7] < 0)										// interpolate between first and middle bin
+						diff				<= peaks[pk[7]].phs[0] - peaks[pk[7]].phs[1];
+					else														// interpolate between middle and last bin
+						diff				<= peaks[pk[7]].phs[2] - peaks[pk[7]].phs[1];
+					fbin				<= $signed({1'b0, peaks[pk[7]].bin, {24-BWIDTH{1'b0}}}) + $signed(delta[7][15:(BWIDTH-9)]);
+				end
+				delta[8]			<= (delta[7] < 16'sh0000) ? -delta[7] : delta[7];
+				mp[8]				<= mp[7];
+				pk[8]				<= pk[7];
+			end
+			else																// do not execute this pipeline step
+			begin
+				diff				<= 16'hxxxx;
+				fbin				<= 24'hxxxxxx;
+				delta[8]			<= 16'hxxxx;
+				mp[8]				<= 1'bx;
+				pk[8]				<= {PWIDTH{1'bx}};
+			end
+			wip[8]			<= wip[7];
+		end
+		begin																	// stage <2*WIDTH+12>
+			if (wip[8])														// execute this pipeline step
+			begin
+				if (mp[8])													// wait for diff
+				begin
+					addA				<= {33{1'bx}};
+					addB				<= {33{1'bx}};
+					fbin_				<= {48-BWIDTH{1'bx}};
+				end
+				else															// perform interpolation addition
+				begin
+					addA				<= $signed({1'b0, diff}) * delta[8];
+					addB				<= $signed({1'b1, diff}) * delta[8];
+					fbin_				<= fbin * BIN;
+				end
+				mp[9]				<= mp[8];
+				pk[9]				<= pk[8];
+			end
+			else																// do not execute this pipeline step
+			begin
+				addA				<= {33{1'bx}};
+				addB				<= {33{1'bx}};
+				fbin_				<= {48-BWIDTH{1'bx}};
+				mp[9]				<= 1'bx;
+				pk[9]				<= {PWIDTH{1'bx}};
+			end
+			wip[9]			<= wip[8];
+		end
+		begin																	// stage <2*WIDTH+13>
+			if (wip[9] && !mp[9])										// execute this pipeline step
 			begin
 				source_valid	<= 1'b1;
-				source_sop		<= (pk[7] == {PWIDTH{1'b0}}) ? 1'b1 : 1'b0;
-				source_eop		<= (pk[7] == NPEAKS-1) ? 1'b1 : 1'b0;
-				source_phaseA	<= peaks[pk[7]].phs[1] + addA[30:15];
-				source_phaseB	<= peaks[pk[7]].phs[1] + addB[30:15];
-				source_done		<= (pk[7] == NPEAKS-1) ? 1'b1 : 1'b0;
+				source_sop		<= (pk[9] == {PWIDTH{1'b0}}) ? 1'b1 : 1'b0;
+				source_eop		<= (pk[9] == NPEAKS-1) ? 1'b1 : 1'b0;
+				source_freq		<= fbin_[47-BWIDTH:24-BWIDTH];
+				source_phaseA	<= peaks[pk[9]].phs[1] + addA[30:15];
+				source_phaseB	<= peaks[pk[9]].phs[1] + addB[30:15];
+				source_done		<= (pk[9] == NPEAKS-1) ? 1'b1 : 1'b0;
 			end
 			else																// do not execute this pipeline step
 			begin
 				source_valid	<= 1'b0;
 				source_sop		<= 1'b0;
 				source_eop		<= 1'b0;
+				source_freq		<= 24'hxxxxxx;
 				source_phaseA	<= 16'hxxxx;
 				source_phaseB	<= 16'hxxxx;
 			end
@@ -358,27 +389,27 @@ begin
 		source_valid	<= 1'b0;
 		source_sop		<= 1'b0;
 		source_eop		<= 1'b0;
+		source_freq		<= 24'hxxxxxx;
 		source_phaseA	<= 16'hxxxx;
 		source_phaseB	<= 16'hxxxx;
-		wip[0]			<= 1'bx;
-		wip[2]			<= 1'bx;
-		wip[4:7]			<= '{default:{1'bx}};
-		mp[0]				<= 1'bx;
-		mp[2]				<= 1'bx;
-		mp[4:7]			<= '{default:{1'bx}};
-		pk[0]				<= {PWIDTH{1'bx}};
-		pk[2]				<= {PWIDTH{1'bx}};
-		pk[4:7]			<= '{default:{PWIDTH{1'bx}}};
+		mp[1]				<= 1'bx;
+		mp[3:4]			<= '{default:{1'bx}};
+		mp[6:9]			<= '{default:{1'bx}};
+		pk[1]				<= {PWIDTH{1'bx}};
+		pk[3:4]			<= '{default:{PWIDTH{1'bx}}};
+		pk[6:9]			<= '{default:{PWIDTH{1'bx}}};
 		cosin				<= 16'hxxxx;
 		stcos				<= {WIDTH+16{1'bx}};
 		numer				<= {2*WIDTH{1'bx}};
 		denom				<= {WIDTH{1'bx}};
 		dm					<= 16'hxxxx;
 		dp					<= 16'hxxxx;
-		delta[5:6]		<= '{default:16'hxxxx};
+		delta[7:8]		<= '{default:16'hxxxx};
 		diff				<= 16'hxxxx;
 		addA				<= {33{1'bx}};
 		addB				<= {33{1'bx}};
+		fbin				<= 24'hxxxxxx;
+		fbin_				<= {48-BWIDTH{1'bx}};
 	end
 end
 
@@ -400,8 +431,8 @@ delay #(
 ) delay1 (
 	.clk						(clk),
 	.reset					(reset || sink_eop),
-	.sink						({wip[0], mp[0], pk[0]}),
-	.source					({wip[1], mp[1], pk[1]})
+	.sink						({wip[1], mp[1], pk[1]}),
+	.source					({wip[2], mp[2], pk[2]})
 );
 
 // division
@@ -423,13 +454,13 @@ lpm_divide #(
 
 // delay during division
 delay #(
-	.WIDTH					(PWIDTH+1),
+	.WIDTH					(PWIDTH+2),
 	.DELAY					(2*WIDTH)
 ) delay2 (
 	.clk						(clk),
 	.reset					(reset || sink_eop),
-	.sink						({wip[2], mp[2], pk[2]}),
-	.source					({wip[3], mp[3], pk[3]})
+	.sink						({wip[4], mp[4], pk[4]}),
+	.source					({wip[5], mp[5], pk[5]})
 );
 
 endmodule

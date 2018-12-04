@@ -73,7 +73,7 @@ begin
 	begin
 		out				<= '{default:16'h0000};
 		add				<= '{default:1'bx};
-		z					<= 16'h0000;
+		z					<= 14'h0000;
 		diff				<= 16'hxxxx;
 		zp					<= 8'h00;
 		frac				<= 24'h000000;
@@ -85,7 +85,7 @@ begin
 			if (sink == 16'h4000 || sink == 16'hC000)
 			begin
 				add[0]			<= 1'bx;
-				z					<= 16'h0000;
+				z					<= 14'h0000;
 			end
 			else if (sink > 16'hC000 || sink < 16'h4000)
 			begin

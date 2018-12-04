@@ -54,7 +54,7 @@ module PR3 #(
 );
 
 // more parameters
-localparam TICKS = 40000000 / FREQ;									// number of clk40 ticks per run
+localparam TICKS = 20480000 / FREQ;									// number of clk20 ticks per run
 localparam MWIDTH = WIDTH + FFT;										// number of bits used for intermediate results
 localparam CWIDTH = $clog2(TICKS);									// number of counter bits
 localparam TR_DELAY = 2 * MWIDTH + 2;								// latency of carthesian to polar transformation
@@ -94,7 +94,7 @@ wire signed		[15:0]			trans_peak_phase;					// phase data output bus		Q1.15
 /*- code ---------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 // run control
-always @(posedge clk40)
+always @(posedge clk20)
 begin
 	cnt				<= (reset || cnt == TICKS-1'b1) ? {CWIDTH{1'b0}} : cnt + 1'b1;
 	start				<= (reset || cnt != {CWIDTH{1'b0}}) ? 1'b0 : 1'b1;
@@ -103,13 +103,13 @@ end
 /*----------------------------------------------------------------------------*/
 /*- modules ------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
-// pll for the different clock signals
+// pll for the input clock
 altera_pll #(
 	.reference_clock_frequency	("40.000000 MHz"),
 	.number_of_clocks		(2),
-	.output_clock_frequency0	("20.000000 MHz"),
+	.output_clock_frequency0	("20.480000 MHz"),
 	.duty_cycle0			(50),
-	.output_clock_frequency1	("100.000000 MHz"),
+	.output_clock_frequency1	("102.400000 MHz"),
 	.duty_cycle1			(50)
 ) pll (
 	.rst						(),
@@ -204,6 +204,7 @@ peak_detect #(
 	.source_valid			(source_valid),
 	.source_sop				(source_sop),
 	.source_eop				(source_eop),
+	.source_freq			(source_freq),
 	.source_phaseA			(source_phaseA),
 	.source_phaseB			(source_phaseB)
 );
