@@ -1,0 +1,20 @@
+Fitter Status : Successful - Tue Dec 04 12:25:01 2018
+Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+Revision Name : PR3
+Top-level Entity Name : PR3
+Family : Cyclone V
+Device : 5CSEMA4U23C6
+Timing Models : Final
+Logic utilization (in ALMs) : 5,400 / 15,880 ( 34 % )
+Total registers : 11720
+Total pins : 103 / 314 ( 33 % )
+Total virtual pins : 0
+Total block memory bits : 2,000,002 / 2,764,800 ( 72 % )
+Total RAM Blocks : 262 / 270 ( 97 % )
+Total DSP Blocks : 84 / 84 ( 100 % )
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 1 / 5 ( 20 % )
+Total DLLs : 0 / 4 ( 0 % )
