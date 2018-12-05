@@ -28,10 +28,10 @@ localparam FFT = 11;
 localparam FREQ = 5000;
 
 // Declare inputs as regs and outputs as wires
-reg									clk = 0;
+reg									clk40 = 0, clk20 = 0;
 reg									reset = 0;
 reg signed		[WIDTH-1:0]		dataIn[0:NSINK-1];
-wire									source_valid, source_sop, source_eop;
+wire									source_valid;
 wire unsigned	[31:0]			source_data;
 const real							pi = 3.1416;
 const real							sin1_freq = 2.002E6;
@@ -48,7 +48,8 @@ const real							sin4_mag = 1024;
 const real							sin4_off = 0.75;
 
 // clock generator(s)
-always #(12500ps) clk++;		// F = 40.0 MHz
+always #(12500ps) clk40++;		// F = 40.00 MHz
+always #(24414ps) clk20++;		// F = 20.48 MHz
 
 // sine calculator
 function real sineat(real offset);
@@ -61,7 +62,7 @@ function real sineat(real offset);
 endfunction
 
 // sine approx generator
-always @(negedge clk)
+always @(negedge clk20)
 begin
 	dataIn[0] = sineat(0.0);
 	dataIn[1] = sineat(0.3);
@@ -82,12 +83,10 @@ end
 
 // Connect module(s) to test
 PR3 pr (
-	.clk40					(clk),
+	.clk40					(clk40),
 	.reset					(reset),
 	.sink						(dataIn),
 	.source_valid			(source_valid),
-	.source_sop				(source_sop),
-	.source_eop				(source_eop),
 	.source_data			(source_data)
 );
 

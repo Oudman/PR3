@@ -431,8 +431,8 @@ begin
 	else if (logic_done && !source_done)							// continue with output
 	begin
 		source_valid	<= 1'b1;
-		source_sop		<= (peak == {PWIDTH{1'b0}}) ? 1'b1 : 1'b0;
-		source_eop		<= (peak == NPEAKS-1'b1) ? 1'b1 : 1'b0;
+		source_sop		<= (peak == {PWIDTH{1'b0}} && ir && pos == {NBWIDTH{1'b0}}) ? 1'b1 : 1'b0;
+		source_eop		<= (peak == NPEAKS-1'b1 && !ir && pos == NBINS-1) ? 1'b1 : 1'b0;
 		if (ir)																// write interpolated data
 		begin
 			if (pos == {NBWIDTH{1'b0}})								// write interpolated frequency

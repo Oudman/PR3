@@ -47,8 +47,6 @@ module PR3 #(
 	input		wire									reset,				// synchronous reset
 	input		wire signed		[WIDTH-1:0]		sink[0:NSINK-1],	//	antenna data buses			Q<WIDTH>.0
 	output	reg									source_valid,		// output is valid
-	output	reg									source_sop,			// first output entry
-	output	reg									source_eop,			// last output entry
 	output	reg				[31:0]			source_data			// output data bus
 );
 
@@ -95,6 +93,12 @@ wire									peak_fifo_sop;						// first output entry
 wire									peak_fifo_eop;						// last outptu entry
 wire				[31:0]			peak_fifo_data;					// phase data output bus
 
+// source control related
+reg									fifo_todo;							// write next cycle
+reg				[23:0]			fifo_num;							// block number
+reg				[7:0]				fifo_antenna;						// antenna number
+reg				[31:0]			fifo_buffer;						// data buffer
+
 /*----------------------------------------------------------------------------*/
 /*- code ---------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
@@ -103,6 +107,46 @@ always @(posedge clk20)
 begin
 	cnt				<= (reset || cnt == TICKS-1'b1) ? {CWIDTH{1'b0}} : cnt + 1'b1;
 	start				<= (reset || cnt != {CWIDTH{1'b0}}) ? 1'b0 : 1'b1;
+end
+
+// source control
+always @(posedge clk)
+begin
+	if (reset)																// reset all
+	begin
+		source_valid	<= 1'b0;
+		source_data		<= 32'hxxxxxxxx;
+		fifo_todo		<= 1'b0;
+		fifo_num			<= 24'h000000;
+		fifo_antenna	<= 8'h00;
+		fifo_buffer		<= 32'hxxxxxxxx;
+	end
+	else if (peak_fifo_valid || fifo_todo)							// write output
+	begin
+		source_valid	<= 1'b1;
+		if (peak_fifo_sop)												// new antenna block
+			source_data		<= {fifo_num, fifo_antenna};
+		else																	// continue with antenna block
+			source_data		<= fifo_buffer;
+		if (peak_fifo_eop)												// last entry of antenna block
+		begin
+			if (fifo_antenna == NSINK-1)								// last antenna block of complete block
+			begin
+				fifo_num			<= fifo_num + 1'b1;
+				fifo_antenna	<= 8'h00;
+			end
+			else																// non-last antenna block of complete block
+				fifo_antenna	<= fifo_antenna + 1'b1;
+		end
+		fifo_todo		<= peak_fifo_valid;
+		fifo_buffer		<= (peak_fifo_valid) ? peak_fifo_data : 32'hxxxxxxxx;
+	end
+	else																		// wait
+	begin
+		source_valid	<= 1'b0;
+		source_data		<= 32'hxxxxxxxx;
+		fifo_buffer		<= 32'hxxxxxxxx;
+	end
 end
 
 /*----------------------------------------------------------------------------*/
@@ -177,6 +221,7 @@ atan2 #(
 	.DELAY					(TR_DELAY)
 ) atan2 (
 	.clk						(clk),
+	.reset					(reset),
 	.sink_x					(fft_trans_re),
 	.sink_y					(fft_trans_im),
 	.source					(trans_peak_phase)
@@ -212,13 +257,6 @@ peak_detect #(
 	.source_eop				(peak_fifo_eop),
 	.source_data			(peak_fifo_data)
 );
-
-// write data into fifo
-// TODO
-assign source_valid = peak_fifo_valid;
-assign source_sop = peak_fifo_sop;
-assign source_eop = peak_fifo_eop;
-assign source_data = peak_fifo_data;
 
 endmodule
 

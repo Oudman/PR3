@@ -121,7 +121,7 @@ VCCIO4A                      : AA16      : power  :                   : 3.3V    
 GND                          : AA17      : gnd    :                   :         :           :                
 source_valid                 : AA18      : output : 3.3-V LVTTL       :         : 4A        : Y              
 source_data[7]               : AA19      : output : 3.3-V LVTTL       :         : 4A        : Y              
-source_data[22]              : AA20      : output : 3.3-V LVTTL       :         : 5A        : N              
+source_data[19]              : AA20      : output : 3.3-V LVTTL       :         : 5A        : N              
 VCCA_FPLL                    : AA21      : power  :                   : 2.5V    :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AA23      :        :                   :         : 5A        :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AA24      :        :                   :         : 5A        :                
@@ -135,7 +135,7 @@ GND                          : AB3       : gnd    :                   :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : AB4       :        :                   :         : 3A        :                
 TCK                          : AB5       : input  :                   :         : 3A        :                
 AS_DATA3, DATA3              : AB6       :        :                   :         : 3A        :                
-source_data[18]              : AB23      : output : 3.3-V LVTTL       :         : 5A        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AB23      :        :                   :         : 5A        :                
 GND                          : AB24      : gnd    :                   :         :           :                
 GND                          : AB25      : gnd    :                   :         :           :                
 GND                          : AB26      : gnd    :                   :         :           :                
@@ -152,7 +152,7 @@ VCC_AUX                      : AC8       : power  :                   : 2.5V    
 VCC_AUX                      : AC21      : power  :                   : 2.5V    :           :                
 source_data[17]              : AC22      : output : 3.3-V LVTTL       :         : 4A        : Y              
 sink[2][7]                   : AC23      : input  : 3.3-V LVTTL       :         : 4A        : Y              
-source_data[19]              : AC24      : output : 3.3-V LVTTL       :         : 5A        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AC24      :        :                   :         : 5A        :                
 VCCIO5A                      : AC25      : power  :                   : 3.3V    : 5A        :                
 VREFB5AN0                    : AC26      : power  :                   :         : 5A        :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AC27      :        :                   :         : 6B        :                
@@ -173,13 +173,13 @@ VCCPD3B4A                    : AD13      : power  :                   : 3.3V    
 GND                          : AD14      : gnd    :                   :         :           :                
 VCC_AUX                      : AD15      : power  :                   : 2.5V    :           :                
 VCCPD3B4A                    : AD16      : power  :                   : 3.3V    : 3B, 4A    :                
-source_data[27]              : AD17      : output : 3.3-V LVTTL       :         : 4A        : N              
+source_data[22]              : AD17      : output : 3.3-V LVTTL       :         : 4A        : N              
 VCCPD3B4A                    : AD18      : power  :                   : 3.3V    : 3B, 4A    :                
 sink[2][2]                   : AD19      : input  : 3.3-V LVTTL       :         : 4A        : Y              
 source_data[12]              : AD20      : output : 3.3-V LVTTL       :         : 4A        : Y              
 VCCPD3B4A                    : AD21      : power  :                   : 3.3V    : 3B, 4A    :                
 GND                          : AD22      : gnd    :                   :         :           :                
-source_sop                   : AD23      : output : 3.3-V LVTTL       :         : 4A        : Y              
+source_data[25]              : AD23      : output : 3.3-V LVTTL       :         : 4A        : N              
 VCCPGM                       : AD24      : power  :                   : 1.8V/2.5V/3.0V/3.3V :           :                
 GND                          : AD25      : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AD26      :        :                   :         : 5A        :                
@@ -201,7 +201,7 @@ VCCIO3B                      : AE13      : power  :                   : 3.3V    
 DNU                          : AE14      :        :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AE15      :        :                   :         : 4A        :                
 GND                          : AE16      : gnd    :                   :         :           :                
-source_data[28]              : AE17      : output : 3.3-V LVTTL       :         : 4A        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE17      :        :                   :         : 4A        :                
 GND                          : AE18      : gnd    :                   :         :           :                
 sink[2][3]                   : AE19      : input  : 3.3-V LVTTL       :         : 4A        : Y              
 source_data[11]              : AE20      : output : 3.3-V LVTTL       :         : 4A        : Y              
@@ -209,8 +209,8 @@ VCCIO4A                      : AE21      : power  :                   : 3.3V    
 source_data[3]               : AE22      : output : 3.3-V LVTTL       :         : 4A        : Y              
 source_data[16]              : AE23      : output : 3.3-V LVTTL       :         : 4A        : Y              
 sink[2][1]                   : AE24      : input  : 3.3-V LVTTL       :         : 4A        : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : AE25      :        :                   :         : 5A        :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : AE26      :        :                   :         : 5A        :                
+source_data[26]              : AE25      : output : 3.3-V LVTTL       :         : 5A        : N              
+source_data[20]              : AE26      : output : 3.3-V LVTTL       :         : 5A        : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : AE27      :        :                   :         : 6B        :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AE28      :        :                   :         : 6B        :                
 GND                          : AF1       : gnd    :                   :         :           :                
@@ -238,9 +238,9 @@ sink[2][0]                   : AF22      : input  : 3.3-V LVTTL       :         
 sink[2][10]                  : AF23      : input  : 3.3-V LVTTL       :         : 4A        : Y              
 GND                          : AF24      : gnd    :                   :         :           :                
 source_data[8]               : AF25      : output : 3.3-V LVTTL       :         : 4A        : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : AF26      :        :                   :         : 5A        :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : AF27      :        :                   :         : 4A        :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : AF28      :        :                   :         : 4A        :                
+source_data[27]              : AF26      : output : 3.3-V LVTTL       :         : 5A        : N              
+source_data[23]              : AF27      : output : 3.3-V LVTTL       :         : 4A        : N              
+source_data[29]              : AF28      : output : 3.3-V LVTTL       :         : 4A        : N              
 GND                          : AG1       : gnd    :                   :         :           :                
 GND                          : AG2       : gnd    :                   :         :           :                
 GND                          : AG3       : gnd    :                   :         :           :                
@@ -254,18 +254,18 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : AG10      :        :                   :      
 RESERVED_INPUT_WITH_WEAK_PULLUP : AG11      :        :                   :         : 4A        :                
 VCCIO4A                      : AG12      : power  :                   : 3.3V    : 4A        :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AG13      :        :                   :         : 4A        :                
-source_data[31]              : AG14      : output : 3.3-V LVTTL       :         : 4A        : N              
-source_data[26]              : AG15      : output : 3.3-V LVTTL       :         : 4A        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG14      :        :                   :         : 4A        :                
+source_data[21]              : AG15      : output : 3.3-V LVTTL       :         : 4A        : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : AG16      :        :                   :         : 4A        :                
 GND                          : AG17      : gnd    :                   :         :           :                
 source_data[6]               : AG18      : output : 3.3-V LVTTL       :         : 4A        : Y              
 sink[2][8]                   : AG19      : input  : 3.3-V LVTTL       :         : 4A        : Y              
 source_data[4]               : AG20      : output : 3.3-V LVTTL       :         : 4A        : Y              
-source_eop                   : AG21      : output : 3.3-V LVTTL       :         : 4A        : Y              
+source_data[24]              : AG21      : output : 3.3-V LVTTL       :         : 4A        : N              
 VCCIO4A                      : AG22      : power  :                   : 3.3V    : 4A        :                
 source_data[9]               : AG23      : output : 3.3-V LVTTL       :         : 4A        : Y              
 sink[2][5]                   : AG24      : input  : 3.3-V LVTTL       :         : 4A        : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : AG25      :        :                   :         : 4A        :                
+source_data[18]              : AG25      : output : 3.3-V LVTTL       :         : 4A        : N              
 sink[2][11]                  : AG26      : input  : 3.3-V LVTTL       :         : 4A        : Y              
 GND                          : AG27      : gnd    :                   :         :           :                
 source_data[0]               : AG28      : output : 3.3-V LVTTL       :         : 4A        : Y              
@@ -280,13 +280,13 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : AH9       :        :                   :      
 GND                          : AH10      : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AH11      :        :                   :         : 4A        :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AH12      :        :                   :         : 4A        :                
-source_data[24]              : AH13      : output : 3.3-V LVTTL       :         : 4A        : N              
-source_data[30]              : AH14      : output : 3.3-V LVTTL       :         : 4A        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH13      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH14      :        :                   :         : 4A        :                
 VCCIO4A                      : AH15      : power  :                   : 3.3V    : 4A        :                
-source_data[29]              : AH16      : output : 3.3-V LVTTL       :         : 4A        : N              
+source_data[30]              : AH16      : output : 3.3-V LVTTL       :         : 4A        : N              
 reset                        : AH17      : input  : 3.3-V LVTTL       :         : 4A        : Y              
 source_data[15]              : AH18      : output : 3.3-V LVTTL       :         : 4A        : Y              
-source_data[20]              : AH19      : output : 3.3-V LVTTL       :         : 4A        : N              
+source_data[31]              : AH19      : output : 3.3-V LVTTL       :         : 4A        : N              
 GND                          : AH20      : gnd    :                   :         :           :                
 source_data[14]              : AH21      : output : 3.3-V LVTTL       :         : 4A        : Y              
 source_data[13]              : AH22      : output : 3.3-V LVTTL       :         : 4A        : Y              
@@ -712,8 +712,8 @@ TDI                          : W10       : input  :                   :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : W11       :        :                   :         : 3B        :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : W12       :        :                   :         : 3B        :                
 VCCIO4A                      : W13       : power  :                   : 3.3V    : 4A        :                
-source_data[25]              : W14       : output : 3.3-V LVTTL       :         : 4A        : N              
-source_data[23]              : W15       : output : 3.3-V LVTTL       :         : 5A        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : W14       :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : W15       :        :                   :         : 5A        :                
 GND                          : W16       : gnd    :                   :         :           :                
 VCCIO5A                      : W17       : power  :                   : 3.3V    : 5A        :                
 GND                          : W18       : gnd    :                   :         :           :                
@@ -738,10 +738,10 @@ GND                          : Y12       : gnd    :                   :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : Y13       :        :                   :         : 4A        :                
 GND                          : Y14       : gnd    :                   :         :           :                
 sink[2][13]                  : Y15       : input  : 3.3-V LVTTL       :         : 4A        : Y              
-source_data[21]              : Y16       : output : 3.3-V LVTTL       :         : 5A        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : Y16       :        :                   :         : 5A        :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : Y17       :        :                   :         : 5A        :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : Y18       :        :                   :         : 5A        :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : Y19       :        :                   :         : 5A        :                
+source_data[28]              : Y19       : output : 3.3-V LVTTL       :         : 5A        : N              
 GND                          : Y20       : gnd    :                   :         :           :                
 VCCPD5A                      : Y21       : power  :                   : 3.3V    : 5A        :                
 GND                          : Y24       : gnd    :                   :         :           :                

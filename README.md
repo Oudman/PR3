@@ -27,12 +27,13 @@ Input data is assumed to be consisting of three 14-bit wide input streams.
 ### Output data
 Output data is streamed in blocks and uses the following format:
 
-* 4 bytes: block number
-* Per peak:
-	+ 4 bytes: interpolated frequency in Hz
-	+ 2 bytes: interpolated phase A + 2 bytes: interpolated phase B
-	+ Per raw data bin:
-		- 2 bytes: bin magnitude + 2 bytes: bin phase
+- Per antenna
+	* 3 bytes: block number + 1 byte: antenna number
+	* Per peak:
+		+ 4 bytes: interpolated frequency in Hz
+		+ 2 bytes: interpolated phase A + 2 bytes: interpolated phase B
+		+ Per raw data bin:
+			- 2 bytes: bin magnitude + 2 bytes: bin phase
 
 To calculate the phase in radians, use the following formula:
 

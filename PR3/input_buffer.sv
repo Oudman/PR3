@@ -191,13 +191,13 @@ generate for (i = 0; i < NSINK; i++)
 			.widthad_b				(AWIDTH),
 			.outdata_reg_b			("CLOCK1")
 		) blockram (
-			.address_a				(ram_wraddr),
-			.address_b				(ram_rdaddr),
-			.clock0					(sink_clk),
-			.clock1					(source_clk),
 			.data_a					(sink_data[i]),
+			.address_a				(ram_wraddr),
 			.wren_a					(ram_wren),
-			.q_b						(ram_q[i])
+			.address_b				(ram_rdaddr),
+			.q_b						(ram_q[i]),
+			.clock0					(sink_clk),
+			.clock1					(source_clk)
 		);	
 	end
 endgenerate

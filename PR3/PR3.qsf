@@ -52,14 +52,10 @@ set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "SYSTEMVERILOG HDL" -section_
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to source_sop
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to source_valid
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to reset
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to source_eop
 set_location_assignment PIN_AH17 -to reset
 set_location_assignment PIN_AA18 -to source_valid
-set_location_assignment PIN_AD23 -to source_sop
-set_location_assignment PIN_AG21 -to source_eop
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_location_assignment PIN_AE12 -to sink[0][0]
