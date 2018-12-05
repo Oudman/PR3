@@ -32,7 +32,8 @@ module peak_detect #(
 	parameter WIDTH,														// magnitude bus width in bits
 	parameter BIN,															// bin width (Hz)
 	parameter NPEAKS,														// number of peaks
-	parameter shortint PEAKSEP[0:NPEAKS]							// borders of peak ranges
+	parameter shortint PEAKSEP[0:NPEAKS],							// borders of peak ranges
+	parameter NBPP															// number of bins per peak
 )(
 	input		wire									clk,					// proccessing speed
 	input		wire									reset,				// reset
@@ -44,14 +45,15 @@ module peak_detect #(
 	output	reg									source_valid,		// output is valid
 	output	reg									source_sop,			// first output entry
 	output	reg									source_eop,			// last output entry
-	output	reg unsigned	[23:0]			source_freq,		// frequency						UQ24.0
-	output	reg signed		[15:0]			source_phaseA,		// phase A output bus			Q1.15
-	output	reg signed		[15:0]			source_phaseB		// phase B output bus			Q1.15
+	output	reg 				[31:0]			source_data			// serialized output data
 );
 
 // more parameters
 localparam BWIDTH = $clog2(PEAKSEP[NPEAKS]);						// bin address width
 localparam PWIDTH = $clog2(NPEAKS);									// peak address width
+localparam LWIDTH = 2;													// chunk side lobe width // TODO: should always be NBPP/2
+localparam NBINS = 2 * LWIDTH + 1;									// number of bins per chunk
+localparam NBWIDTH = $clog2(NBINS);									// chunk bin address width
 
 /*----------------------------------------------------------------------------*/
 /*- struct definition and registers ------------------------------------------*/
@@ -59,8 +61,11 @@ localparam PWIDTH = $clog2(NPEAKS);									// peak address width
 // struct definition
 typedef struct {
 	reg signed		[BWIDTH:0]		bin;								// central bin number			Q<BWIDTH+1>.0
-	reg unsigned	[WIDTH-1:0]		mag[0:2];						// magnitude						UQ<WIDTH>.0
-	reg signed		[15:0]			phs[0:2];						// phase								Q1.15
+	reg unsigned	[WIDTH-1:0]		mag[0:NBINS-1];				// magnitude						UQ<WIDTH>.0
+	reg signed		[15:0]			phs[0:NBINS-1];				// phase								Q1.15
+	reg unsigned	[23:0]			ifreq;							// interpolated frequency		UQ24.0
+	reg signed		[15:0]			iphsA;							// interpolated peak phase A	Q1.15
+	reg signed		[15:0]			iphsB;							// interpolated peak phase B	Q1.15
 } chunk;
 
 // peak data
@@ -70,8 +75,8 @@ chunk									peaks[0:NPEAKS-1];				// peak data
 reg									sink_done;							// input has been processed
 chunk									buffer;								// input buffer
 
-// source related
-reg									source_done;						// output has been processed
+// processing logic related
+reg									logic_done;							// processing logic is completed
 reg									wip[0:9];							// execute pipeline step
 reg									mp[0:9];								// switch between m and p
 reg unsigned	[PWIDTH-1:0]	pk[0:9];								// peak on which to calculate	UQ<PWIDTH>.0
@@ -90,6 +95,12 @@ reg signed		[32:0]			addB;									// 									Q3.30
 reg unsigned	[23:0]			fbin;									//	frequency in bins				UQ<BWIDTH>.<24-BWIDTH>
 reg unsigned	[47-BWIDTH:0]	fbin_;								//	frequency in bins				UQ24.<24-BWIDTH>
 
+// source related
+reg									source_done;						// output has been completed
+reg unsigned	[PWIDTH-1:0]	peak;									// selected peak					UQ<BWIDTH>.0
+reg									ir;									// interpolated or raw data
+reg unsigned	[NBWIDTH:0]		pos;									// data
+
 /*----------------------------------------------------------------------------*/
 /*- code ---------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
@@ -98,7 +109,7 @@ always_ff @(posedge clk)
 begin
 	if (reset || sink_eop)												// reset all
 	begin
-		buffer.bin		<= {BWIDTH+1{1'b0}} - 2'd2;
+		buffer.bin		<= {BWIDTH+1{1'b0}} - 1'b1 - LWIDTH;
 		buffer.mag		<= '{default:{WIDTH{1'b0}}};
 		buffer.phs		<= '{default:{16'h0000}};
 		for (byte i = 0; i < NPEAKS; i++)
@@ -112,11 +123,19 @@ begin
 	else if (sink_valid && !sink_done)								// continue with input
 	begin
 		buffer.bin		<= buffer.bin + 1'b1;
-		buffer.mag		<= '{buffer.mag[1], buffer.mag[2], sink_mag};
-		buffer.phs		<= '{buffer.phs[1], buffer.phs[2], sink_phase};
+		buffer.mag[0:NBINS-2] <= buffer.mag[1:NBINS-1];
+		buffer.mag[NBINS-1] <= sink_mag;
+		buffer.phs[0:NBINS-2] <= buffer.phs[1:NBINS-1];
+		buffer.phs[NBINS-1] <= sink_phase;
 		for (byte i = 0; i < NPEAKS; i++)
-			if (PEAKSEP[i] <= buffer.bin && buffer.bin < PEAKSEP[i+1] && buffer.mag[1] > peaks[i].mag[1])
-				peaks[i]			<= buffer;
+		begin
+			if (PEAKSEP[i] <= buffer.bin && buffer.bin < PEAKSEP[i+1] && buffer.mag[LWIDTH] > peaks[i].mag[LWIDTH])
+			begin
+				peaks[i].bin	<= buffer.bin;
+				peaks[i].mag	<= buffer.mag;
+				peaks[i].phs	<= buffer.phs;
+			end
+		end
 		sink_done		<= (buffer.bin >= PEAKSEP[NPEAKS]-1) ? 1'b1 : 1'b0;
 	end
 end
@@ -142,18 +161,18 @@ end
 // Finally:
 // 	k’ := k + d
 
-// source control
+// processing logic control
 always_ff @(posedge clk)
 begin
 	if (reset || sink_eop)												// reset all
 	begin
-		source_done		<= 1'b0;
-		source_valid	<= 1'b0;
-		source_sop		<= 1'b0;
-		source_eop		<= 1'b0;
-		source_freq		<= 24'hxxxxxx;
-		source_phaseA	<= 16'hxxxx;
-		source_phaseB	<= 16'hxxxx;
+		logic_done		<= 1'b0;
+		for (byte i = 0; i < NPEAKS; i++)
+		begin
+			peaks[i].ifreq	<= 24'hxxxxxx;
+			peaks[i].iphsA	<= 16'hxxxx;
+			peaks[i].iphsB	<= 16'hxxxx;
+		end
 		wip[0]			<= 1'b1;
 		wip[1]			<= 1'b0;
 		wip[3:4]			<= '{default:{1'b0}};
@@ -179,21 +198,21 @@ begin
 		fbin				<= 24'hxxxxxx;
 		fbin_				<= {48-BWIDTH{1'bx}};
 	end
-	else if (sink_done && !source_done)								// continue with output
+	else if (sink_done && !logic_done)								// continue with processing
 	begin
 		begin																	// stage I
 			if (wip[0])														// execute this pipeline step
 			begin
 				if (mp[0])													// cos(a-b)
 				begin
-					cosin				<= peaks[pk[0]].phs[0] - peaks[pk[0]].phs[1];
+					cosin				<= peaks[pk[0]].phs[LWIDTH-1] - peaks[pk[0]].phs[LWIDTH];
 					wip[0]			<= 1'b1;
 					mp[0]				<= 1'b0;
 					pk[0]				<= pk[0];
 				end
 				else															// cos(c-b)
 				begin
-					cosin				<= peaks[pk[0]].phs[2] - peaks[pk[0]].phs[1];
+					cosin				<= peaks[pk[0]].phs[LWIDTH+1] - peaks[pk[0]].phs[LWIDTH];
 					wip[0]			<= (pk[0] == NPEAKS-1) ? 1'b0 : 1'b1;
 					mp[0]				<= (pk[0] < NPEAKS-1) ? 1'b1 : 1'bx;
 					pk[0]				<= pk[0] + 1'b1;
@@ -219,9 +238,9 @@ begin
 			if (wip[2])														// execute this pipeline step
 			begin
 				if (mp[2])													// r*cos(a-c)
-					stcos				<= $signed({1'b0, peaks[pk[2]].mag[0]}) * cosout;
+					stcos				<= $signed({1'b0, peaks[pk[2]].mag[LWIDTH-1]}) * cosout;
 				else															// t*cos(b-c)
-					stcos				<= $signed({1'b0, peaks[pk[2]].mag[2]}) * cosout;
+					stcos				<= $signed({1'b0, peaks[pk[2]].mag[LWIDTH+1]}) * cosout;
 				mp[3]				<= mp[2];
 				pk[3]				<= pk[2];
 			end
@@ -238,9 +257,9 @@ begin
 			begin
 				numer				<= stcos[WIDTH+14:15] << WIDTH;
 				if (mp[3])													// s - r*cos(a-c)
-					denom				<= peaks[pk[3]].mag[1] - stcos[WIDTH+14:15];
+					denom				<= peaks[pk[3]].mag[LWIDTH] - stcos[WIDTH+14:15];
 				else															// t*cos(b-c) - s
-					denom				<= stcos[WIDTH+14:15] - peaks[pk[3]].mag[1];
+					denom				<= stcos[WIDTH+14:15] - peaks[pk[3]].mag[LWIDTH];
 				mp[4]				<= mp[3];
 				pk[4]				<= pk[3];
 			end
@@ -315,9 +334,9 @@ begin
 				else															// delta is available
 				begin
 					if (delta[7] < 0)										// interpolate between first and middle bin
-						diff				<= peaks[pk[7]].phs[0] - peaks[pk[7]].phs[1];
+						diff				<= peaks[pk[7]].phs[LWIDTH-1] - peaks[pk[7]].phs[LWIDTH];
 					else														// interpolate between middle and last bin
-						diff				<= peaks[pk[7]].phs[2] - peaks[pk[7]].phs[1];
+						diff				<= peaks[pk[7]].phs[LWIDTH+1] - peaks[pk[7]].phs[LWIDTH];
 					fbin				<= $signed({1'b0, peaks[pk[7]].bin, {24-BWIDTH{1'b0}}}) + $signed(delta[7][15:(BWIDTH-9)]);
 				end
 				delta[8]			<= (delta[7] < 16'sh0000) ? -delta[7] : delta[7];
@@ -365,33 +384,15 @@ begin
 		begin																	// stage <2*WIDTH+13>
 			if (wip[9] && !mp[9])										// execute this pipeline step
 			begin
-				source_valid	<= 1'b1;
-				source_sop		<= (pk[9] == {PWIDTH{1'b0}}) ? 1'b1 : 1'b0;
-				source_eop		<= (pk[9] == NPEAKS-1) ? 1'b1 : 1'b0;
-				source_freq		<= fbin_[47-BWIDTH:24-BWIDTH];
-				source_phaseA	<= peaks[pk[9]].phs[1] + addA[30:15];
-				source_phaseB	<= peaks[pk[9]].phs[1] + addB[30:15];
-				source_done		<= (pk[9] == NPEAKS-1) ? 1'b1 : 1'b0;
-			end
-			else																// do not execute this pipeline step
-			begin
-				source_valid	<= 1'b0;
-				source_sop		<= 1'b0;
-				source_eop		<= 1'b0;
-				source_freq		<= 24'hxxxxxx;
-				source_phaseA	<= 16'hxxxx;
-				source_phaseB	<= 16'hxxxx;
+				peaks[pk[9]].ifreq <= fbin_[47-BWIDTH:24-BWIDTH];
+				peaks[pk[9]].iphsA <= peaks[pk[9]].phs[LWIDTH] + addA[30:15];
+				peaks[pk[9]].iphsB <= peaks[pk[9]].phs[LWIDTH] + addB[30:15];
+				logic_done		<= (pk[9] == NPEAKS-1) ? 1'b1 : 1'b0;
 			end
 		end
 	end
 	else
 	begin
-		source_valid	<= 1'b0;
-		source_sop		<= 1'b0;
-		source_eop		<= 1'b0;
-		source_freq		<= 24'hxxxxxx;
-		source_phaseA	<= 16'hxxxx;
-		source_phaseB	<= 16'hxxxx;
 		mp[1]				<= 1'bx;
 		mp[3:4]			<= '{default:{1'bx}};
 		mp[6:9]			<= '{default:{1'bx}};
@@ -410,6 +411,62 @@ begin
 		addB				<= {33{1'bx}};
 		fbin				<= 24'hxxxxxx;
 		fbin_				<= {48-BWIDTH{1'bx}};
+	end
+end
+
+// source control
+always_ff @(posedge clk)
+begin
+	if (reset || sink_eop)												// reset all
+	begin
+		source_done		<= 1'b0;
+		source_valid	<= 1'b0;
+		source_sop		<= 1'b0;
+		source_eop		<= 1'b0;
+		source_data		<= 32'hxxxxxxxx;
+		peak				<= {PWIDTH{1'b0}};
+		ir					<= 1'b1;
+		pos				<= {NBWIDTH{1'b0}};
+	end
+	else if (logic_done && !source_done)							// continue with output
+	begin
+		source_valid	<= 1'b1;
+		source_sop		<= (peak == {PWIDTH{1'b0}}) ? 1'b1 : 1'b0;
+		source_eop		<= (peak == NPEAKS-1'b1) ? 1'b1 : 1'b0;
+		if (ir)																// write interpolated data
+		begin
+			if (pos == {NBWIDTH{1'b0}})								// write interpolated frequency
+			begin
+				source_data 	<= {8'h00, peaks[peak].ifreq};
+				pos				<= pos + 1'b1;
+			end
+			else																// write interpolated phases
+			begin
+				source_data 	<= {peaks[peak].iphsA, peaks[peak].iphsB};
+				pos				<= {NBWIDTH{1'b0}};
+				ir					<= 1'b0;
+			end
+		end
+		else																	// write raw data
+		begin
+			source_data		<= {peaks[peak].mag[pos][WIDTH-1:WIDTH-16], peaks[peak].phs[pos]};
+			if (pos == NBINS-1)
+			begin																// last bin
+				peak				<= peak + 1'b1;
+				ir					<= 1'b1;
+				pos				<= {NBWIDTH{1'b0}};
+				source_done		<= (peak == NPEAKS-1) ? 1'b1 : 1'b0;
+			end
+			else																// non-last bin
+				pos				<= pos + 1'b1;
+		end
+	end
+	else
+	begin
+		source_valid	<= 1'b0;
+		source_sop		<= 1'b0;
+		source_eop		<= 1'b0;
+		source_data		<= 32'hxxxxxxxx;
 	end
 end
 

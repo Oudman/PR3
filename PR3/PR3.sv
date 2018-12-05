@@ -40,7 +40,8 @@ module PR3 #(
 	parameter NSINK = 3,													// number of antennas
 	parameter WIDTH = 14,												// number of input bits per antenna
 	parameter FFT = 11,													// fft width
-	parameter FREQ = 100													// number of runs per second
+	parameter FREQ = 5000,												// number of runs per second
+	parameter NBPP = 5													// number of bins per peak
 )(
 	input		wire									clk40,				// 40.0MHz reference clock
 	input		wire									reset,				// synchronous reset
@@ -48,9 +49,7 @@ module PR3 #(
 	output	reg									source_valid,		// output is valid
 	output	reg									source_sop,			// first output entry
 	output	reg									source_eop,			// last output entry
-	output	reg unsigned	[23:0]			source_freq,		// frequency						UQ24.0
-	output	reg signed		[15:0]			source_phaseA,		// phase A							Q1.15
-	output	reg signed		[15:0]			source_phaseB		// phase B							Q1.15
+	output	reg				[31:0]			source_data			// output data bus
 );
 
 // more parameters
@@ -89,6 +88,12 @@ wire									trans_peak_sop;					// first output entry
 wire									trans_peak_eop;					// last outptu entry
 wire unsigned	[MWIDTH-1:0]	trans_peak_mag;					// magnitude data output bus	UQ<MWIDTH>.0
 wire signed		[15:0]			trans_peak_phase;					// phase data output bus		Q1.15
+
+// peak detection + phase extraction related
+wire									peak_fifo_valid;					// output is valid
+wire									peak_fifo_sop;						// first output entry
+wire									peak_fifo_eop;						// last outptu entry
+wire				[31:0]			peak_fifo_data;					// phase data output bus
 
 /*----------------------------------------------------------------------------*/
 /*- code ---------------------------------------------------------------------*/
@@ -192,7 +197,8 @@ peak_detect #(
 	.WIDTH					(MWIDTH),
 	.BIN						(10000),
 	.NPEAKS					(4),
-	.PEAKSEP					('{100, 300, 500, 700, 900})
+	.PEAKSEP					('{100, 300, 500, 700, 900}),
+	.NBPP						(NBPP)
 ) pd (
 	.clk						(clk),
 	.reset					(reset),
@@ -201,13 +207,18 @@ peak_detect #(
 	.sink_eop				(trans_peak_eop),
 	.sink_mag				(trans_peak_mag),
 	.sink_phase				(trans_peak_phase),
-	.source_valid			(source_valid),
-	.source_sop				(source_sop),
-	.source_eop				(source_eop),
-	.source_freq			(source_freq),
-	.source_phaseA			(source_phaseA),
-	.source_phaseB			(source_phaseB)
+	.source_valid			(peak_fifo_valid),
+	.source_sop				(peak_fifo_sop),
+	.source_eop				(peak_fifo_eop),
+	.source_data			(peak_fifo_data)
 );
+
+// write data into fifo
+// TODO
+assign source_valid = peak_fifo_valid;
+assign source_sop = peak_fifo_sop;
+assign source_eop = peak_fifo_eop;
+assign source_data = peak_fifo_data;
 
 endmodule
 

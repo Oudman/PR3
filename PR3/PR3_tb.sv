@@ -32,8 +32,7 @@ reg									clk = 0;
 reg									reset = 0;
 reg signed		[WIDTH-1:0]		dataIn[0:NSINK-1];
 wire									source_valid, source_sop, source_eop;
-wire unsigned	[23:0]			source_freq;
-wire signed		[15:0]			source_phaseA, source_phaseB;
+wire unsigned	[31:0]			source_data;
 const real							pi = 3.1416;
 const real							sin1_freq = 2.002E6;
 const real							sin1_mag = 1024;
@@ -82,21 +81,14 @@ begin
 end
 
 // Connect module(s) to test
-PR3 #(
-	.NSINK					(NSINK),
-	.WIDTH					(WIDTH),
-	.FFT						(FFT),
-	.FREQ						(FREQ)
-) pr (
+PR3 pr (
 	.clk40					(clk),
 	.reset					(reset),
 	.sink						(dataIn),
 	.source_valid			(source_valid),
 	.source_sop				(source_sop),
 	.source_eop				(source_eop),
-	.source_freq			(source_freq),
-	.source_phaseA			(source_phaseA),
-	.source_phaseB			(source_phaseB)
+	.source_data			(source_data)
 );
 
 endmodule

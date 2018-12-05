@@ -20,5 +20,23 @@ The FFT output is tranformed from Carthesian to polar.
 ### Peak detection and phase extraction
 First, within 1MHz of each peak, the highest peak is stored together with each left and right neighbour bin and its central bin number. Second, per peak an interpolation delta is calculated in order to get the exact peak frequency. Using this delta, two possible phases at this peak location are calculated and output together with the calculated exact frequency.
 
+## Data formats
+### Input data
+Input data is assumed to be consisting of three 14-bit wide input streams.
+
+### Output data
+Output data is streamed in blocks and uses the following format:
+
+* 4 bytes: block number
+* Per peak:
+	+ 4 bytes: interpolated frequency in Hz
+	+ 2 bytes: interpolated phase A + 2 bytes: interpolated phase B
+	+ Per raw data bin:
+		- 2 bytes: bin magnitude + 2 bytes: bin phase
+
+To calculate the phase in radians, use the following formula:
+
+> (the two input bytes as signed integer) / 2^15 * pi
+
 ## Copyrights
 Copyright (c) 2018 F.H. Oudman, f.h.oudman@student.tue.nl
