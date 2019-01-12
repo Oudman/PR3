@@ -83,7 +83,7 @@ end
 
 // Connect module(s) to test
 PR3 pr (
-	.clk40					(clk40),
+//	.clk40					(clk40),
 	.reset					(reset),
 	.sink						(dataIn),
 	.source_valid			(source_valid),

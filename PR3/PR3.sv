@@ -43,7 +43,8 @@ module PR3 #(
 	parameter FREQ = 5000,												// number of runs per second
 	parameter NBPP = 5													// number of bins per peak
 )(
-	input		wire									clk40,				// 40.0MHz reference clock
+	output	wire									clkout,				// 20.0MHz output clock
+	input		wire									clkin,				// 50.0MHz reference clock
 	input		wire									reset,				// synchronous reset
 	input		wire signed		[WIDTH-1:0]		sink[0:NSINK-1],	//	antenna data buses			Q<WIDTH>.0
 	output	reg									source_valid,		// output is valid
@@ -55,6 +56,8 @@ localparam TICKS = 20480000 / FREQ;									// number of clk20 ticks per run
 localparam MWIDTH = WIDTH + FFT;										// number of bits used for intermediate results
 localparam CWIDTH = $clog2(TICKS);									// number of counter bits
 localparam TR_DELAY = 2 * MWIDTH + 2;								// latency of carthesian to polar transformation
+
+wire 									clk40;								// 40.0MHz reference clock
 
 /*----------------------------------------------------------------------------*/
 /*- wires and registers ------------------------------------------------------*/
@@ -152,6 +155,20 @@ end
 /*----------------------------------------------------------------------------*/
 /*- modules ------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
+// pll for the input clock
+altera_pll #(
+	.reference_clock_frequency	("50.000000 MHz"),
+	.number_of_clocks		(2),
+	.output_clock_frequency0	("20.000000 MHz"),
+	.duty_cycle0			(50),
+	.output_clock_frequency1	("40.000000 MHz"),
+	.duty_cycle1			(50)
+) pllinout (
+	.rst						(),
+	.outclk					({clk40, clkout}),
+	.refclk					(clkin)
+);
+
 // pll for the input clock
 altera_pll #(
 	.reference_clock_frequency	("40.000000 MHz"),
